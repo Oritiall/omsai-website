@@ -577,15 +577,16 @@ footer {
   .section { padding: calc(var(--nav-h) + 40px) 20px 60px; }
 
   /* ── Navbar fix ── */
-  #navbar { padding: 0 14px; gap: 6px; height: var(--nav-h); }
-  .nav-brand { gap: 10px; min-width: 0; overflow: hidden; }
-  .nav-brand img { height: 48px; flex-shrink: 0; }
-  .nav-slogan { min-width: 0; overflow: hidden; }
-  .nav-slogan-main { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
+  :root { --nav-h: 72px; }
+  #navbar { padding: 0 14px; gap: 8px; height: var(--nav-h); align-items: center; }
+  .nav-brand { gap: 10px; min-width: 0; overflow: hidden; align-items: center; }
+  .nav-brand img { height: 56px; flex-shrink: 0; }
+  .nav-slogan { min-width: 0; overflow: hidden; justify-content: center; }
+  .nav-slogan-main { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; line-height: 1; }
   .nav-slogan-sub { display: none; }
   .nav-links { display: none; }
-  .lang-toggle { padding: 5px 10px; font-size: 11px; flex-shrink: 0; }
-  .hamburger { display: flex; flex-shrink: 0; }
+  .lang-toggle { padding: 5px 10px; font-size: 11px; flex-shrink: 0; align-self: center; }
+  .hamburger { display: flex; flex-shrink: 0; align-self: center; }
   .mobile-menu { padding: 20px; top: var(--nav-h); }
 
   /* ── Hero ── */
@@ -613,10 +614,10 @@ footer {
 }
 
 @media (max-width: 560px) {
-  :root { --nav-h: 62px; }
+  :root { --nav-h: 66px; }
   #navbar { padding: 0 12px; }
-  .nav-brand img { height: 42px; }
-  .nav-slogan-main { font-size: 13px; max-width: 130px; }
+  .nav-brand img { height: 50px; }
+  .nav-slogan-main { font-size: 14px; max-width: 130px; }
   .adv-grid { grid-template-columns: 1fr; }
   .svc-grid { grid-template-columns: 1fr; }
   .sec-title { font-size: clamp(26px, 7vw, 38px); }
