@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMS AI - עתיד העסקים מתחיל כאן</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & BASE ─── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Rubik', 'Arial Hebrew', sans-serif;
+  color: #fff;
+  direction: rtl;
+  background: #0B2447;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; }
+
+/* ─── CSS VARS ─── */
+:root {
+  --nav-h: 100px;
+  --slogan-color: #1A4A90;
+  --white: #fff;
+  --off: rgba(255,255,255,0.75);
+  --muted: rgba(255,255,255,0.45);
+  --card: rgba(255,255,255,0.07);
+  --card-b: rgba(255,255,255,0.13);
+  --max: 1140px;
+  --r: 18px;
+}
+
+/* ─── SCROLL ANIMATION ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1),
+              transform 0.65s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ─── NAVBAR ─── */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-h);
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 36px;
+  direction: ltr;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+#navbar.scrolled {
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.1);
+}
+.nav-brand { display: flex; align-items: center; gap: 18px; flex-shrink: 0; }
+.nav-brand img { height: 84px; object-fit: contain; flex-shrink: 0; }
+.nav-slogan {
+  display: flex; flex-direction: column; gap: 4px;
+  justify-content: center; align-items: flex-start;
+}
+.nav-slogan-main {
+  font-size: 20px; font-weight: 300;
+  color: var(--slogan-color);
+  letter-spacing: 0.5px; direction: ltr; text-align: left;
+  line-height: 1; transition: color 0.5s;
+}
+.nav-slogan-main b { font-weight: 700; color: inherit; }
+.nav-slogan-sub {
+  font-size: 11.5px; color: rgba(0,0,0,0.6);
+  font-weight: 300; line-height: 1.3;
+  direction: ltr; text-align: left;
+  white-space: nowrap;
+}
+/* Nav links */
+.nav-links {
+  display: flex; align-items: center; gap: 26px;
+  list-style: none; direction: rtl;
+}
+.nav-links a {
+  font-size: 14px; font-weight: 400; color: rgba(0,0,0,0.7);
+  transition: color 0.2s; white-space: nowrap;
+}
+.nav-links a:hover { color: #000; }
+.nav-links .nav-cta {
+  background: #0B2447; color: #fff;
+  padding: 9px 20px; border-radius: 10px;
+  font-weight: 500; transition: background 0.2s;
+}
+.nav-links .nav-cta:hover { background: #1A3A6B; }
+
+/* ─── LANG TOGGLE ─── */
+.lang-toggle {
+  background: rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; color: rgba(0,0,0,0.65);
+  font-family: 'Rubik', sans-serif;
+  transition: all 0.2s;
+  flex-shrink: 0; letter-spacing: 0.5px;
+}
+.lang-toggle:hover { background: rgba(0,0,0,0.15); color: rgba(0,0,0,0.9); }
+
+/* Hamburger */
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: rgba(0,0,0,0.7); border-radius: 2px;
+  transition: all 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 99;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(18px);
+  padding: 24px 36px;
+  display: none; flex-direction: column; gap: 4px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  direction: rtl;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 17px; font-weight: 400; color: rgba(0,0,0,0.75);
+  padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: color 0.2s;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: #000; }
+
+/* ─── SECTIONS ─── */
+.section {
+  min-height: 100vh;
+  padding: calc(var(--nav-h) + 80px) 40px 100px;
+  display: flex; align-items: center; justify-content: center;
+}
+.container {
+  width: 100%; max-width: var(--max);
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0;
+}
+.sec-label {
+  font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  font-weight: 600; color: rgba(255,255,255,0.4);
+  margin-bottom: 14px; text-align: center;
+}
+
+/* Section backgrounds */
+#hero       { background: linear-gradient(145deg, #0B2447 0%, #1A3A6B 100%); }
+#ainative   { background: #374290; }
+#impact     { background: #1B3F64; }
+#compare    { background: #516C82; }
+#about      { background: #283746; }
+#movers     { background: #121C47; }
+#advantages { background: #233488; }
+#services   { background: #032A30; }
+#vision     { background: #272463; }
+#jobot      { background: linear-gradient(145deg, #3A5068 0%, #4D6478 100%); }
+#contact    { background: #0A1628; }
+
+/* ─── CONTACT FORM ─── */
+.contact-wrap {
+  width: 100%; max-width: 580px;
+  display: flex; flex-direction: column; gap: 0;
+}
+.contact-form {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 24px; padding: 40px 36px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group label {
+  font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,0.65); letter-spacing: 0.3px;
+}
+.form-group input,
+.form-group textarea {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 12px; padding: 14px 18px;
+  font-size: 15px; color: #fff;
+  font-family: 'Rubik', sans-serif;
+  outline: none; transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(255,255,255,0.28); }
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.11);
+}
+.form-group textarea { resize: vertical; min-height: 110px; }
+.contact-submit {
+  background: #fff; color: #0A1628;
+  border: none; border-radius: 12px;
+  padding: 15px 32px; font-size: 16px; font-weight: 700;
+  font-family: 'Rubik', sans-serif;
+  cursor: pointer; width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: all 0.2s; margin-top: 4px;
+}
+.contact-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+.contact-note {
+  text-align: center; font-size: 12px;
+  color: rgba(255,255,255,0.35); margin-top: 14px; font-weight: 300;
+}
+
+/* ─── HERO ─── */
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center; width: 100%;
+}
+.hero-overline {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; letter-spacing: 3px; font-weight: 500;
+  color: rgba(255,255,255,0.5); text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.5); flex-shrink: 0;
+}
+.hero-title {
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 800; line-height: 1.0;
+  letter-spacing: -2px; margin-bottom: 24px;
+}
+.hero-title em { font-style: normal; color: rgba(255,255,255,0.55); }
+.hero-sub {
+  font-size: clamp(16px, 1.6vw, 19px);
+  color: rgba(255,255,255,0.65); line-height: 1.7;
+  font-weight: 300; margin-bottom: 36px;
+}
+.hero-chip {
+  display: inline-flex;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 999px; padding: 8px 22px;
+  font-size: 12px; letter-spacing: 3px; font-weight: 500;
+  color: rgba(255,255,255,0.7);
+}
+.hero-img-wrap { display: flex; align-items: center; justify-content: center; }
+.hero-img-wrap img { width: 100%; max-width: 500px; filter: brightness(1.05); border-radius: 16px; }
+.hero-actions { display: flex; gap: 14px; margin-bottom: 36px; flex-wrap: wrap; }
+.btn-primary {
+  background: #fff; color: #0B2447;
+  padding: 14px 32px; border-radius: 12px;
+  font-size: 15px; font-weight: 700;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.2s; font-family: 'Rubik', sans-serif;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.btn-secondary {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25); color: #fff;
+  padding: 14px 32px; border-radius: 12px;
+  font-size: 15px; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.2s; font-family: 'Rubik', sans-serif;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.18); }
+
+/* ─── SECTION TITLES ─── */
+.sec-title {
+  font-size: clamp(30px, 4.5vw, 58px);
+  font-weight: 500; line-height: 1.1; letter-spacing: -0.5px;
+  margin-bottom: 16px; text-align: center;
+}
+.sec-sub {
+  font-size: clamp(15px, 1.6vw, 18px);
+  color: var(--off); line-height: 1.75; font-weight: 300;
+  text-align: center; max-width: 680px; margin: 0 auto 48px;
+}
+
+/* ─── SVG ICONS ─── */
+.svg-icon {
+  display: inline-block; flex-shrink: 0;
+  stroke: currentColor; fill: none;
+  stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ─── CARD BASE ─── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-b);
+  border-radius: var(--r);
+}
+
+/* ─── AI NATIVE - PILLARS ─── */
+.pillars {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; width: 100%;
+}
+.pillar {
+  background: var(--card); border: 1px solid var(--card-b);
+  border-radius: var(--r); padding: 32px 26px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 14px;
+}
+.pillar-icon {
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.1); border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.88);
+}
+.pillar h3 { font-size: 18px; font-weight: 500; }
+.pillar p  { font-size: 14px; color: var(--off); font-weight: 300; line-height: 1.65; }
+
+/* ─── IMPACT CARDS ─── */
+.impacts {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 20px; width: 100%;
+}
+.impact-card {
+  background: var(--card); border: 1px solid var(--card-b);
+  border-radius: var(--r); padding: 28px;
+  display: flex; gap: 20px; align-items: flex-start;
+}
+.impact-num {
+  font-size: 36px; font-weight: 700; color: rgba(255,255,255,0.15);
+  line-height: 1; flex-shrink: 0; font-variant-numeric: tabular-nums;
+}
+.impact-text h4 { font-size: 17px; font-weight: 500; margin-bottom: 8px; }
+.impact-text p  { font-size: 14px; color: var(--off); font-weight: 300; line-height: 1.65; }
+
+/* ─── COMPARISON ─── */
+.comparison-wrap {
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  gap: 20px; align-items: stretch; width: 100%;
+}
+.comp-col {
+  background: var(--card); border: 1px solid var(--card-b);
+  border-radius: var(--r); padding: 28px 26px;
+}
+#compare .comp-col { background: rgba(0,0,0,0.12); border-color: rgba(0,0,0,0.15); }
+#compare .comp-col.ai { border-color: rgba(0,0,0,0.25); background: rgba(0,0,0,0.2); }
+.comp-head {
+  font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  font-weight: 600; margin-bottom: 20px; text-align: center;
+  color: rgba(255,255,255,0.55);
+}
+.comp-row {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 17px; color: #fff;
+}
+.comp-row:last-child { border-bottom: none; }
+.comp-row .ci { flex-shrink: 0; margin-top: 2px; color: rgba(255,255,255,0.7); }
+.comp-row small { display: block; font-size: 13px; color: var(--muted); font-weight: 300; }
+.big-stat { font-size: 22px; font-weight: 600; color: #fff; line-height: 1; }
+.vs-sep {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 300; color: rgba(255,255,255,0.3);
+  letter-spacing: 2px; writing-mode: vertical-lr;
+}
+
+/* ─── ABOUT ─── */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center; width: 100%;
+}
+.about-text .sec-title { text-align: right; }
+.about-text .sec-sub   { text-align: right; margin: 0 0 28px; }
+.feat-list { display: flex; flex-direction: column; gap: 12px; }
+.feat-item {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--card); border: 1px solid var(--card-b);
+  border-radius: 14px; padding: 15px 20px;
+  font-size: 15px; font-weight: 400;
+}
+.about-img img {
+  width: 100%; border-radius: 16px;
+  filter: brightness(1.05) contrast(1.05);
+}
+
+/* ─── TIMELINE ─── */
+.timeline {
+  display: flex; gap: 0; width: 100%; max-width: 860px;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute; top: 28px; right: 28px; left: 28px;
+  height: 1px; background: rgba(255,255,255,0.15); z-index: 0;
+}
+.tl-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 12px; position: relative; z-index: 1;
+}
+.tl-dot {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.8); flex-shrink: 0;
+}
+.tl-year { font-size: 20px; font-weight: 600; }
+.tl-label { font-size: 13px; color: var(--off); font-weight: 300; line-height: 1.5; }
+.first-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 999px; padding: 10px 24px; margin-bottom: 40px;
+  font-size: 12px; letter-spacing: 3px; font-weight: 500;
+  color: rgba(255,255,255,0.7);
+}
+
+/* ─── ADVANTAGES ─── */
+.adv-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; width: 100%;
+}
+.adv-card {
+  background: var(--card); border: 1px solid var(--card-b);
+  border-radius: var(--r); padding: 28px 24px;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 12px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.adv-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.25); }
+.adv-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.88);
+}
+.adv-card h3 { font-size: 17px; font-weight: 500; }
+.adv-card p  { font-size: 14px; color: var(--off); font-weight: 300; line-height: 1.6; }
+
+/* ─── SERVICES ─── */
+.svc-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; width: 100%;
+}
+.svc-card {
+  background: var(--card); border: 1px solid var(--card-b);
+  border-radius: var(--r); padding: 26px 22px;
+  display: flex; flex-direction: column; gap: 12px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.svc-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.25); }
+.svc-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.88);
+}
+.svc-card h3 { font-size: 16px; font-weight: 500; }
+.svc-card p  { font-size: 13px; color: var(--off); font-weight: 300; line-height: 1.6; }
+
+/* ─── VISION ─── */
+.vision-quote {
+  max-width: 760px; text-align: center; margin: 0 auto 52px;
+}
+.vision-quote-text {
+  font-size: clamp(20px, 2.8vw, 30px);
+  font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.88);
+}
+.vision-stats {
+  display: flex; gap: 40px; justify-content: center; margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.v-stat { text-align: center; }
+.v-num  { font-size: clamp(40px, 6vw, 72px); font-weight: 300; line-height: 1; }
+.v-label{ font-size: 14px; color: var(--off); font-weight: 300; margin-top: 6px; }
+.vision-cta {
+  font-size: clamp(16px, 2vw, 20px);
+  text-align: center; color: rgba(255,255,255,0.7);
+  font-weight: 300; line-height: 1.7;
+}
+
+/* ─── JOBOT ─── */
+.jobot-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 52px; align-items: center; width: 100%;
+}
+.jobot-info .sec-title { text-align: right; }
+.jobot-info .sec-sub   { text-align: right; margin: 0 0 20px; }
+.war-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.28);
+  border-radius: 999px; padding: 9px 20px; margin-bottom: 22px;
+  font-size: 13px; font-weight: 500; color: #fff;
+}
+.app-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.tag {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 999px; padding: 5px 14px;
+  font-size: 12px; color: rgba(255,255,255,0.7); font-weight: 400;
+}
+.jobot-btns { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+.jobot-contact {
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+  font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 300;
+}
+.jobot-contact a { color: rgba(255,255,255,0.8); font-weight: 400; }
+.jobot-features {
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 24px; padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.jobot-features-title {
+  font-size: 16px; font-weight: 600; text-align: center;
+  color: #1a2a4a; margin-bottom: 4px; letter-spacing: 0.5px;
+}
+.feat-row {
+  display: flex; align-items: flex-start; gap: 14px;
+  background: rgba(0,0,0,0.04);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 14px; padding: 14px 16px;
+}
+.feat-row-icon {
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: rgba(58,80,104,0.12); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: #3A5068;
+}
+.feat-row-text strong { display: block; font-size: 14px; font-weight: 600; color: #1a2a4a; margin-bottom: 3px; }
+.feat-row-text span   { font-size: 12px; color: rgba(0,0,0,0.5); font-weight: 300; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: #060E1F;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 48px 40px;
+  text-align: center;
+}
+.footer-header-mirror {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px; margin-bottom: 24px;
+}
+.footer-slogan-main {
+  font-size: 20px; font-weight: 300; color: rgba(255,255,255,0.85);
+  letter-spacing: 0.5px; direction: ltr;
+}
+.footer-slogan-main b { font-weight: 700; color: #fff; }
+.footer-slogan-sub {
+  font-size: 12px; color: rgba(255,255,255,0.45);
+  font-weight: 300; text-align: center;
+}
+.footer-slogan { font-size: 14px; color: var(--muted); font-weight: 300; margin-bottom: 24px; }
+.footer-links { display: flex; gap: 28px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.footer-links a:hover { color: #fff; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  :root { --nav-h: 68px; }
+  .section { padding: calc(var(--nav-h) + 40px) 20px 60px; }
+
+  /* ── Navbar fix ── */
+  #navbar { padding: 0 14px; gap: 6px; height: var(--nav-h); }
+  .nav-brand { gap: 10px; min-width: 0; overflow: hidden; }
+  .nav-brand img { height: 48px; flex-shrink: 0; }
+  .nav-slogan { min-width: 0; overflow: hidden; }
+  .nav-slogan-main { font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 160px; }
+  .nav-slogan-sub { display: none; }
+  .nav-links { display: none; }
+  .lang-toggle { padding: 5px 10px; font-size: 11px; flex-shrink: 0; }
+  .hamburger { display: flex; flex-shrink: 0; }
+  .mobile-menu { padding: 20px; top: var(--nav-h); }
+
+  /* ── Hero ── */
+  .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+  .hero-img-wrap { display: flex; justify-content: center; }
+  .hero-img-wrap img { max-width: 260px; width: 80%; }
+  .hero-title { font-size: clamp(34px, 9vw, 52px); letter-spacing: -1px; }
+
+  /* ── Layouts ── */
+  .pillars { grid-template-columns: 1fr; }
+  .impacts { grid-template-columns: 1fr; }
+  .comparison-wrap { grid-template-columns: 1fr; }
+  .vs-sep { writing-mode: initial; padding: 4px 0; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-img { display: flex; justify-content: center; }
+  .about-img img { max-width: 260px; width: 80%; }
+  .timeline { flex-direction: column; gap: 24px; }
+  .timeline::before { display: none; }
+  .tl-item { flex-direction: row; text-align: right; gap: 16px; }
+  .adv-grid { grid-template-columns: 1fr 1fr; }
+  .svc-grid { grid-template-columns: 1fr 1fr; }
+  .jobot-grid { grid-template-columns: 1fr; }
+  .vision-stats { gap: 24px; }
+  .contact-form { padding: 28px 20px; }
+}
+
+@media (max-width: 560px) {
+  :root { --nav-h: 62px; }
+  #navbar { padding: 0 12px; }
+  .nav-brand img { height: 42px; }
+  .nav-slogan-main { font-size: 13px; max-width: 130px; }
+  .adv-grid { grid-template-columns: 1fr; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .sec-title { font-size: clamp(26px, 7vw, 38px); }
+  footer { padding: 36px 20px; }
+  .hero-img-wrap img { max-width: 220px; }
+  .about-img img { max-width: 220px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav id="navbar">
+  <div class="nav-brand">
+    <a href="#hero" onclick="jumpTo('hero')"><img src="logo.png" alt="OMS AI" style="cursor:pointer;"></a>
+    <div class="nav-slogan">
+      <span class="nav-slogan-main" id="sloganMain"><b>O</b>ne <b>M</b>an <b>S</b>ystem <b>AI</b></span>
+      <span class="nav-slogan-sub" data-i18n="nav-sub">בניית מוצרים - מערכות, אפליקציות ואתרים באמצעות יכולות הבינה המלאכותית. AI-NATIVE</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#ainative" onclick="jumpTo('ainative')">AI Native</a></li>
+    <li><a href="#compare" onclick="jumpTo('compare')" data-i18n="nav-compare">השוואה</a></li>
+    <li><a href="#about" onclick="jumpTo('about')" data-i18n="nav-about">אודות</a></li>
+    <li><a href="#services" onclick="jumpTo('services')" data-i18n="nav-services">שירותים</a></li>
+    <li><a href="#vision" onclick="jumpTo('vision')" data-i18n="nav-vision">חזון</a></li>
+    <li><a href="#jobot" onclick="jumpTo('jobot')">Jobot</a></li>
+    <li><a href="#contact" onclick="jumpTo('contact')" class="nav-cta" data-i18n="nav-contact">צור קשר</a></li>
+  </ul>
+  <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+  <button class="hamburger" id="hamburger" aria-label="תפריט">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#ainative" onclick="jumpTo('ainative');closeMobile()">AI Native</a>
+  <a href="#compare"  onclick="jumpTo('compare');closeMobile()" data-i18n="nav-compare">השוואה</a>
+  <a href="#about"    onclick="jumpTo('about');closeMobile()" data-i18n="nav-about">אודות</a>
+  <a href="#services" onclick="jumpTo('services');closeMobile()" data-i18n="nav-services">שירותים</a>
+  <a href="#vision"   onclick="jumpTo('vision');closeMobile()" data-i18n="nav-vision">חזון</a>
+  <a href="#jobot"    onclick="jumpTo('jobot');closeMobile()">Jobot</a>
+  <a href="#contact" onclick="jumpTo('contact');closeMobile()" data-i18n="nav-contact">צור קשר</a>
+</div>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="section" id="hero">
+  <div class="hero-grid container">
+    <div>
+      <div class="hero-overline reveal"><span class="hero-dot"></span><span data-i18n="hero-overline"> חברת טכנולוגיה ישראלית · 2026</span></div>
+      <h1 class="hero-title reveal reveal-delay-1" data-i18n-html="hero-title">OMS AI<br><em>עתיד העסקים</em><br>מתחיל כאן</h1>
+      <p class="hero-sub reveal reveal-delay-2" data-i18n="hero-sub">אנחנו חברה חדשנית חלוצת AI-NATIVE. הוקמנו מהיסוד סביב יכולות הבינה המלאכותית.</p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#services" class="btn-primary">
+          <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" style="stroke:#0B2447"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span data-i18n="hero-btn1">הפתרונות שלנו</span>
+        </a>
+        <a href="#about" class="btn-secondary" data-i18n="hero-btn2">מי אנחנו</a>
+      </div>
+      <div class="hero-chip reveal reveal-delay-4">AI NATIVE &nbsp;·&nbsp; ISRAEL &nbsp;·&nbsp; 2026</div>
+    </div>
+    <div class="hero-img-wrap reveal reveal-delay-2">
+      <img src="W.png" alt="OMS AI Vision">
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ AI NATIVE ══════════════ -->
+<section class="section" id="ainative">
+  <div class="container">
+    <p class="sec-label reveal" data-i18n="ainative-label">הגדרה</p>
+    <h2 class="sec-title reveal" data-i18n="ainative-title">מה זה AI Native?</h2>
+    <p class="sec-sub reveal" data-i18n="ainative-sub">חברה שנבנתה מהיסוד עם AI בלב כל תהליך - לא תוסף, לא כלי עזר. DNA.</p>
+    <div class="pillars">
+      <div class="pillar reveal reveal-delay-1">
+        <span class="pillar-icon"><svg class="svg-icon" width="28" height="28" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M9 11h.01M15 11h.01"/></svg></span>
+        <h3 data-i18n="pillar1-h3">ארכיטקטורת AI-First</h3>
+        <p data-i18n="pillar1-p">כל מערכת, כל קוד, כל מבנה - תוכנן מהרגע הראשון סביב AI. לא ירושה, לא עדכון.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-2">
+        <span class="pillar-icon"><svg class="svg-icon" width="28" height="28" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="12" cy="19" r="2"/><line x1="12" y1="7" x2="12" y2="17"/><line x1="7" y1="12" x2="17" y2="12"/></svg></span>
+        <h3 data-i18n="pillar2-h3">החלטות מבוססות AI</h3>
+        <p data-i18n="pillar2-p">כל החלטה עסקית ואופטימיזציה - מונעת על ידי מודלים חכמים בזמן אמת.</p>
+      </div>
+      <div class="pillar reveal reveal-delay-3">
+        <span class="pillar-icon"><svg class="svg-icon" width="28" height="28" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg></span>
+        <h3 data-i18n="pillar3-h3">מוצרים מונעי AI</h3>
+        <p data-i18n="pillar3-p">המוצרים לומדים, מתפתחים ומשתפרים בכוחות עצמם - ללא התערבות אנושית.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ IMPACT ══════════════ -->
+<section class="section" id="impact">
+  <div class="container">
+    <p class="sec-label reveal" data-i18n="impact-label">השפעה גלובלית</p>
+    <h2 class="sec-title reveal" data-i18n="impact-title">כיצד AI Native ישנה את העולם?</h2>
+    <div class="impacts">
+      <div class="impact-card reveal reveal-delay-1">
+        <div class="impact-num">01</div>
+        <div class="impact-text">
+          <h4 data-i18n="impact1-h4">אוטומציה מלאה של תהליכים</h4>
+          <p data-i18n="impact1-p">תהליכים שלקחו שבועות הופכים לאוטומטיים שרצים תוך שניות, ללא שגיאות וללא עייפות.</p>
+        </div>
+      </div>
+      <div class="impact-card reveal reveal-delay-2">
+        <div class="impact-num">02</div>
+        <div class="impact-text">
+          <h4 data-i18n="impact2-h4">קבלת החלטות בזמן אמת</h4>
+          <p data-i18n="impact2-p">AI מנתח נתונים ומקבל החלטות עסקיות חכמות תוך אלפיות שנייה - מהירות שאף אנושי לא יכול להשיג.</p>
+        </div>
+      </div>
+      <div class="impact-card reveal reveal-delay-3">
+        <div class="impact-num">03</div>
+        <div class="impact-text">
+          <h4 data-i18n="impact3-h4">חיסכון עצום בעלויות</h4>
+          <p data-i18n="impact3-p">הוזלת עלויות של 70%+ בתהליכי פיתוח, תפעול ושירות - משאבים שחוזרים לצמיחה העסקית.</p>
+        </div>
+      </div>
+      <div class="impact-card reveal reveal-delay-4">
+        <div class="impact-num">04</div>
+        <div class="impact-text">
+          <h4 data-i18n="impact4-h4">מוצרים שמשתפרים לבד</h4>
+          <p data-i18n="impact4-p">מוצרי AI Native לומדים מכל אינטראקציה ומשתפרים אוטומטית - ערך שגדל עם הזמן.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ COMPARISON ══════════════ -->
+<section class="section" id="compare">
+  <div class="container">
+    <p class="sec-label reveal" data-i18n="compare-label">השוואה</p>
+    <h2 class="sec-title reveal" data-i18n="compare-title">קיצור תהליכים · הוזלת עלויות</h2>
+    <div class="comparison-wrap reveal">
+      <div class="comp-col trad">
+        <div class="comp-head" data-i18n="trad-head">שיטה מסורתית</div>
+        <div class="comp-row">
+          <span class="ci"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <div><span data-i18n="trad-r1-main">שבועות עד חודשים</span><small data-i18n="trad-r1-small">זמן פיתוח ממוצע</small></div>
+        </div>
+        <div class="comp-row">
+          <span class="ci"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+          <div><span data-i18n="trad-r2-main">עלויות גבוהות</span><small data-i18n="trad-r2-small">צוות גדול + תשתיות יקרות</small></div>
+        </div>
+        <div class="comp-row">
+          <span class="ci"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+          <div><span data-i18n="trad-r3-main">שגיאות אנושיות</span><small data-i18n="trad-r3-small">תלות מוחלטת באנשים</small></div>
+        </div>
+        <div class="comp-row">
+          <span class="ci"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 1 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg></span>
+          <div><span data-i18n="trad-r4-main">סקיילינג איטי ויקר</span><small data-i18n="trad-r4-small">כל גידול = עלות גבוהה</small></div>
+        </div>
+      </div>
+      <div class="vs-sep">VS</div>
+      <div class="comp-col ai">
+        <div class="comp-head" data-i18n="ai-head">AI Native</div>
+        <div class="comp-row">
+          <span class="ci"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          <div><div class="big-stat" data-i18n="ai-r1-big">שעות</div><small data-i18n="ai-r1-small">מ-idea למוצר עובד</small></div>
+        </div>
+        <div class="comp-row">
+          <span class="ci"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 6 23 6 23 12"/></svg></span>
+          <div><div class="big-stat">70%↓</div><small data-i18n="ai-r2-small">הפחתת עלויות ממוצעת</small></div>
+        </div>
+        <div class="comp-row">
+          <span class="ci"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/></svg></span>
+          <div><div class="big-stat">~0</div><small data-i18n="ai-r3-small">שיעור שגיאות</small></div>
+        </div>
+        <div class="comp-row">
+          <span class="ci"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
+          <div><div class="big-stat">∞</div><small data-i18n="ai-r4-small">סקיילינג ללא עלות נוספת</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ABOUT ══════════════ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="sec-label reveal" data-i18n="about-label">מי אנחנו</p>
+        <h2 class="sec-title reveal">OMS AI</h2>
+        <p class="sec-sub reveal" data-i18n="about-sub">חברת OMS AI היא חברת טכנולוגיה ישראלית חדשנית המתמחה בבניית פתרונות עסקיים מבוססי AI. נוסדה מתוך חזון שכל עסק ראוי לנצל את מלוא הכוח של הבינה המלאכותית.</p>
+        <div class="feat-list">
+          <div class="feat-item reveal reveal-delay-1"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg><span data-i18n="feat1">מומחי AI ולמידת מכונה</span></div>
+          <div class="feat-item reveal reveal-delay-2"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9m16 0H4m16 0 1.28 2.55a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45L4 16"/></svg><span data-i18n="feat2">הנדסת תוכנה ברמה עולמית</span></div>
+          <div class="feat-item reveal reveal-delay-3"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span data-i18n="feat3">אסטרטגיה עסקית מבוססת נתונים</span></div>
+          <div class="feat-item reveal reveal-delay-4"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span data-i18n="feat4">טכנולוגיה ישראלית - גאווה מקומית</span></div>
+        </div>
+      </div>
+      <div class="about-img reveal reveal-delay-2">
+        <img src="M.png" alt="OMS AI Team">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FIRST MOVERS ══════════════ -->
+<section class="section" id="movers">
+  <div class="container" style="display:flex;flex-direction:column;align-items:center">
+    <p class="sec-label reveal" data-i18n="movers-label">יתרון תחרותי</p>
+    <h2 class="sec-title reveal" data-i18n="movers-title">חלוצות ה-AI Native בישראל</h2>
+    <p class="sec-sub reveal" data-i18n="movers-sub">לא חברה ותיקה שהוסיפה AI - נולדנו כ-AI Native. יתרון שלא ניתן לשכפל.</p>
+    <div class="first-badge reveal">
+      <svg class="svg-icon" width="14" height="14" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      FIRST MOVERS - AI NATIVE ISRAEL
+      <svg class="svg-icon" width="14" height="14" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </div>
+    <div class="timeline">
+      <div class="tl-item reveal reveal-delay-1">
+        <div class="tl-dot"><svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24"><path d="M12 22V12"/><path d="M12 12C12 12 7 9 7 5a5 5 0 0 1 10 0c0 4-5 7-5 7z"/></svg></div>
+        <div><div class="tl-year">2024</div><div class="tl-label" data-i18n="tl1-label">ייסוד עם חזון AI Native</div></div>
+      </div>
+      <div class="tl-item reveal reveal-delay-2">
+        <div class="tl-dot"><svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <div><div class="tl-year">2025</div><div class="tl-label" data-i18n="tl2-label">פיתוח מוצרים ופתרונות ראשונים</div></div>
+      </div>
+      <div class="tl-item reveal reveal-delay-3">
+        <div class="tl-dot"><svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg></div>
+        <div><div class="tl-year">2025+</div><div class="tl-label" data-i18n="tl3-label">השקה ללקוחות ראשונים</div></div>
+      </div>
+      <div class="tl-item reveal reveal-delay-4">
+        <div class="tl-dot"><svg class="svg-icon" width="20" height="20" viewBox="0 0 24 24"><path d="M2 20h20"/><path d="m4 20 2-8 6 4 6-4 2 8"/><path d="M12 4 8 8l4 2 4-2-4-4z"/></svg></div>
+        <div><div class="tl-year">2026</div><div class="tl-label" data-i18n="tl4-label">מובילים בשוק ה-AI הישראלי</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ ADVANTAGES ══════════════ -->
+<section class="section" id="advantages">
+  <div class="container">
+    <p class="sec-label reveal" data-i18n="adv-label">למה OMS AI</p>
+    <h2 class="sec-title reveal" data-i18n="adv-title">היתרונות שלנו</h2>
+    <div class="adv-grid">
+      <div class="adv-card reveal reveal-delay-1">
+        <div class="adv-icon"><svg class="svg-icon" width="24" height="24" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <h3 data-i18n="adv1-h3">מהירות פיתוח x10</h3>
+        <p data-i18n="adv1-p">מה שלקח חודשים - אצלנו נגמר תוך ימים</p>
+      </div>
+      <div class="adv-card reveal reveal-delay-2">
+        <div class="adv-icon"><svg class="svg-icon" width="24" height="24" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3 data-i18n="adv2-h3">עלויות נמוכות ב-70%</h3>
+        <p data-i18n="adv2-p">AI מחליף שכבות שלמות של פיתוח יקר</p>
+      </div>
+      <div class="adv-card reveal reveal-delay-3">
+        <div class="adv-icon"><svg class="svg-icon" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+        <h3 data-i18n="adv3-h3">דיוק ואיכות גבוהה</h3>
+        <p data-i18n="adv3-p">מוצרים שעומדים בסטנדרטים הגבוהים ביותר</p>
+      </div>
+      <div class="adv-card reveal reveal-delay-1">
+        <div class="adv-icon"><svg class="svg-icon" width="24" height="24" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
+        <h3 data-i18n="adv4-h3">אוטומציה מקצה לקצה</h3>
+        <p data-i18n="adv4-p">כל התהליך - מעיצוב ועד ייצור - אוטומטי</p>
+      </div>
+      <div class="adv-card reveal reveal-delay-2">
+        <div class="adv-icon"><svg class="svg-icon" width="24" height="24" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+        <h3 data-i18n="adv5-h3">צמיחה מהירה</h3>
+        <p data-i18n="adv5-p">מוצרים שמתרחבים בקלות ללא עלות גידול</p>
+      </div>
+      <div class="adv-card reveal reveal-delay-3">
+        <div class="adv-icon"><svg class="svg-icon" width="24" height="24" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 data-i18n="adv6-h3">אמינות ובטיחות</h3>
+        <p data-i18n="adv6-p">פתרונות יציבים, מאובטחים ובני-אמון</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ SERVICES ══════════════ -->
+<section class="section" id="services">
+  <div class="container">
+    <p class="sec-label reveal" data-i18n="svc-label">פורטפוליו</p>
+    <h2 class="sec-title reveal" data-i18n="svc-title">הפתרונות שלנו</h2>
+    <div class="svc-grid">
+      <div class="svc-card reveal reveal-delay-1">
+        <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h3 data-i18n="svc1-h3">אתרים ואפליקציות AI</h3>
+        <p data-i18n="svc1-p">נוכחות דיגיטלית מרשימה עם AI משולב בכל שכבה</p>
+      </div>
+      <div class="svc-card reveal reveal-delay-2">
+        <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <h3 data-i18n="svc2-h3">מערכות אוטומציה עסקית</h3>
+        <p data-i18n="svc2-p">אוטומציה של תהליכי ליבה - מכירות, שירות, לוגיסטיקה</p>
+      </div>
+      <div class="svc-card reveal reveal-delay-3">
+        <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17.5 10.5c1 1 1.5 2 1.5 4a6 6 0 0 1-12 0c0-2 .5-3 1.5-4l3.5-3.5"/><path d="m6 14 2-2"/></svg></div>
+        <h3 data-i18n="svc3-h3">עיצוב UX/UI מונע AI</h3>
+        <p data-i18n="svc3-p">ממשקי משתמש חכמים שמתאימים את עצמם לכל משתמש</p>
+      </div>
+      <div class="svc-card reveal reveal-delay-1">
+        <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
+        <h3 data-i18n="svc4-h3">ייעוץ אסטרטגי AI</h3>
+        <p data-i18n="svc4-p">מפת דרכים לאימוץ AI בעסק שלך - שלב אחר שלב</p>
+      </div>
+      <div class="svc-card reveal reveal-delay-2">
+        <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div>
+        <h3 data-i18n="svc5-h3">פיתוח מוצרים דיגיטליים</h3>
+        <p data-i18n="svc5-p">מהרעיון למוצר בשוק - מהר, חכם וחסכוני</p>
+      </div>
+      <div class="svc-card reveal reveal-delay-3">
+        <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <h3 data-i18n="svc6-h3">AI לעסקים קטנים ובינוניים</h3>
+        <p data-i18n="svc6-p">פתרונות נגישים שמעניקים לעסקים קטנים כוח של ענק</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ VISION ══════════════ -->
+<section class="section" id="vision">
+  <div class="container" style="display:flex;flex-direction:column;align-items:center">
+    <p class="sec-label reveal" data-i18n="vision-label">החזון</p>
+    <h2 class="sec-title reveal" data-i18n="vision-title">החזון שלנו</h2>
+    <div class="vision-quote reveal reveal-delay-1">
+      <p class="vision-quote-text" data-i18n="vision-quote">"עולם שבו כל עסק - קטן כגדול - מנצל את מלוא הכוח של הבינה המלאכותית."</p>
+    </div>
+    <div class="vision-stats">
+      <div class="v-stat reveal reveal-delay-1"><div class="v-num">10x</div><div class="v-label" data-i18n="vlabel1">מהירות פיתוח</div></div>
+      <div class="v-stat reveal reveal-delay-2"><div class="v-num">70%</div><div class="v-label" data-i18n="vlabel2">הוזלת עלויות</div></div>
+      <div class="v-stat reveal reveal-delay-3"><div class="v-num">∞</div><div class="v-label" data-i18n="vlabel3">יכולת סקיילינג</div></div>
+    </div>
+    <p class="vision-cta reveal reveal-delay-4" data-i18n="vision-cta">
+      המהפכה כבר כאן. האם העסק שלך יוביל אותה, או יישאר מאחור?
+    </p>
+    <div style="margin-top:36px" class="reveal reveal-delay-5">
+      <a href="https://omsai.ai" target="_blank" class="btn-primary">
+        <svg class="svg-icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:#272463"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        <span data-i18n="vision-btn">בואו נדבר</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ JOBOT ══════════════ -->
+<section class="section" id="jobot">
+  <div class="container">
+    <div class="jobot-grid">
+      <div class="jobot-info">
+        <p class="sec-label reveal" data-i18n="jobot-label">מוצר במתנה</p>
+        <h2 class="sec-title reveal">Jobot</h2>
+        <p class="sec-sub reveal" data-i18n="jobot-sub">האפליקציה החכמה שמשנה את הדרך בה מוצאים עבודה - שולחת קורות חיים באופן אוטומטי, חכם וממוקד.</p>
+        <div class="war-badge reveal">
+          <svg class="svg-icon" width="14" height="14" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span data-i18n="jobot-war">חינם בימי המלחמה - עד לניצחון המיוחל</span>
+        </div>
+        <div class="app-tags reveal">
+          <span class="tag">AI Native</span>
+          <span class="tag" data-i18n="tag-auto">אוטומציה חכמה</span>
+          <span class="tag" data-i18n="tag-mobile">מובייל</span>
+          <span class="tag" data-i18n="tag-free">חינמי</span>
+        </div>
+        <div class="jobot-btns reveal">
+          <a href="https://jobot.app" target="_blank" class="btn-primary" style="background:#fff;color:#3A5068">
+            <svg class="svg-icon" width="15" height="15" viewBox="0 0 24 24" style="stroke:#3A5068"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span data-i18n="jobot-btn1">פתח את Jobot</span>
+          </a>
+          <a href="https://jobot.app" target="_blank" class="btn-secondary">
+            <svg class="svg-icon" width="15" height="15" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span data-i18n="jobot-btn2">הורד בחינם</span>
+          </a>
+        </div>
+        <div class="jobot-contact reveal" data-i18n-html="jobot-contact-html">
+          גלה עוד: <a href="https://jobot.app" target="_blank">jobot.app</a> &nbsp;·&nbsp; בנוי על ידי <a href="https://omsai.ai" target="_blank">OMS AI</a>
+        </div>
+      </div>
+      <div class="jobot-features reveal reveal-delay-2">
+        <img src="JOBOT.png" alt="Jobot" style="width:60%;max-width:260px;margin:0 auto 18px;display:block;filter:brightness(1.05);border-radius:12px;">
+        <div class="jobot-features-title" data-i18n="jobot-feat-title">Jobot - בוט קו״ח חכם</div>
+        <div class="feat-row">
+          <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+          <div class="feat-row-text">
+            <strong data-i18n="feat-r1-strong">חיפוש משרות חכם</strong>
+            <span data-i18n="feat-r1-span">AI סורק אלפי מודעות בזמן אמת ומוצא את ההתאמות הטובות ביותר עבורך</span>
+          </div>
+        </div>
+        <div class="feat-row">
+          <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+          <div class="feat-row-text">
+            <strong data-i18n="feat-r2-strong">שליחה אוטומטית של קו״ח</strong>
+            <span data-i18n="feat-r2-span">הבוט שולח קורות חיים מותאמים אישית לכל משרה, ללא מאמץ ידני</span>
+          </div>
+        </div>
+        <div class="feat-row">
+          <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+          <div class="feat-row-text">
+            <strong data-i18n="feat-r3-strong">פרופיל אישי מותאם AI</strong>
+            <span data-i18n="feat-r3-span">מנתח את הכישורים שלך ומייצר פרופיל תעסוקתי שמשתפר עם כל בקשה</span>
+          </div>
+        </div>
+        <div class="feat-row">
+          <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="feat-row-text">
+            <strong data-i18n="feat-r4-strong">מעקב ותובנות בזמן אמת</strong>
+            <span data-i18n="feat-r4-span">דאשבורד חי: כמה פניות נשלחו, כמה נפתחו, ומה השלב הבא</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<section class="section" id="contact">
+  <div class="container">
+    <p class="sec-label reveal" data-i18n="contact-label">צור קשר</p>
+    <h2 class="sec-title reveal" data-i18n="contact-title">נשמח לשמוע ממך</h2>
+    <p class="sec-sub reveal" data-i18n="contact-sub">השאירי פרטים ונחזור אלייך בהקדם - ישירות לוואטסאפ.</p>
+    <div class="contact-wrap reveal reveal-delay-1">
+      <form class="contact-form" onsubmit="sendToWhatsApp(event)">
+        <div class="form-group">
+          <label data-i18n="contact-name-label">שם מלא</label>
+          <input type="text" id="cName" placeholder="השם שלך" required data-i18n-placeholder="contact-name-ph">
+        </div>
+        <div class="form-group">
+          <label data-i18n="contact-phone-label">טלפון</label>
+          <input type="tel" id="cPhone" placeholder="050-0000000" required data-i18n-placeholder="contact-phone-ph">
+        </div>
+        <div class="form-group">
+          <label data-i18n="contact-email-label">אימייל (אופציונלי)</label>
+          <input type="email" id="cEmail" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label data-i18n="contact-msg-label">הודעה</label>
+          <textarea id="cMsg" placeholder="ספרי לנו במה תרצי לקבל עזרה..." data-i18n-placeholder="contact-msg-ph"></textarea>
+        </div>
+        <button type="submit" class="contact-submit">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0A1628" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span data-i18n="contact-btn">שלח בוואטסאפ</span>
+        </button>
+      </form>
+      <p class="contact-note" data-i18n="contact-note">לחיצה תפתח את וואטסאפ עם הפרטים שלך מוכנים לשליחה</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+  <div class="footer-header-mirror">
+    <span class="footer-slogan-main"><b>O</b>ne <b>M</b>an <b>S</b>ystem <b>AI</b></span>
+    <span class="footer-slogan-sub" data-i18n="footer-sub">בניית מוצרים - מערכות, אפליקציות ואתרים באמצעות יכולות הבינה המלאכותית. AI-NATIVE</span>
+  </div>
+  <div class="footer-links">
+    <a href="#hero" data-i18n="footer-home">ראשי</a>
+    <a href="#ainative">AI Native</a>
+    <a href="#about" data-i18n="footer-about">אודות</a>
+    <a href="#services" data-i18n="footer-services">שירותים</a>
+    <a href="#vision" data-i18n="footer-vision">חזון</a>
+    <a href="#jobot">Jobot</a>
+    <a href="#contact" data-i18n="footer-contact">צור קשר</a>
+  </div>
+  <p class="footer-copy" data-i18n="footer-copy">© 2026 OMS AI · כל הזכויות שמורות · ישראל</p>
+</footer>
+
+<script>
+// ── TRANSLATIONS ──
+const T = {
+  he: {
+    'page-title':      'OMS AI - עתיד העסקים מתחיל כאן',
+    'nav-sub':         'בניית מוצרים - מערכות, אפליקציות ואתרים באמצעות יכולות הבינה המלאכותית. AI-NATIVE',
+    'nav-compare':     'השוואה',
+    'nav-about':       'אודות',
+    'nav-services':    'שירותים',
+    'nav-vision':      'חזון',
+    'nav-contact':     'צור קשר',
+    'hero-overline':   ' חברת טכנולוגיה ישראלית · 2026',
+    'hero-title':      'OMS AI<br><em>עתיד העסקים</em><br>מתחיל כאן',
+    'hero-sub':        'אנחנו חברה חדשנית חלוצת AI-NATIVE. הוקמנו מהיסוד סביב יכולות הבינה המלאכותית.',
+    'hero-btn1':       'הפתרונות שלנו',
+    'hero-btn2':       'מי אנחנו',
+    'ainative-label':  'הגדרה',
+    'ainative-title':  'מה זה AI Native?',
+    'ainative-sub':    'חברה שנבנתה מהיסוד עם AI בלב כל תהליך - לא תוסף, לא כלי עזר. DNA.',
+    'pillar1-h3':      'ארכיטקטורת AI-First',
+    'pillar1-p':       'כל מערכת, כל קוד, כל מבנה - תוכנן מהרגע הראשון סביב AI. לא ירושה, לא עדכון.',
+    'pillar2-h3':      'החלטות מבוססות AI',
+    'pillar2-p':       'כל החלטה עסקית ואופטימיזציה - מונעת על ידי מודלים חכמים בזמן אמת.',
+    'pillar3-h3':      'מוצרים מונעי AI',
+    'pillar3-p':       'המוצרים לומדים, מתפתחים ומשתפרים בכוחות עצמם - ללא התערבות אנושית.',
+    'impact-label':    'השפעה גלובלית',
+    'impact-title':    'כיצד AI Native ישנה את העולם?',
+    'impact1-h4':      'אוטומציה מלאה של תהליכים',
+    'impact1-p':       'תהליכים שלקחו שבועות הופכים לאוטומטיים שרצים תוך שניות, ללא שגיאות וללא עייפות.',
+    'impact2-h4':      'קבלת החלטות בזמן אמת',
+    'impact2-p':       'AI מנתח נתונים ומקבל החלטות עסקיות חכמות תוך אלפיות שנייה - מהירות שאף אנושי לא יכול להשיג.',
+    'impact3-h4':      'חיסכון עצום בעלויות',
+    'impact3-p':       'הוזלת עלויות של 70%+ בתהליכי פיתוח, תפעול ושירות - משאבים שחוזרים לצמיחה העסקית.',
+    'impact4-h4':      'מוצרים שמשתפרים לבד',
+    'impact4-p':       'מוצרי AI Native לומדים מכל אינטראקציה ומשתפרים אוטומטית - ערך שגדל עם הזמן.',
+    'compare-label':   'השוואה',
+    'compare-title':   'קיצור תהליכים · הוזלת עלויות',
+    'trad-head':       'שיטה מסורתית',
+    'trad-r1-main':    'שבועות עד חודשים',
+    'trad-r1-small':   'זמן פיתוח ממוצע',
+    'trad-r2-main':    'עלויות גבוהות',
+    'trad-r2-small':   'צוות גדול + תשתיות יקרות',
+    'trad-r3-main':    'שגיאות אנושיות',
+    'trad-r3-small':   'תלות מוחלטת באנשים',
+    'trad-r4-main':    'סקיילינג איטי ויקר',
+    'trad-r4-small':   'כל גידול = עלות גבוהה',
+    'ai-head':         'AI Native',
+    'ai-r1-big':       'שעות',
+    'ai-r1-small':     'מ-idea למוצר עובד',
+    'ai-r2-small':     'הפחתת עלויות ממוצעת',
+    'ai-r3-small':     'שיעור שגיאות',
+    'ai-r4-small':     'סקיילינג ללא עלות נוספת',
+    'about-label':     'מי אנחנו',
+    'about-sub':       'חברת OMS AI היא חברת טכנולוגיה ישראלית חדשנית המתמחה בבניית פתרונות עסקיים מבוססי AI. נוסדה מתוך חזון שכל עסק ראוי לנצל את מלוא הכוח של הבינה המלאכותית.',
+    'feat1':           'מומחי AI ולמידת מכונה',
+    'feat2':           'הנדסת תוכנה ברמה עולמית',
+    'feat3':           'אסטרטגיה עסקית מבוססת נתונים',
+    'feat4':           'טכנולוגיה ישראלית - גאווה מקומית',
+    'movers-label':    'יתרון תחרותי',
+    'movers-title':    'חלוצות ה-AI Native בישראל',
+    'movers-sub':      'לא חברה ותיקה שהוסיפה AI - נולדנו כ-AI Native. יתרון שלא ניתן לשכפל.',
+    'tl1-label':       'ייסוד עם חזון AI Native',
+    'tl2-label':       'פיתוח מוצרים ופתרונות ראשונים',
+    'tl3-label':       'השקה ללקוחות ראשונים',
+    'tl4-label':       'מובילים בשוק ה-AI הישראלי',
+    'adv-label':       'למה OMS AI',
+    'adv-title':       'היתרונות שלנו',
+    'adv1-h3':         'מהירות פיתוח x10',
+    'adv1-p':          'מה שלקח חודשים - אצלנו נגמר תוך ימים',
+    'adv2-h3':         'עלויות נמוכות ב-70%',
+    'adv2-p':          'AI מחליף שכבות שלמות של פיתוח יקר',
+    'adv3-h3':         'דיוק ואיכות גבוהה',
+    'adv3-p':          'מוצרים שעומדים בסטנדרטים הגבוהים ביותר',
+    'adv4-h3':         'אוטומציה מקצה לקצה',
+    'adv4-p':          'כל התהליך - מעיצוב ועד ייצור - אוטומטי',
+    'adv5-h3':         'צמיחה מהירה',
+    'adv5-p':          'מוצרים שמתרחבים בקלות ללא עלות גידול',
+    'adv6-h3':         'אמינות ובטיחות',
+    'adv6-p':          'פתרונות יציבים, מאובטחים ובני-אמון',
+    'svc-label':       'פורטפוליו',
+    'svc-title':       'הפתרונות שלנו',
+    'svc1-h3':         'אתרים ואפליקציות AI',
+    'svc1-p':          'נוכחות דיגיטלית מרשימה עם AI משולב בכל שכבה',
+    'svc2-h3':         'מערכות אוטומציה עסקית',
+    'svc2-p':          'אוטומציה של תהליכי ליבה - מכירות, שירות, לוגיסטיקה',
+    'svc3-h3':         'עיצוב UX/UI מונע AI',
+    'svc3-p':          'ממשקי משתמש חכמים שמתאימים את עצמם לכל משתמש',
+    'svc4-h3':         'ייעוץ אסטרטגי AI',
+    'svc4-p':          'מפת דרכים לאימוץ AI בעסק שלך - שלב אחר שלב',
+    'svc5-h3':         'פיתוח מוצרים דיגיטליים',
+    'svc5-p':          'מהרעיון למוצר בשוק - מהר, חכם וחסכוני',
+    'svc6-h3':         'AI לעסקים קטנים ובינוניים',
+    'svc6-p':          'פתרונות נגישים שמעניקים לעסקים קטנים כוח של ענק',
+    'vision-label':    'החזון',
+    'vision-title':    'החזון שלנו',
+    'vision-quote':    '"עולם שבו כל עסק - קטן כגדול - מנצל את מלוא הכוח של הבינה המלאכותית."',
+    'vlabel1':         'מהירות פיתוח',
+    'vlabel2':         'הוזלת עלויות',
+    'vlabel3':         'יכולת סקיילינג',
+    'vision-cta':      'המהפכה כבר כאן. האם העסק שלך יוביל אותה, או יישאר מאחור?',
+    'vision-btn':      'בואו נדבר',
+    'jobot-label':     'מוצר במתנה',
+    'jobot-sub':       'האפליקציה החכמה שמשנה את הדרך בה מוצאים עבודה - שולחת קורות חיים באופן אוטומטי, חכם וממוקד.',
+    'jobot-war':       'חינם בימי המלחמה - עד לניצחון המיוחל',
+    'tag-auto':        'אוטומציה חכמה',
+    'tag-mobile':      'מובייל',
+    'tag-free':        'חינמי',
+    'jobot-btn1':      'פתח את Jobot',
+    'jobot-btn2':      'הורד בחינם',
+    'jobot-contact-html': 'גלה עוד: <a href="https://jobot.app" target="_blank">jobot.app</a> &nbsp;·&nbsp; בנוי על ידי <a href="https://omsai.ai" target="_blank">OMS AI</a>',
+    'jobot-feat-title':'Jobot - בוט קו"ח חכם',
+    'feat-r1-strong':  'חיפוש משרות חכם',
+    'feat-r1-span':    'AI סורק אלפי מודעות בזמן אמת ומוצא את ההתאמות הטובות ביותר עבורך',
+    'feat-r2-strong':  'שליחה אוטומטית של קו"ח',
+    'feat-r2-span':    'הבוט שולח קורות חיים מותאמים אישית לכל משרה, ללא מאמץ ידני',
+    'feat-r3-strong':  'פרופיל אישי מותאם AI',
+    'feat-r3-span':    'מנתח את הכישורים שלך ומייצר פרופיל תעסוקתי שמשתפר עם כל בקשה',
+    'feat-r4-strong':  'מעקב ותובנות בזמן אמת',
+    'feat-r4-span':    'דאשבורד חי: כמה פניות נשלחו, כמה נפתחו, ומה השלב הבא',
+    'contact-label':      'צור קשר',
+    'contact-title':      'נשמח לשמוע ממך',
+    'contact-sub':        'השאירי פרטים ונחזור אלייך בהקדם - ישירות לוואטסאפ.',
+    'contact-name-label': 'שם מלא',
+    'contact-name-ph':    'השם שלך',
+    'contact-phone-label':'טלפון',
+    'contact-phone-ph':   '050-0000000',
+    'contact-email-label':'אימייל (אופציונלי)',
+    'contact-msg-label':  'הודעה',
+    'contact-msg-ph':     'ספרי לנו במה תרצי לקבל עזרה...',
+    'contact-btn':        'שלח בוואטסאפ',
+    'contact-note':       'לחיצה תפתח את וואטסאפ עם הפרטים שלך מוכנים לשליחה',
+    'footer-sub':      'בניית מוצרים - מערכות, אפליקציות ואתרים באמצעות יכולות הבינה המלאכותית. AI-NATIVE',
+    'footer-home':     'ראשי',
+    'footer-about':    'אודות',
+    'footer-services': 'שירותים',
+    'footer-vision':   'חזון',
+    'footer-contact':  'צור קשר',
+    'footer-copy':     '© 2026 OMS AI · כל הזכויות שמורות · ישראל',
+  },
+  en: {
+    'page-title':      'OMS AI - The Future of Business Starts Here',
+    'nav-sub':         'Building products - systems, apps and websites using AI capabilities. AI-NATIVE',
+    'nav-compare':     'Compare',
+    'nav-about':       'About',
+    'nav-services':    'Services',
+    'nav-vision':      'Vision',
+    'nav-contact':     'Contact',
+    'hero-overline':   ' Israeli Tech Company · 2026',
+    'hero-title':      'OMS AI<br><em>The Future of Business</em><br>Starts Here',
+    'hero-sub':        'We are an innovative AI-NATIVE pioneer company, built from the ground up around the power of artificial intelligence.',
+    'hero-btn1':       'Our Solutions',
+    'hero-btn2':       'Who We Are',
+    'ainative-label':  'Definition',
+    'ainative-title':  'What is AI Native?',
+    'ainative-sub':    'A company built from the ground up with AI at the core of every process - not an add-on, not a helper. DNA.',
+    'pillar1-h3':      'AI-First Architecture',
+    'pillar1-p':       'Every system, every line of code, every structure - designed from day one around AI. Not inherited, not patched.',
+    'pillar2-h3':      'AI-Based Decisions',
+    'pillar2-p':       'Every business decision and optimization - driven by smart models in real time.',
+    'pillar3-h3':      'AI-Driven Products',
+    'pillar3-p':       'Products that learn, evolve and improve on their own - without human intervention.',
+    'impact-label':    'Global Impact',
+    'impact-title':    'How Will AI Native Change the World?',
+    'impact1-h4':      'Full Process Automation',
+    'impact1-p':       'Processes that took weeks become automated and run in seconds, without errors or fatigue.',
+    'impact2-h4':      'Real-Time Decision Making',
+    'impact2-p':       'AI analyzes data and makes smart business decisions in milliseconds - speed no human can match.',
+    'impact3-h4':      'Massive Cost Savings',
+    'impact3-p':       '70%+ cost reduction in development, operations and service - resources that go back into growth.',
+    'impact4-h4':      'Self-Improving Products',
+    'impact4-p':       'AI Native products learn from every interaction and improve automatically - value that grows over time.',
+    'compare-label':   'Comparison',
+    'compare-title':   'Faster Processes · Lower Costs',
+    'trad-head':       'Traditional Method',
+    'trad-r1-main':    'Weeks to Months',
+    'trad-r1-small':   'Average development time',
+    'trad-r2-main':    'High Costs',
+    'trad-r2-small':   'Large team + expensive infrastructure',
+    'trad-r3-main':    'Human Errors',
+    'trad-r3-small':   'Total dependency on people',
+    'trad-r4-main':    'Slow & Expensive Scaling',
+    'trad-r4-small':   'Every growth = high cost',
+    'ai-head':         'AI Native',
+    'ai-r1-big':       'Hours',
+    'ai-r1-small':     'From idea to working product',
+    'ai-r2-small':     'Average cost reduction',
+    'ai-r3-small':     'Error rate',
+    'ai-r4-small':     'Scaling at no extra cost',
+    'about-label':     'Who We Are',
+    'about-sub':       'OMS AI is an innovative Israeli tech company specializing in building AI-powered business solutions. Founded with the vision that every business deserves to harness the full power of artificial intelligence.',
+    'feat1':           'AI & Machine Learning Experts',
+    'feat2':           'World-Class Software Engineering',
+    'feat3':           'Data-Driven Business Strategy',
+    'feat4':           'Israeli Technology - Local Pride',
+    'movers-label':    'Competitive Advantage',
+    'movers-title':    'AI Native Pioneers in Israel',
+    'movers-sub':      'Not a legacy company that added AI - we were born as AI Native. An advantage that cannot be replicated.',
+    'tl1-label':       'Founded with AI Native Vision',
+    'tl2-label':       'First Products & Solutions Development',
+    'tl3-label':       'Launch to First Customers',
+    'tl4-label':       'Leading the Israeli AI Market',
+    'adv-label':       'Why OMS AI',
+    'adv-title':       'Our Advantages',
+    'adv1-h3':         '10x Development Speed',
+    'adv1-p':          'What took months - done in days with us',
+    'adv2-h3':         '70% Lower Costs',
+    'adv2-p':          'AI replaces entire layers of expensive development',
+    'adv3-h3':         'High Precision & Quality',
+    'adv3-p':          'Products meeting the highest standards',
+    'adv4-h3':         'End-to-End Automation',
+    'adv4-p':          'The entire process - from design to production - automated',
+    'adv5-h3':         'Rapid Growth',
+    'adv5-p':          'Products that scale easily at no extra cost',
+    'adv6-h3':         'Reliability & Security',
+    'adv6-p':          'Stable, secure and trustworthy solutions',
+    'svc-label':       'Portfolio',
+    'svc-title':       'Our Solutions',
+    'svc1-h3':         'AI Websites & Apps',
+    'svc1-p':          'Impressive digital presence with AI integrated at every layer',
+    'svc2-h3':         'Business Automation Systems',
+    'svc2-p':          'Automation of core processes - sales, service, logistics',
+    'svc3-h3':         'AI-Driven UX/UI Design',
+    'svc3-p':          'Smart interfaces that adapt to each individual user',
+    'svc4-h3':         'AI Strategic Consulting',
+    'svc4-p':          'A roadmap for AI adoption in your business - step by step',
+    'svc5-h3':         'Digital Product Development',
+    'svc5-p':          'From idea to market product - fast, smart and cost-effective',
+    'svc6-h3':         'AI for SMBs',
+    'svc6-p':          'Accessible solutions giving small businesses the power of giants',
+    'vision-label':    'Vision',
+    'vision-title':    'Our Vision',
+    'vision-quote':    '"A world where every business - large or small - harnesses the full power of artificial intelligence."',
+    'vlabel1':         'Development Speed',
+    'vlabel2':         'Cost Reduction',
+    'vlabel3':         'Scaling Capacity',
+    'vision-cta':      'The revolution is here. Will your business lead it, or be left behind?',
+    'vision-btn':      "Let's Talk",
+    'jobot-label':     'Our Gift to You',
+    'jobot-sub':       'The smart app that changes the way people find work - automatically sends tailored CVs, smart and targeted.',
+    'jobot-war':       'Free during wartime - until the awaited victory',
+    'tag-auto':        'Smart Automation',
+    'tag-mobile':      'Mobile',
+    'tag-free':        'Free',
+    'jobot-btn1':      'Open Jobot',
+    'jobot-btn2':      'Download Free',
+    'jobot-contact-html': 'Learn more: <a href="https://jobot.app" target="_blank">jobot.app</a> &nbsp;·&nbsp; Built by <a href="https://omsai.ai" target="_blank">OMS AI</a>',
+    'jobot-feat-title':'Jobot - Smart CV Bot',
+    'feat-r1-strong':  'Smart Job Search',
+    'feat-r1-span':    'AI scans thousands of listings in real time and finds the best matches for you',
+    'feat-r2-strong':  'Automatic CV Sending',
+    'feat-r2-span':    'The bot sends personalized CVs to each job automatically, with no manual effort',
+    'feat-r3-strong':  'AI-Adapted Personal Profile',
+    'feat-r3-span':    'Analyzes your skills and creates a professional profile that improves with each application',
+    'feat-r4-strong':  'Real-Time Tracking & Insights',
+    'feat-r4-span':    "Live dashboard: how many applications sent, how many opened, and what's next",
+    'contact-label':      'Contact',
+    'contact-title':      "We'd Love to Hear From You",
+    'contact-sub':        'Leave your details and we will get back to you - directly on WhatsApp.',
+    'contact-name-label': 'Full Name',
+    'contact-name-ph':    'Your name',
+    'contact-phone-label':'Phone',
+    'contact-phone-ph':   '050-0000000',
+    'contact-email-label':'Email (optional)',
+    'contact-msg-label':  'Message',
+    'contact-msg-ph':     'Tell us how we can help...',
+    'contact-btn':        'Send via WhatsApp',
+    'contact-note':       'Clicking will open WhatsApp with your details ready to send',
+    'footer-sub':      'Building products - systems, apps and websites using AI capabilities. AI-NATIVE',
+    'footer-home':     'Home',
+    'footer-about':    'About',
+    'footer-services': 'Services',
+    'footer-vision':   'Vision',
+    'footer-contact':  'Contact',
+    'footer-copy':     '© 2026 OMS AI · All Rights Reserved · Israel',
+  }
+};
+
+let currentLang = 'he';
+
+function toggleLang() {
+  setLang(currentLang === 'he' ? 'en' : 'he');
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  document.title = T[lang]['page-title'];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+  document.body.style.direction  = lang === 'he' ? 'rtl' : 'ltr';
+
+  // Text content elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (T[lang][key] !== undefined) el.textContent = T[lang][key];
+  });
+
+  // HTML content elements (contain links / markup)
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.getAttribute('data-i18n-html');
+    if (T[lang][key] !== undefined) el.innerHTML = T[lang][key];
+  });
+
+  // Toggle button label
+  document.getElementById('langToggle').textContent = lang === 'he' ? 'EN' : 'HE';
+
+  // Direction-sensitive overrides
+  const isEn = lang === 'en';
+  const align = isEn ? 'left' : 'right';
+
+  document.querySelectorAll('.about-text .sec-title, .about-text .sec-sub').forEach(el => {
+    el.style.textAlign = align;
+  });
+  document.querySelectorAll('.jobot-info .sec-title, .jobot-info .sec-sub').forEach(el => {
+    el.style.textAlign = align;
+  });
+  document.querySelectorAll('.tl-item').forEach(el => {
+    el.style.textAlign = isEn ? 'left' : 'center';
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (T[lang][key] !== undefined) el.placeholder = T[lang][key];
+  });
+}
+
+// ── WHATSAPP CONTACT ──
+function sendToWhatsApp(e) {
+  e.preventDefault();
+  const name  = document.getElementById('cName').value.trim();
+  const phone = document.getElementById('cPhone').value.trim();
+  const email = document.getElementById('cEmail').value.trim();
+  const msg   = document.getElementById('cMsg').value.trim();
+  const lines = [
+    'שלום, קיבלתי פנייה דרך האתר:',
+    `*שם:* ${name}`,
+    `*טלפון:* ${phone}`,
+  ];
+  if (email) lines.push(`*אימייל:* ${email}`);
+  if (msg)   lines.push(`*הודעה:* ${msg}`);
+  const text = encodeURIComponent(lines.join('\n'));
+  window.open(`https://wa.me/972544555461?text=${text}`, '_blank');
+}
+
+// ── INSTANT NAVIGATION ──
+function jumpTo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const saved = document.documentElement.style.scrollBehavior;
+  document.documentElement.style.scrollBehavior = 'auto';
+  el.scrollIntoView();
+  requestAnimationFrame(() => {
+    document.documentElement.style.scrollBehavior = saved;
+  });
+}
+
+// ── NAVBAR SCROLL ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── SLOGAN COLOR PER SECTION ──
+const sloganColors = {
+  hero:       '#1A4A90',
+  ainative:   '#374290',
+  impact:     '#1B3F64',
+  compare:    '#516C82',
+  about:      '#283746',
+  movers:     '#121C47',
+  advantages: '#233488',
+  services:   '#032A30',
+  vision:     '#272463',
+  jobot:      '#3A5068',
+  contact:    '#0A1628'
+};
+const sloganEl = document.getElementById('sloganMain');
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && sloganColors[e.target.id]) {
+      sloganEl.style.color = sloganColors[e.target.id];
+    }
+  });
+}, { threshold: 0.35 });
+Object.keys(sloganColors).forEach(id => {
+  const el = document.getElementById(id);
+  if (el) sectionObserver.observe(el);
+});
+
+// ── HAMBURGER ──
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+function closeMobile() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
