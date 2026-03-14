@@ -115,6 +115,11 @@ img { display: block; }
 }
 .lang-toggle:hover { background: rgba(0,0,0,0.15); color: rgba(0,0,0,0.9); }
 
+/* Nav right-side controls group */
+.nav-controls {
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+}
+
 /* Nav contact button - mobile only */
 .nav-contact-fixed {
   display: none;
@@ -598,6 +603,8 @@ footer {
   .nav-slogan-main { font-size: 13px; white-space: nowrap; line-height: 1; }
   .nav-slogan-sub { display: none; }
   .nav-links { display: none; }
+  .nav-slogan-main { display: none; }
+  .nav-controls { gap: 6px; }
   .nav-contact-fixed { display: inline-block; }
   .lang-toggle { padding: 5px 10px; font-size: 11px; flex-shrink: 0; }
   .hamburger { display: flex; flex-shrink: 0; }
@@ -661,11 +668,13 @@ footer {
     <li><a href="#jobot" onclick="jumpTo('jobot')">Jobot</a></li>
     <li><a href="#contact" onclick="jumpTo('contact')" class="nav-cta" data-i18n="nav-contact">צור קשר</a></li>
   </ul>
-  <a href="#contact" onclick="jumpTo('contact')" class="nav-contact-fixed" data-i18n="nav-contact">צור קשר</a>
-  <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
-  <button class="hamburger" id="hamburger" aria-label="תפריט">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-controls">
+    <a href="#contact" onclick="jumpTo('contact')" class="nav-contact-fixed" data-i18n="nav-contact">צור קשר</a>
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+    <button class="hamburger" id="hamburger" aria-label="תפריט">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
