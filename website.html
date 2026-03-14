@@ -115,16 +115,6 @@ img { display: block; }
 }
 .lang-toggle:hover { background: rgba(0,0,0,0.15); color: rgba(0,0,0,0.9); }
 
-/* Nav contact button (always visible) */
-.nav-contact-fixed {
-  background: #0B2447; color: #fff;
-  padding: 9px 16px; border-radius: 10px;
-  font-size: 13px; font-weight: 500;
-  white-space: nowrap; flex-shrink: 0;
-  transition: background 0.2s;
-}
-.nav-contact-fixed:hover { background: #1A3A6B; }
-
 /* Hamburger */
 .hamburger {
   display: none; flex-direction: column; gap: 5px;
@@ -659,7 +649,6 @@ footer {
     <li><a href="#jobot" onclick="jumpTo('jobot')">Jobot</a></li>
     <li><a href="#contact" onclick="jumpTo('contact')" class="nav-cta" data-i18n="nav-contact">צור קשר</a></li>
   </ul>
-  <a href="#contact" onclick="jumpTo('contact')" class="nav-contact-fixed" data-i18n="nav-contact">צור קשר</a>
   <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
   <button class="hamburger" id="hamburger" aria-label="תפריט">
     <span></span><span></span><span></span>
