@@ -619,7 +619,13 @@ footer {
   /* ── Layouts ── */
   .pillars { grid-template-columns: 1fr; }
   .impacts { grid-template-columns: 1fr; }
-  .comparison-wrap { grid-template-columns: 1fr; }
+  .comparison-wrap { grid-template-columns: 1fr auto 1fr; }
+  .comparison-wrap .comp-col { padding: 16px 12px; }
+  .comparison-wrap .comp-row { font-size: 13px; gap: 6px; padding: 10px 0; }
+  .comparison-wrap .comp-row .ci svg { width: 14px; height: 14px; }
+  .comparison-wrap .comp-row small { font-size: 11px; }
+  .comparison-wrap .big-stat { font-size: 16px; }
+  .comparison-wrap .comp-head { letter-spacing: 1px; margin-bottom: 12px; font-size: 11px; }
   .vs-sep { writing-mode: initial; padding: 4px 0; }
   .about-grid { grid-template-columns: 1fr; }
   .about-img { display: flex; justify-content: center; }
