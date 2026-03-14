@@ -115,6 +115,16 @@ img { display: block; }
 }
 .lang-toggle:hover { background: rgba(0,0,0,0.15); color: rgba(0,0,0,0.9); }
 
+/* Nav contact button (always visible) */
+.nav-contact-fixed {
+  background: #0B2447; color: #fff;
+  padding: 9px 16px; border-radius: 10px;
+  font-size: 13px; font-weight: 500;
+  white-space: nowrap; flex-shrink: 0;
+  transition: background 0.2s;
+}
+.nav-contact-fixed:hover { background: #1A3A6B; }
+
 /* Hamburger */
 .hamburger {
   display: none; flex-direction: column; gap: 5px;
@@ -649,6 +659,7 @@ footer {
     <li><a href="#jobot" onclick="jumpTo('jobot')">Jobot</a></li>
     <li><a href="#contact" onclick="jumpTo('contact')" class="nav-cta" data-i18n="nav-contact">צור קשר</a></li>
   </ul>
+  <a href="#contact" onclick="jumpTo('contact')" class="nav-contact-fixed" data-i18n="nav-contact">צור קשר</a>
   <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
   <button class="hamburger" id="hamburger" aria-label="תפריט">
     <span></span><span></span><span></span>
@@ -673,11 +684,11 @@ footer {
       <h1 class="hero-title reveal reveal-delay-1" data-i18n-html="hero-title">OMS AI<br><em>עתיד העסקים</em><br>מתחיל כאן</h1>
       <p class="hero-sub reveal reveal-delay-2" data-i18n="hero-sub">אנחנו חברה חדשנית חלוצת AI-NATIVE. הוקמנו מהיסוד סביב יכולות הבינה המלאכותית.</p>
       <div class="hero-actions reveal reveal-delay-3">
-        <a href="#services" class="btn-primary">
+        <a href="#services" onclick="jumpTo('services')" class="btn-primary">
           <svg class="svg-icon" viewBox="0 0 24 24" width="16" height="16" style="stroke:#0B2447"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           <span data-i18n="hero-btn1">הפתרונות שלנו</span>
         </a>
-        <a href="#about" class="btn-secondary" data-i18n="hero-btn2">מי אנחנו</a>
+        <a href="#about" onclick="jumpTo('about')" class="btn-secondary" data-i18n="hero-btn2">מי אנחנו</a>
       </div>
       <div class="hero-chip reveal reveal-delay-4">AI NATIVE &nbsp;·&nbsp; ISRAEL &nbsp;·&nbsp; 2026</div>
     </div>
@@ -993,35 +1004,34 @@ footer {
       </div>
       <div class="jobot-features reveal reveal-delay-2">
         <img src="JOBOT.png" alt="Jobot" style="width:60%;max-width:260px;margin:0 auto 18px;display:block;filter:brightness(1.05);border-radius:12px;">
-        <div class="jobot-features-title" data-i18n="jobot-feat-title">Jobot - בוט קו״ח חכם</div>
-        <div class="feat-row">
-          <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-          <div class="feat-row-text">
-            <strong data-i18n="feat-r1-strong">חיפוש משרות חכם</strong>
-            <span data-i18n="feat-r1-span">AI סורק אלפי מודעות בזמן אמת ומוצא את ההתאמות הטובות ביותר עבורך</span>
+        <div class="jobot-features-title" style="font-size:19px;line-height:1.4;margin-bottom:10px;">
+          <span style="color:#1a2a4a;">העבודה הבאה שלך? </span><span style="color:#00A99D;">בוא נמצא אותה ביחד</span>
+        </div>
+        <p style="font-size:12px;color:rgba(0,0,0,0.55);font-weight:300;line-height:1.6;text-align:center;margin-bottom:14px;">
+          שכחו מלגלול שעות בלוחות דרושים. JoBot חושב מחוץ לקופסה – סורק מקורות מפתיעים, מזהה הזדמנויות נסתרות, ומתאים לכם משרות בדרכים שלא חשבתם עליהן. ✨ כי מציאת עבודה צריכה להיות יצירתית, לא מתישה.
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+          <div class="feat-row" style="flex-direction:column;align-items:center;text-align:center;gap:8px;padding:12px 10px;">
+            <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <div class="feat-row-text"><strong>חיפוש משרות</strong><span>סריקת לוחות דרושים בזמן אמת</span></div>
+          </div>
+          <div class="feat-row" style="flex-direction:column;align-items:center;text-align:center;gap:8px;padding:12px 10px;">
+            <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+            <div class="feat-row-text"><strong>העלאת קו״ח</strong><span>ניתוח חכם של קורות החיים שלך</span></div>
+          </div>
+          <div class="feat-row" style="flex-direction:column;align-items:center;text-align:center;gap:8px;padding:12px 10px;">
+            <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+            <div class="feat-row-text"><strong>שליחה אוטומטית</strong><span>מכתב מקדים מותאם אישית</span></div>
+          </div>
+          <div class="feat-row" style="flex-direction:column;align-items:center;text-align:center;gap:8px;padding:12px 10px;">
+            <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div>
+            <div class="feat-row-text"><strong>מחקר AI</strong><span>בינה מלאכותית שמחפשת בשבילך</span></div>
           </div>
         </div>
-        <div class="feat-row">
-          <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
-          <div class="feat-row-text">
-            <strong data-i18n="feat-r2-strong">שליחה אוטומטית של קו״ח</strong>
-            <span data-i18n="feat-r2-span">הבוט שולח קורות חיים מותאמים אישית לכל משרה, ללא מאמץ ידני</span>
-          </div>
-        </div>
-        <div class="feat-row">
-          <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-          <div class="feat-row-text">
-            <strong data-i18n="feat-r3-strong">פרופיל אישי מותאם AI</strong>
-            <span data-i18n="feat-r3-span">מנתח את הכישורים שלך ומייצר פרופיל תעסוקתי שמשתפר עם כל בקשה</span>
-          </div>
-        </div>
-        <div class="feat-row">
-          <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <div class="feat-row-text">
-            <strong data-i18n="feat-r4-strong">מעקב ותובנות בזמן אמת</strong>
-            <span data-i18n="feat-r4-span">דאשבורד חי: כמה פניות נשלחו, כמה נפתחו, ומה השלב הבא</span>
-          </div>
-        </div>
+        <a href="https://jobot.app" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#00A99D,#00BFB3);color:#fff;font-weight:700;font-size:16px;padding:14px;border-radius:12px;text-decoration:none;margin-bottom:10px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
+          🚀 בואו נתחיל! &nbsp;🚀
+        </a>
+        <p style="text-align:center;font-size:11px;color:rgba(0,0,0,0.4);font-weight:300;">חינמי לחלוטין &bull; ללא כרטיס אשראי &bull; תוצאות תוך דקות</p>
       </div>
     </div>
   </div>
@@ -1032,7 +1042,7 @@ footer {
   <div class="container">
     <p class="sec-label reveal" data-i18n="contact-label">צור קשר</p>
     <h2 class="sec-title reveal" data-i18n="contact-title">נשמח לשמוע ממך</h2>
-    <p class="sec-sub reveal" data-i18n="contact-sub">השאירי פרטים ונחזור אלייך בהקדם - ישירות לוואטסאפ.</p>
+    <p class="sec-sub reveal" data-i18n="contact-sub">השאירו פרטים ונחזור אליכם בהקדם - ישירות לוואטסאפ.</p>
     <div class="contact-wrap reveal reveal-delay-1">
       <form class="contact-form" onsubmit="sendToWhatsApp(event)">
         <div class="form-group">
@@ -1200,7 +1210,7 @@ const T = {
     'feat-r4-span':    'דאשבורד חי: כמה פניות נשלחו, כמה נפתחו, ומה השלב הבא',
     'contact-label':      'צור קשר',
     'contact-title':      'נשמח לשמוע ממך',
-    'contact-sub':        'השאירי פרטים ונחזור אלייך בהקדם - ישירות לוואטסאפ.',
+    'contact-sub':        'השאירו פרטים ונחזור אליכם בהקדם - ישירות לוואטסאפ.',
     'contact-name-label': 'שם מלא',
     'contact-name-ph':    'השם שלך',
     'contact-phone-label':'טלפון',
