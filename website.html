@@ -1662,7 +1662,7 @@ function setLang(lang) {
     el.style.textAlign = align;
   });
   document.querySelectorAll('.tl-item').forEach(el => {
-    el.style.textAlign = isEn ? 'left' : 'center';
+    el.style.textAlign = isEn ? 'left' : '';
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.getAttribute('data-i18n-placeholder');
