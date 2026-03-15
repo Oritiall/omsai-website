@@ -368,12 +368,12 @@ img { display: block; }
   gap: 20px; align-items: stretch; width: 100%;
 }
 .comp-col {
-  background: var(--card); border: 1px solid var(--card-b);
-  border-radius: var(--r); padding: 36px 36px;
+  background: var(--card); border: none;
+  border-radius: var(--r); padding: 48px 44px;
   display: flex; flex-direction: column;
 }
-#compare .comp-col { background: rgba(0,0,0,0.12); border-color: rgba(0,0,0,0.15); }
-#compare .comp-col.ai { border-color: rgba(0,0,0,0.25); background: rgba(0,0,0,0.2); }
+#compare .comp-col { background: rgba(0,0,0,0.12); }
+#compare .comp-col.ai { background: rgba(0,0,0,0.2); }
 .comp-head {
   font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
   font-weight: 600; margin-bottom: 20px; text-align: center;
@@ -930,9 +930,9 @@ footer {
     <p class="sec-label reveal" data-i18n="movers-label">יתרון תחרותי</p>
     <h2 class="sec-title reveal" data-i18n="movers-title">חלוצות ה-AI Native בישראל</h2>
     <p class="sec-sub reveal" data-i18n="movers-sub">לא חברה ותיקה שהוסיפה AI - נולדנו כ-AI Native. יתרון שלא ניתן לשכפל.</p>
-    <div class="first-badge reveal">
+    <div class="first-badge reveal" style="text-align:center;justify-content:center;">
       <svg class="svg-icon" width="14" height="14" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      FIRST MOVERS - AI NATIVE ISRAEL
+      <span data-i18n="first-badge">חלוצי ה-AI Native בישראל</span>
       <svg class="svg-icon" width="14" height="14" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
     </div>
     <div class="timeline">
@@ -1257,6 +1257,7 @@ const T = {
     'feat2':           'הנדסת תוכנה ברמה עולמית',
     'feat3':           'אסטרטגיה עסקית מבוססת נתונים',
     'feat4':           'טכנולוגיה ישראלית - גאווה מקומית',
+    'first-badge':     'חלוצי ה-AI Native בישראל',
     'movers-label':    'יתרון תחרותי',
     'movers-title':    'חלוצות ה-AI Native בישראל',
     'movers-sub':      'לא חברה ותיקה שהוסיפה AI - נולדנו כ-AI Native. יתרון שלא ניתן לשכפל.',
@@ -1455,6 +1456,7 @@ const T = {
     'feat2':           'World-Class Software Engineering',
     'feat3':           'Data-Driven Business Strategy',
     'feat4':           'Israeli Technology - Local Pride',
+    'first-badge':     'FIRST MOVERS - AI NATIVE ISRAEL',
     'movers-label':    'Competitive Advantage',
     'movers-title':    'AI Native Pioneers in Israel',
     'movers-sub':      'Not a legacy company that added AI - we were born as AI Native. An advantage that cannot be replicated.',
