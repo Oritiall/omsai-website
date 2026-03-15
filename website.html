@@ -477,7 +477,7 @@ img { display: block; }
   display: flex; flex-direction: column; gap: 12px;
   transition: transform 0.2s, border-color 0.2s;
 }
-.svc-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.25); }
+.svc-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.25); cursor: pointer; }
 .svc-icon {
   width: 44px; height: 44px; border-radius: 12px;
   background: rgba(255,255,255,0.1);
@@ -486,6 +486,74 @@ img { display: block; }
 }
 .svc-card h3 { font-size: 16px; font-weight: 500; }
 .svc-card p  { font-size: 13px; color: var(--off); font-weight: 300; line-height: 1.6; }
+
+/* ─── SVC-MORE LINK ─── */
+.svc-more {
+  font-size: 12px; color: #00BFB3; font-weight: 500;
+  margin-top: auto; display: inline-block;
+  transition: opacity 0.2s;
+}
+.svc-card:hover .svc-more { opacity: 0.7; }
+
+/* ─── SERVICE MODAL ─── */
+.svc-modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.65); z-index: 9000;
+  align-items: center; justify-content: center; padding: 20px;
+}
+.svc-modal-overlay.open { display: flex; }
+.svc-modal-box {
+  background: #0f2d52; border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px; padding: 36px 32px; max-width: 540px; width: 100%;
+  position: relative; max-height: 90vh; overflow-y: auto;
+  animation: modalIn 0.25s ease;
+}
+@keyframes modalIn {
+  from { opacity:0; transform: translateY(24px) scale(0.97); }
+  to   { opacity:1; transform: none; }
+}
+.svc-modal-close {
+  position: absolute; top: 16px; inset-inline-end: 16px;
+  background: rgba(255,255,255,0.08); border: none; color: #fff;
+  width: 32px; height: 32px; border-radius: 50%; font-size: 18px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.svc-modal-close:hover { background: rgba(255,255,255,0.18); }
+.svc-modal-icon {
+  margin-bottom: 16px;
+}
+.svc-modal-icon .svc-icon {
+  width: 56px; height: 56px; border-radius: 16px;
+  background: rgba(0,169,157,0.18);
+}
+.svc-modal-title {
+  font-size: 22px; font-weight: 700; margin-bottom: 12px; color: #fff;
+}
+.svc-modal-desc {
+  font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7;
+  margin-bottom: 24px; font-weight: 300;
+}
+.svc-modal-features {
+  display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px;
+}
+.svc-modal-feat {
+  display: flex; flex-direction: column; gap: 4px;
+  background: rgba(255,255,255,0.05); border-radius: 12px; padding: 14px 16px;
+}
+.svc-modal-feat strong {
+  font-size: 14px; font-weight: 600; color: #00BFB3;
+}
+.svc-modal-feat span {
+  font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 300; line-height: 1.6;
+}
+.svc-modal-cta {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: linear-gradient(135deg,#00A99D,#00BFB3); color: #fff;
+  font-weight: 700; font-size: 16px; padding: 14px;
+  border-radius: 12px; text-decoration: none; transition: opacity 0.2s;
+}
+.svc-modal-cta:hover { opacity: 0.88; }
 
 /* ─── VISION ─── */
 .vision-quote {
@@ -931,35 +999,41 @@ footer {
     <p class="sec-label reveal" data-i18n="svc-label">פורטפוליו</p>
     <h2 class="sec-title reveal" data-i18n="svc-title">הפתרונות שלנו</h2>
     <div class="svc-grid">
-      <div class="svc-card reveal reveal-delay-1">
+      <div class="svc-card reveal reveal-delay-1" onclick="openServiceModal(1)">
         <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
         <h3 data-i18n="svc1-h3">אתרים ואפליקציות AI</h3>
         <p data-i18n="svc1-p">נוכחות דיגיטלית מרשימה עם AI משולב בכל שכבה</p>
+        <span class="svc-more" data-i18n="svc-more">פרטים נוספים ←</span>
       </div>
-      <div class="svc-card reveal reveal-delay-2">
+      <div class="svc-card reveal reveal-delay-2" onclick="openServiceModal(2)">
         <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
         <h3 data-i18n="svc2-h3">מערכות אוטומציה עסקית</h3>
         <p data-i18n="svc2-p">אוטומציה של תהליכי ליבה - מכירות, שירות, לוגיסטיקה</p>
+        <span class="svc-more" data-i18n="svc-more">פרטים נוספים ←</span>
       </div>
-      <div class="svc-card reveal reveal-delay-3">
+      <div class="svc-card reveal reveal-delay-3" onclick="openServiceModal(3)">
         <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r="2.5"/><path d="M17.5 10.5c1 1 1.5 2 1.5 4a6 6 0 0 1-12 0c0-2 .5-3 1.5-4l3.5-3.5"/><path d="m6 14 2-2"/></svg></div>
         <h3 data-i18n="svc3-h3">עיצוב UX/UI מונע AI</h3>
         <p data-i18n="svc3-p">ממשקי משתמש חכמים שמתאימים את עצמם לכל משתמש</p>
+        <span class="svc-more" data-i18n="svc-more">פרטים נוספים ←</span>
       </div>
-      <div class="svc-card reveal reveal-delay-1">
+      <div class="svc-card reveal reveal-delay-1" onclick="openServiceModal(4)">
         <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg></div>
         <h3 data-i18n="svc4-h3">ייעוץ אסטרטגי AI</h3>
         <p data-i18n="svc4-p">מפת דרכים לאימוץ AI בעסק שלך - שלב אחר שלב</p>
+        <span class="svc-more" data-i18n="svc-more">פרטים נוספים ←</span>
       </div>
-      <div class="svc-card reveal reveal-delay-2">
+      <div class="svc-card reveal reveal-delay-2" onclick="openServiceModal(5)">
         <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg></div>
         <h3 data-i18n="svc5-h3">פיתוח מוצרים דיגיטליים</h3>
         <p data-i18n="svc5-p">מהרעיון למוצר בשוק - מהר, חכם וחסכוני</p>
+        <span class="svc-more" data-i18n="svc-more">פרטים נוספים ←</span>
       </div>
-      <div class="svc-card reveal reveal-delay-3">
+      <div class="svc-card reveal reveal-delay-3" onclick="openServiceModal(6)">
         <div class="svc-icon"><svg class="svg-icon" width="22" height="22" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
         <h3 data-i18n="svc6-h3">AI לעסקים קטנים ובינוניים</h3>
         <p data-i18n="svc6-p">פתרונות נגישים שמעניקים לעסקים קטנים כוח של ענק</p>
+        <span class="svc-more" data-i18n="svc-more">פרטים נוספים ←</span>
       </div>
     </div>
   </div>
@@ -1025,33 +1099,33 @@ footer {
       <div class="jobot-features reveal reveal-delay-2">
         <img src="JOBOT.png" alt="Jobot" style="width:60%;max-width:260px;margin:0 auto 18px;display:block;filter:brightness(1.05);border-radius:12px;">
         <div class="jobot-features-title" style="font-size:19px;line-height:1.4;margin-bottom:10px;">
-          <span style="color:#1a2a4a;">העבודה הבאה שלך? </span><span style="color:#00A99D;">בוא נמצא אותה ביחד</span>
+          <span style="color:#1a2a4a;" data-i18n="jobot-title-p1">העבודה הבאה שלך? </span><span style="color:#00A99D;" data-i18n="jobot-title-p2">בוא נמצא אותה ביחד</span>
         </div>
-        <p style="font-size:12px;color:rgba(0,0,0,0.55);font-weight:300;line-height:1.6;text-align:center;margin-bottom:14px;">
+        <p style="font-size:12px;color:rgba(0,0,0,0.55);font-weight:300;line-height:1.6;text-align:center;margin-bottom:14px;" data-i18n="jobot-panel-desc">
           שכחו מלגלול שעות בלוחות דרושים. JoBot חושב מחוץ לקופסה – סורק מקורות מפתיעים, מזהה הזדמנויות נסתרות, ומתאים לכם משרות בדרכים שלא חשבתם עליהן. ✨ כי מציאת עבודה צריכה להיות יצירתית, לא מתישה.
         </p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
           <div class="feat-row" style="flex-direction:column;align-items:center;text-align:center;gap:8px;padding:12px 10px;">
             <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-            <div class="feat-row-text"><strong>חיפוש משרות</strong><span>סריקת לוחות דרושים בזמן אמת</span></div>
+            <div class="feat-row-text"><strong data-i18n="feat-r1-strong">חיפוש משרות</strong><span data-i18n="feat-r1-span">סריקת לוחות דרושים בזמן אמת</span></div>
           </div>
           <div class="feat-row" style="flex-direction:column;align-items:center;text-align:center;gap:8px;padding:12px 10px;">
             <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
-            <div class="feat-row-text"><strong>העלאת קו״ח</strong><span>ניתוח חכם של קורות החיים שלך</span></div>
+            <div class="feat-row-text"><strong data-i18n="feat-r2-strong">העלאת קו״ח</strong><span data-i18n="feat-r2-span">ניתוח חכם של קורות החיים שלך</span></div>
           </div>
           <div class="feat-row" style="flex-direction:column;align-items:center;text-align:center;gap:8px;padding:12px 10px;">
             <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
-            <div class="feat-row-text"><strong>שליחה אוטומטית</strong><span>מכתב מקדים מותאם אישית</span></div>
+            <div class="feat-row-text"><strong data-i18n="feat-r3-strong">שליחה אוטומטית</strong><span data-i18n="feat-r3-span">מכתב מקדים מותאם אישית</span></div>
           </div>
           <div class="feat-row" style="flex-direction:column;align-items:center;text-align:center;gap:8px;padding:12px 10px;">
             <div class="feat-row-icon"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg></div>
-            <div class="feat-row-text"><strong>מחקר AI</strong><span>בינה מלאכותית שמחפשת בשבילך</span></div>
+            <div class="feat-row-text"><strong data-i18n="feat-r4-strong">מחקר AI</strong><span data-i18n="feat-r4-span">בינה מלאכותית שמחפשת בשבילך</span></div>
           </div>
         </div>
         <a href="https://jobot.app" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#00A99D,#00BFB3);color:#fff;font-weight:700;font-size:16px;padding:14px;border-radius:12px;text-decoration:none;margin-bottom:10px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
-          בואו נתחיל!
+          <span data-i18n="jobot-start-btn">בואו נתחיל!</span>
         </a>
-        <p style="text-align:center;font-size:11px;color:rgba(0,0,0,0.4);font-weight:300;">חינמי לחלוטין &bull; ללא כרטיס אשראי &bull; תוצאות תוך דקות</p>
+        <p style="text-align:center;font-size:11px;color:rgba(0,0,0,0.4);font-weight:300;" data-i18n-html="jobot-free-note">חינמי לחלוטין &bull; ללא כרטיס אשראי &bull; תוצאות תוך דקות</p>
       </div>
     </div>
   </div>
@@ -1108,6 +1182,18 @@ footer {
   </div>
   <p class="footer-copy" data-i18n="footer-copy">© 2026 OMS AI · כל הזכויות שמורות · ישראל</p>
 </footer>
+
+<!-- ══════════════ SERVICE MODAL ══════════════ -->
+<div id="svc-modal" class="svc-modal-overlay" onclick="closeSvcModal(event)">
+  <div class="svc-modal-box">
+    <button class="svc-modal-close" onclick="closeSvcModal()">&#x2715;</button>
+    <div class="svc-modal-icon" id="svcModalIcon"></div>
+    <h2 class="svc-modal-title" id="svcModalTitle"></h2>
+    <p class="svc-modal-desc" id="svcModalDesc"></p>
+    <div class="svc-modal-features" id="svcModalFeatures"></div>
+    <a href="#contact" class="svc-modal-cta" onclick="closeSvcModal();jumpTo('contact')" data-i18n="svc-modal-cta">בואו נדבר</a>
+  </div>
+</div>
 
 <script>
 // ── TRANSLATIONS ──
@@ -1220,14 +1306,75 @@ const T = {
     'jobot-btn2':      'הורד בחינם',
     'jobot-contact-html': 'גלה עוד: <a href="https://jobot.app" target="_blank">jobot.app</a> &nbsp;·&nbsp; בנוי על ידי <a href="https://omsai.ai" target="_blank">OMS AI</a>',
     'jobot-feat-title':'Jobot - בוט קו"ח חכם',
-    'feat-r1-strong':  'חיפוש משרות חכם',
-    'feat-r1-span':    'AI סורק אלפי מודעות בזמן אמת ומוצא את ההתאמות הטובות ביותר עבורך',
-    'feat-r2-strong':  'שליחה אוטומטית של קו"ח',
-    'feat-r2-span':    'הבוט שולח קורות חיים מותאמים אישית לכל משרה, ללא מאמץ ידני',
-    'feat-r3-strong':  'פרופיל אישי מותאם AI',
-    'feat-r3-span':    'מנתח את הכישורים שלך ומייצר פרופיל תעסוקתי שמשתפר עם כל בקשה',
-    'feat-r4-strong':  'מעקב ותובנות בזמן אמת',
-    'feat-r4-span':    'דאשבורד חי: כמה פניות נשלחו, כמה נפתחו, ומה השלב הבא',
+    'jobot-title-p1':  'העבודה הבאה שלך? ',
+    'jobot-title-p2':  'בוא נמצא אותה ביחד',
+    'jobot-panel-desc':'שכחו מלגלול שעות בלוחות דרושים. JoBot חושב מחוץ לקופסה – סורק מקורות מפתיעים, מזהה הזדמנויות נסתרות, ומתאים לכם משרות בדרכים שלא חשבתם עליהן. ✨ כי מציאת עבודה צריכה להיות יצירתית, לא מתישה.',
+    'jobot-start-btn': 'בואו נתחיל!',
+    'jobot-free-note': 'חינמי לחלוטין &bull; ללא כרטיס אשראי &bull; תוצאות תוך דקות',
+    'feat-r1-strong':  'חיפוש משרות',
+    'feat-r1-span':    'סריקת לוחות דרושים בזמן אמת',
+    'feat-r2-strong':  'העלאת קו״ח',
+    'feat-r2-span':    'ניתוח חכם של קורות החיים שלך',
+    'feat-r3-strong':  'שליחה אוטומטית',
+    'feat-r3-span':    'מכתב מקדים מותאם אישית',
+    'feat-r4-strong':  'מחקר AI',
+    'feat-r4-span':    'בינה מלאכותית שמחפשת בשבילך',
+    'svc-more':        'פרטים נוספים ←',
+    'svc-modal-cta':   'בואו נדבר',
+    'svc1-modal-desc': 'נבנה עבורכם נוכחות דיגיטלית מרשימה ומתקדמת, עם AI משולב בכל שכבה - מהממשק ועד השרת. כל רכיב חושב ולומד, כדי לספק חוויה שלא עוצרת.',
+    'svc1-f1-t': 'צ\'אטבוט חכם ומותאם אישית',
+    'svc1-f1-d': 'בוט AI שמענה ללקוחות 24/7, מבין שאלות בשפה טבעית ומספק תשובות מדויקות ומותאמות.',
+    'svc1-f2-t': 'המלצות מבוססות AI',
+    'svc1-f2-d': 'מנוע המלצות שלומד את העדפות המשתמש ומציג תוכן, מוצרים ושירותים רלוונטיים בזמן אמת.',
+    'svc1-f3-t': 'ניתוח נתונים בזמן אמת',
+    'svc1-f3-d': 'דאשבורד חכם שמנטר התנהגות משתמשים ומייצר תובנות לשיפור ביצועים ולמידה מתמדת.',
+    'svc1-f4-t': 'עיצוב רספונסיבי ומהיר',
+    'svc1-f4-d': 'חוויית משתמש מושלמת בכל מכשיר - מובייל, טאבלט ודסקטופ, עם טעינה מהירה וביצועים גבוהים.',
+    'svc2-modal-desc': 'אוטומציה מלאה של תהליכי הליבה העסקיים שלכם - חסכו זמן, הפחיתו עלויות ואפשרו לצוות להתרכז במה שבאמת חשוב.',
+    'svc2-f1-t': 'אוטומציה של מכירות ו-CRM',
+    'svc2-f1-d': 'מערכת שמנהלת לידים, שולחת הצעות מחיר ועוקבת אחר לקוחות באופן אוטומטי לחלוטין ללא מגע יד.',
+    'svc2-f2-t': 'שירות לקוחות אוטומטי',
+    'svc2-f2-d': 'בוט AI שמטפל בפניות נפוצות, מנתב שיחות ומסלים בעיות לנציג אנושי רק בעת הצורך האמיתי.',
+    'svc2-f3-t': 'לוגיסטיקה ומלאי חכמים',
+    'svc2-f3-d': 'ניהול מלאי אוטומטי, התראות על חוסרים וחיזוי ביקוש מבוסס AI שמונע עודפים ומחסורים.',
+    'svc2-f4-t': 'דיווח ותובנות אוטומטיים',
+    'svc2-f4-d': 'דוחות עסקיים שמייצרים את עצמם ומגיעים ישר לתיבת המייל שלכם - בזמן הנכון, עם הנתונים הנכונים.',
+    'svc3-modal-desc': 'עיצוב חכם שמתאים את עצמו לכל משתמש - ממשקים שלומדים, מבינים ומשפרים את חוויית המשתמש ללא הפסקה, בכל נקודת מגע.',
+    'svc3-f1-t': 'ממשק אדפטיבי אישי',
+    'svc3-f1-d': 'הממשק משנה את עצמו בהתאם לדפוסי ההתנהגות של כל משתמש, למניעת חיכוך ולמיקסום המרה.',
+    'svc3-f2-t': 'A/B Testing מבוסס AI',
+    'svc3-f2-d': 'ניסויים אוטומטיים שבוחנים אלפי וריאציות עיצוביות ומממשים את הגרסה המנצחת בזמן אמת.',
+    'svc3-f3-t': 'עיצוב מונגש ואינקלוסיבי',
+    'svc3-f3-d': 'AI שמוודא שהממשק נגיש לכולם ועומד בסטנדרטים הבינלאומיים של נגישות (WCAG).',
+    'svc3-f4-t': 'ניתוח חום ומסלולי ניווט',
+    'svc3-f4-d': 'מיפוי מדויק של איך משתמשים מתנהלים בממשק, עם אופטימיזציה מתמדת של הנתיבים לתוצאות טובות יותר.',
+    'svc4-modal-desc': 'ליווי אסטרטגי מקצה לקצה לאימוץ AI בעסק שלכם - ממצב עכשיו ועד מימוש מלא של הפוטנציאל, צעד בצעד.',
+    'svc4-f1-t': 'הערכת מוכנות AI',
+    'svc4-f1-d': 'ניתוח מעמיק של התשתיות, התהליכים והצוות לזיהוי הזדמנויות AI עם הפוטנציאל הגבוה ביותר.',
+    'svc4-f2-t': 'מפת דרכים טכנולוגית',
+    'svc4-f2-d': 'תוכנית מפורטת ומעשית לאימוץ AI שלב אחר שלב, עם מדדי הצלחה ברורים ולוח זמנים ריאלי.',
+    'svc4-f3-t': 'הדרכת צוות',
+    'svc4-f3-d': 'הכשרה מותאמת לצוות שלכם כדי שיידעו לעבוד עם כלי AI וימקסמו את התועלת היומיומית.',
+    'svc4-f4-t': 'ניתוח ROI ובחירת טכנולוגיה',
+    'svc4-f4-d': 'מחשבון החזר השקעה, השוואת פתרונות וסיוע בבחירת הטכנולוגיות שמתאימות בדיוק לצרכי העסק שלכם.',
+    'svc5-modal-desc': 'מהרעיון למוצר בשוק - אנחנו מלווים אתכם בכל שלב, מהאסטרטגיה ועד ההשקה, בזמן שיא ובעלות שמפתיעה לטובה.',
+    'svc5-f1-t': 'פיתוח MVP מהיר',
+    'svc5-f1-d': 'גרסת MVP ל-Market תוך שבועות ספורים - כדי לבחון ביקוש אמיתי לפני השקעה גדולה בפיתוח מלא.',
+    'svc5-f2-t': 'בדיקת Product-Market Fit',
+    'svc5-f2-d': 'ניסויים מהירים עם משתמשים אמיתיים לאימות שהמוצר עונה על צורך אמיתי בשוק לפני הרחבת הפיתוח.',
+    'svc5-f3-t': 'פיתוח איטרטיבי',
+    'svc5-f3-d': 'מחזורי פיתוח קצרים עם משוב מתמיד מהמשתמשים לשיפור ותיקון בזמן אמת - כך שהמוצר תמיד מתפתח.',
+    'svc5-f4-t': 'אסטרטגיית Go-To-Market',
+    'svc5-f4-d': 'תכנון השקה מלא: מיתוג, פרסום דיגיטלי, אסטרטגיית תמחור ורכישת משתמשים ראשונים.',
+    'svc6-modal-desc': 'פתרונות AI נגישים, זולים ופשוטים ליישום - מעניקים לעסקים קטנים ובינוניים את הכוח שבעבר היה שמור לתאגידים גדולים בלבד.',
+    'svc6-f1-t': 'צ\'אטבוט לשירות לקוחות',
+    'svc6-f1-d': 'בוט AI שעונה ללקוחות בוואטסאפ ובאתר 24/7, ללא צורך בנציג אנושי - חוסך זמן וכסף מהיום הראשון.',
+    'svc6-f2-t': 'שיווק דיגיטלי אוטומטי',
+    'svc6-f2-d': 'קמפיינים שמנהלים את עצמם: פוסטים לרשתות חברתיות, ניוזלטרים ומסרים מותאמים אישית לכל לקוח.',
+    'svc6-f3-t': 'ניהול תורים וקביעת פגישות',
+    'svc6-f3-d': 'מערכת AI שמנהלת לוח זמנים, מזכירה ללקוחות על פגישות ומפחיתה ביטולים בצורה אוטומטית.',
+    'svc6-f4-t': 'ניתוח עלויות וחיסכון',
+    'svc6-f4-d': 'AI שמזהה בזבוז בתהליכים, מציע אופטימיזציות ועוזר לקבל החלטות עסקיות חכמות ומבוססות נתונים.',
     'contact-label':      'צור קשר',
     'contact-title':      'נשמח לשמוע ממך',
     'contact-sub':        'השאירו פרטים ונחזור אליכם בהקדם - ישירות לוואטסאפ.',
@@ -1356,14 +1503,75 @@ const T = {
     'jobot-btn2':      'Download Free',
     'jobot-contact-html': 'Learn more: <a href="https://jobot.app" target="_blank">jobot.app</a> &nbsp;·&nbsp; Built by <a href="https://omsai.ai" target="_blank">OMS AI</a>',
     'jobot-feat-title':'Jobot - Smart CV Bot',
-    'feat-r1-strong':  'Smart Job Search',
-    'feat-r1-span':    'AI scans thousands of listings in real time and finds the best matches for you',
-    'feat-r2-strong':  'Automatic CV Sending',
-    'feat-r2-span':    'The bot sends personalized CVs to each job automatically, with no manual effort',
-    'feat-r3-strong':  'AI-Adapted Personal Profile',
-    'feat-r3-span':    'Analyzes your skills and creates a professional profile that improves with each application',
-    'feat-r4-strong':  'Real-Time Tracking & Insights',
-    'feat-r4-span':    "Live dashboard: how many applications sent, how many opened, and what's next",
+    'jobot-title-p1':  'Your next job? ',
+    'jobot-title-p2':  "Let's find it together",
+    'jobot-panel-desc':"Stop scrolling through job boards for hours. JoBot thinks outside the box – scanning surprising sources, identifying hidden opportunities, and matching you with jobs in ways you never imagined. ✨ Because job hunting should be creative, not exhausting.",
+    'jobot-start-btn': "Let's Get Started!",
+    'jobot-free-note': 'Completely free &bull; No credit card &bull; Results in minutes',
+    'feat-r1-strong':  'Job Search',
+    'feat-r1-span':    'Real-time job board scanning',
+    'feat-r2-strong':  'CV Upload',
+    'feat-r2-span':    'Smart analysis of your resume',
+    'feat-r3-strong':  'Auto Send',
+    'feat-r3-span':    'Personalized cover letter',
+    'feat-r4-strong':  'AI Research',
+    'feat-r4-span':    'AI that searches for you',
+    'svc-more':        'Learn more →',
+    'svc-modal-cta':   "Let's Talk",
+    'svc1-modal-desc': 'We build you an impressive, cutting-edge digital presence with AI integrated at every layer — from the interface to the server. Every component thinks and learns to deliver an experience that never stops improving.',
+    'svc1-f1-t': 'Smart Personalized Chatbot',
+    'svc1-f1-d': 'AI bot answering customers 24/7, understanding natural language and providing accurate, tailored responses.',
+    'svc1-f2-t': 'AI-Powered Recommendations',
+    'svc1-f2-d': 'Recommendation engine that learns user preferences and displays relevant content, products and services in real time.',
+    'svc1-f3-t': 'Real-Time Data Analytics',
+    'svc1-f3-d': 'Smart dashboard monitoring user behavior and generating insights for continuous performance improvement.',
+    'svc1-f4-t': 'Responsive & Fast Design',
+    'svc1-f4-d': 'Perfect user experience on every device — mobile, tablet and desktop, with fast loading and high performance.',
+    'svc2-modal-desc': 'Full automation of your core business processes — save time, reduce costs and let your team focus on what truly matters.',
+    'svc2-f1-t': 'Sales & CRM Automation',
+    'svc2-f1-d': 'A system that manages leads, sends quotes and tracks customers completely automatically, with zero manual effort.',
+    'svc2-f2-t': 'Automated Customer Service',
+    'svc2-f2-d': 'AI bot handling common inquiries, routing conversations and escalating issues to a human agent only when truly needed.',
+    'svc2-f3-t': 'Smart Logistics & Inventory',
+    'svc2-f3-d': 'Automatic inventory management, shortage alerts and AI-based demand forecasting to prevent surpluses and shortfalls.',
+    'svc2-f4-t': 'Automated Reporting & Insights',
+    'svc2-f4-d': 'Business reports that generate themselves and arrive directly in your inbox — at the right time, with the right data.',
+    'svc3-modal-desc': 'Smart design that adapts to each user — interfaces that learn, understand and continuously improve the user experience at every touchpoint.',
+    'svc3-f1-t': 'Personalized Adaptive Interface',
+    'svc3-f1-d': 'The interface reshapes itself based on each user\'s behavior patterns, reducing friction and maximizing conversions.',
+    'svc3-f2-t': 'AI-Powered A/B Testing',
+    'svc3-f2-d': 'Automated experiments testing thousands of design variations and implementing the winning version in real time.',
+    'svc3-f3-t': 'Accessible & Inclusive Design',
+    'svc3-f3-d': 'AI ensuring the interface is accessible to everyone and meets international accessibility standards (WCAG).',
+    'svc3-f4-t': 'Heatmap & Navigation Analysis',
+    'svc3-f4-d': 'Precise mapping of how users navigate the interface, with continuous path optimization for better results.',
+    'svc4-modal-desc': 'End-to-end strategic guidance for AI adoption in your business — from where you are now to full potential realization, step by step.',
+    'svc4-f1-t': 'AI Readiness Assessment',
+    'svc4-f1-d': 'Deep analysis of your infrastructure, processes and team to identify the AI opportunities with the highest potential.',
+    'svc4-f2-t': 'Technology Roadmap',
+    'svc4-f2-d': 'A detailed, actionable plan for AI adoption step by step, with clear success metrics and a realistic timeline.',
+    'svc4-f3-t': 'Team Training',
+    'svc4-f3-d': 'Customized training for your team to work with AI tools and maximize daily benefits from day one.',
+    'svc4-f4-t': 'ROI Analysis & Tech Selection',
+    'svc4-f4-d': 'Investment return calculator, solution comparison and assistance selecting the technologies that fit your business exactly.',
+    'svc5-modal-desc': 'From idea to market product — we guide you through every step, from strategy to launch, in record time and at a surprisingly low cost.',
+    'svc5-f1-t': 'Fast MVP Development',
+    'svc5-f1-d': 'An MVP to market within weeks — to validate real demand before committing to full-scale investment.',
+    'svc5-f2-t': 'Product-Market Fit Testing',
+    'svc5-f2-d': 'Rapid experiments with real users to verify the product meets an actual market need before expanding development.',
+    'svc5-f3-t': 'Iterative Development',
+    'svc5-f3-d': 'Short development cycles with constant user feedback for real-time improvement — so your product always evolves.',
+    'svc5-f4-t': 'Go-To-Market Strategy',
+    'svc5-f4-d': 'Full launch planning: branding, digital advertising, pricing strategy and first user acquisition.',
+    'svc6-modal-desc': 'Accessible, affordable and simple-to-implement AI solutions — giving small and medium businesses the power previously reserved for large corporations.',
+    'svc6-f1-t': 'Customer Service Chatbot',
+    'svc6-f1-d': 'AI bot answering customers on WhatsApp and your website 24/7, with no need for a human agent — saving time and money from day one.',
+    'svc6-f2-t': 'Automated Digital Marketing',
+    'svc6-f2-d': 'Self-managing campaigns: social media posts, newsletters and personalized messages tailored to each customer.',
+    'svc6-f3-t': 'Appointment & Queue Management',
+    'svc6-f3-d': 'AI system managing schedules, reminding customers of appointments and automatically reducing cancellations.',
+    'svc6-f4-t': 'Cost Analysis & Savings',
+    'svc6-f4-d': 'AI identifying waste in processes, suggesting optimizations and helping make smarter, data-driven business decisions.',
     'contact-label':      'Contact',
     'contact-title':      "We'd Love to Hear From You",
     'contact-sub':        'Leave your details and we will get back to you - directly on WhatsApp.',
@@ -1449,6 +1657,35 @@ function sendToWhatsApp(e) {
   if (msg)   lines.push(`*הודעה:* ${msg}`);
   const text = encodeURIComponent(lines.join('\n'));
   window.open(`https://wa.me/972544555461?text=${text}`, '_blank');
+}
+
+// ── SERVICE MODAL ──
+function openServiceModal(n) {
+  const lang = currentLang;
+  const card = document.querySelectorAll('.svc-card')[n - 1];
+  const iconClone = card.querySelector('.svc-icon').cloneNode(true);
+  const iconWrap = document.getElementById('svcModalIcon');
+  iconWrap.innerHTML = '';
+  iconWrap.appendChild(iconClone);
+  document.getElementById('svcModalTitle').textContent = T[lang]['svc' + n + '-h3'];
+  document.getElementById('svcModalDesc').textContent  = T[lang]['svc' + n + '-modal-desc'];
+  let featHtml = '';
+  for (let i = 1; i <= 4; i++) {
+    featHtml += '<div class="svc-modal-feat">'
+      + '<strong>' + T[lang]['svc' + n + '-f' + i + '-t'] + '</strong>'
+      + '<span>'   + T[lang]['svc' + n + '-f' + i + '-d'] + '</span>'
+      + '</div>';
+  }
+  document.getElementById('svcModalFeatures').innerHTML = featHtml;
+  const cta = document.querySelector('.svc-modal-cta');
+  if (cta) cta.textContent = T[lang]['svc-modal-cta'];
+  document.getElementById('svc-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeSvcModal(event) {
+  if (event && event.target !== document.getElementById('svc-modal')) return;
+  document.getElementById('svc-modal').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 // ── INSTANT NAVIGATION ──
