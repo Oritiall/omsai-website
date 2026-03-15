@@ -372,13 +372,13 @@ img { display: block; }
 
 /* ─── COMPARISON ─── */
 .comparison-wrap {
-  display: flex; flex-direction: column;
+  display: grid; grid-template-columns: 1fr auto 1fr;
   background: var(--card); border-radius: var(--r);
   overflow: hidden; width: 100%;
 }
 .comp-col {
   background: none; border: none; border-radius: 0;
-  padding: 28px 36px;
+  padding: 36px 32px;
   display: flex; flex-direction: column;
 }
 .comp-head {
@@ -397,13 +397,18 @@ img { display: block; }
 .big-stat { font-size: 20px; font-weight: 600; color: #00BFB3; line-height: 1; }
 .vs-sep {
   display: flex; align-items: center; justify-content: center;
-  writing-mode: horizontal-tb;
-  padding: 14px 36px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  font-size: 12px; font-weight: 700; letter-spacing: 5px;
-  color: rgba(255,255,255,0.45);
-  background: rgba(255,255,255,0.03);
+  position: relative; width: 32px;
+}
+.vs-sep::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 50%;
+  width: 1px; background: rgba(255,255,255,0.08); transform: translateX(-50%);
+}
+.vs-sep span {
+  position: relative; z-index: 1;
+  background: var(--card);
+  padding: 8px 4px; border-radius: 20px;
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  color: rgba(255,255,255,0.3); writing-mode: vertical-lr;
 }
 
 /* ─── ABOUT ─── */
@@ -709,9 +714,11 @@ footer {
 
   /* ── Layouts ── */
   .pillar { padding: 20px 20px; column-gap: 16px; }
-  .comp-col { padding: 20px 20px; }
-  .comp-row { font-size: 14px; gap: 8px; padding: 10px 0; }
-  .vs-sep { padding: 12px 20px; }
+  .comp-col { padding: 20px 16px; }
+  .comp-row { font-size: 13px; gap: 8px; padding: 10px 0; }
+  .comp-row small { font-size: 11px; }
+  .big-stat { font-size: 16px; }
+  .vs-sep { width: 22px; }
   .about-grid { grid-template-columns: 1fr; }
   .about-img { display: flex; justify-content: center; }
   .about-img img { max-width: 260px; width: 80%; }
@@ -890,8 +897,9 @@ footer {
           <span class="ci"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 1 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg></span>
           <div><span data-i18n="trad-r4-main">סקיילינג איטי ויקר</span><small data-i18n="trad-r4-small">כל גידול = עלות גבוהה</small></div>
         </div>
+        <img src="traditional-team.png" alt="צוות מסורתי" style="width:100%;margin-top:auto;padding-top:20px;display:block;border-radius:10px;">
       </div>
-      <div class="vs-sep">VS</div>
+      <div class="vs-sep"><span>VS</span></div>
       <div class="comp-col ai">
         <div class="comp-head" data-i18n="ai-head">AI Native</div>
         <div class="comp-row">
@@ -910,6 +918,7 @@ footer {
           <span class="ci"><svg class="svg-icon" width="18" height="18" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
           <div><div class="big-stat">∞</div><small data-i18n="ai-r4-small">סקיילינג ללא עלות נוספת</small></div>
         </div>
+        <img src="ai-team.png" alt="צוות AI" style="width:100%;margin-top:auto;padding-top:20px;display:block;border-radius:10px;">
       </div>
     </div>
   </div>
