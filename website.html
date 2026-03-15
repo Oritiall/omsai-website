@@ -514,6 +514,16 @@ img { display: block; }
 .svc-card h3 { font-size: 16px; font-weight: 600; color: #00BFB3; }
 .svc-card p  { font-size: 13px; color: var(--off); font-weight: 300; line-height: 1.6; }
 
+/* ─── POLICY MODAL ─── */
+.policy-modal-box { max-width: 680px; }
+.policy-body { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.9; font-weight: 300; }
+.policy-body h3 { font-size: 15px; font-weight: 600; color: #00BFB3; margin: 24px 0 8px; }
+.policy-body h3:first-child { margin-top: 0; }
+.policy-body p { margin-bottom: 10px; }
+.policy-body ul { padding-inline-start: 20px; margin-bottom: 10px; }
+.policy-body ul li { margin-bottom: 6px; }
+.policy-body .policy-date { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 28px; }
+
 /* ─── SVC-MORE LINK ─── */
 .svc-more {
   font-size: 12px; color: #00BFB3; font-weight: 500;
@@ -1205,8 +1215,22 @@ footer {
     <a href="#jobot">Jobot</a>
     <a href="#contact" data-i18n="footer-contact">צור קשר</a>
   </div>
+  <div class="footer-links" style="margin-bottom:16px;">
+    <a href="#" onclick="openPolicy('privacy');return false;" data-i18n="footer-privacy">מדיניות פרטיות</a>
+    <span style="color:rgba(255,255,255,0.15)">·</span>
+    <a href="#" onclick="openPolicy('accessibility');return false;" data-i18n="footer-accessibility">הצהרת נגישות</a>
+  </div>
   <p class="footer-copy" data-i18n="footer-copy">© 2026 OMS AI · כל הזכויות שמורות · ישראל</p>
 </footer>
+
+<!-- ══════════════ POLICY MODALS ══════════════ -->
+<div id="policy-modal" class="svc-modal-overlay" onclick="closePolicyModal(event)">
+  <div class="svc-modal-box policy-modal-box">
+    <button class="svc-modal-close" onclick="closePolicyModal()">&#x2715;</button>
+    <h2 class="svc-modal-title" id="policyTitle"></h2>
+    <div class="policy-body" id="policyBody"></div>
+  </div>
+</div>
 
 <!-- ══════════════ SERVICE MODAL ══════════════ -->
 <div id="svc-modal" class="svc-modal-overlay" onclick="closeSvcModal(event)">
@@ -1421,6 +1445,8 @@ const T = {
     'footer-vision':   'חזון',
     'footer-contact':  'צור קשר',
     'footer-copy':     '© 2026 OMS AI · כל הזכויות שמורות · ישראל',
+    'footer-privacy':      'מדיניות פרטיות',
+    'footer-accessibility':'הצהרת נגישות',
   },
   en: {
     'page-title':      'OMS AI - The Future of Business Starts Here',
@@ -1620,6 +1646,8 @@ const T = {
     'footer-vision':   'Vision',
     'footer-contact':  'Contact',
     'footer-copy':     '© 2026 OMS AI · All Rights Reserved · Israel',
+    'footer-privacy':      'Privacy Policy',
+    'footer-accessibility':'Accessibility Statement',
   }
 };
 
@@ -1668,6 +1696,148 @@ function setLang(lang) {
     const key = el.getAttribute('data-i18n-placeholder');
     if (T[lang][key] !== undefined) el.placeholder = T[lang][key];
   });
+}
+
+// ── POLICY MODALS ──
+const policyContent = {
+  he: {
+    privacy: {
+      title: 'מדיניות פרטיות',
+      body: `
+        <h3>כללי</h3>
+        <p>OMS AI ("החברה") מחויבת להגנה על פרטיות המשתמשים באתר. מדיניות זו מסבירה אילו מידע נאסף, כיצד הוא משמש ומה זכויותיך.</p>
+        <h3>מידע הנאסף</h3>
+        <p>אנו אוספים מידע שאתה מוסר מרצונך בטופס יצירת הקשר בלבד:</p>
+        <ul>
+          <li>שם מלא</li>
+          <li>מספר טלפון</li>
+          <li>כתובת אימייל (אופציונלי)</li>
+          <li>תוכן ההודעה</li>
+        </ul>
+        <h3>שימוש במידע</h3>
+        <p>המידע שנאסף משמש אך ורק לצורך יצירת קשר חוזרת עמך בנוגע לפנייתך, באמצעות WhatsApp או אימייל. איננו שומרים את הנתונים על שרתינו — הפנייה מועברת ישירות לנציג החברה.</p>
+        <h3>שיתוף מידע עם צדדים שלישיים</h3>
+        <p>אנו לא מוכרים, סוחרים, או מעבירים את פרטיך האישיים לצדדים שלישיים כלשהם. המידע נשמר בסודיות מוחלטת.</p>
+        <h3>עוגיות (Cookies)</h3>
+        <p>האתר אינו משתמש בעוגיות מעקב או שירותי ניתוח נתונים של צדדים שלישיים.</p>
+        <h3>אבטחת מידע</h3>
+        <p>אנו נוקטים באמצעי אבטחה סבירים כדי להגן על המידע המועבר דרך האתר מפני גישה בלתי מורשית.</p>
+        <h3>זכויותיך</h3>
+        <p>הנך רשאי בכל עת לפנות אלינו בבקשה לעיין, לתקן או למחוק מידע אישי שמסרת לנו, באמצעות פנייה לדוא"ל: <strong>info@omsai.ai</strong></p>
+        <h3>שינויים במדיניות</h3>
+        <p>החברה שומרת לעצמה את הזכות לעדכן מדיניות זו מעת לעת. שינויים מהותיים יפורסמו באתר.</p>
+        <p class="policy-date">עדכון אחרון: מרץ 2026</p>
+      `
+    },
+    accessibility: {
+      title: 'הצהרת נגישות',
+      body: `
+        <h3>מחויבות לנגישות</h3>
+        <p>OMS AI שואפת להנגיש את אתרה לכלל האוכלוסייה, לרבות אנשים עם מוגבלויות, בהתאם לחוק שוויון זכויות לאנשים עם מוגבלות (תיקון מס' 2), התשס"ה-2005, ותקנות הנגישות לשירות.</p>
+        <h3>רמת הנגישות</h3>
+        <p>האתר פועל לעמידה ברמה AA של תקן WCAG 2.1 ובתקן הישראלי ת"י 5568.</p>
+        <h3>אמצעי נגישות שיושמו</h3>
+        <ul>
+          <li>תמיכה בניווט באמצעות מקלדת</li>
+          <li>טקסט חלופי (alt text) לתמונות</li>
+          <li>ניגודיות צבעים ברמה נאותה</li>
+          <li>גופן קריא וגודל טקסט מתאים</li>
+          <li>מבנה כותרות היררכי ברור</li>
+          <li>תמיכה בכיוון RTL מלא לעברית</li>
+          <li>תגיות ARIA למרכיבים אינטראקטיביים</li>
+          <li>ממשק מותאם לשימוש ממכשירים ניידים</li>
+        </ul>
+        <h3>מגבלות ידועות</h3>
+        <p>אנו עובדים באופן שוטף לשיפור נגישות האתר. ייתכנו מרכיבים מסוימים שטרם הונגשו במלואם — אנו מחויבים לטפל בכך בהקדם.</p>
+        <h3>יצירת קשר בנושאי נגישות</h3>
+        <p>נתקלת בבעיית נגישות? נשמח לשמוע ולסייע:</p>
+        <ul>
+          <li>דוא"ל: <strong>accessibility@omsai.ai</strong></li>
+          <li>טלפון: <strong>054-455-5461</strong></li>
+        </ul>
+        <p>אנו מתחייבים להשיב לפניות נגישות תוך 5 ימי עסקים.</p>
+        <h3>תאריך הצהרה</h3>
+        <p>הצהרת נגישות זו עודכנה לאחרונה במרץ 2026.</p>
+        <p class="policy-date">עדכון אחרון: מרץ 2026</p>
+      `
+    }
+  },
+  en: {
+    privacy: {
+      title: 'Privacy Policy',
+      body: `
+        <h3>General</h3>
+        <p>OMS AI ("the Company") is committed to protecting the privacy of website users. This policy explains what information is collected, how it is used, and your rights.</p>
+        <h3>Information Collected</h3>
+        <p>We only collect information you voluntarily provide through the contact form:</p>
+        <ul>
+          <li>Full name</li>
+          <li>Phone number</li>
+          <li>Email address (optional)</li>
+          <li>Message content</li>
+        </ul>
+        <h3>Use of Information</h3>
+        <p>Collected information is used solely to follow up with you regarding your inquiry, via WhatsApp or email. We do not store data on our servers — inquiries are sent directly to a company representative.</p>
+        <h3>Sharing with Third Parties</h3>
+        <p>We do not sell, trade, or transfer your personal information to any third parties. Your information is kept strictly confidential.</p>
+        <h3>Cookies</h3>
+        <p>This website does not use tracking cookies or third-party analytics services.</p>
+        <h3>Data Security</h3>
+        <p>We take reasonable security measures to protect information transmitted through the website from unauthorized access.</p>
+        <h3>Your Rights</h3>
+        <p>You may at any time contact us to review, correct, or delete personal information you have provided, by emailing: <strong>info@omsai.ai</strong></p>
+        <h3>Policy Changes</h3>
+        <p>The Company reserves the right to update this policy from time to time. Material changes will be published on the website.</p>
+        <p class="policy-date">Last updated: March 2026</p>
+      `
+    },
+    accessibility: {
+      title: 'Accessibility Statement',
+      body: `
+        <h3>Our Commitment</h3>
+        <p>OMS AI is committed to making its website accessible to all users, including people with disabilities, in accordance with applicable accessibility standards.</p>
+        <h3>Accessibility Level</h3>
+        <p>This website strives to conform to Level AA of the Web Content Accessibility Guidelines (WCAG) 2.1 and Israeli Standard SI 5568.</p>
+        <h3>Accessibility Features Implemented</h3>
+        <ul>
+          <li>Keyboard navigation support</li>
+          <li>Alternative text (alt text) for images</li>
+          <li>Adequate color contrast ratios</li>
+          <li>Readable fonts and appropriate text sizing</li>
+          <li>Clear hierarchical heading structure</li>
+          <li>Full RTL support for Hebrew</li>
+          <li>ARIA labels for interactive components</li>
+          <li>Mobile-responsive interface</li>
+        </ul>
+        <h3>Known Limitations</h3>
+        <p>We continuously work to improve the website's accessibility. Some components may not yet be fully accessible — we are committed to addressing these promptly.</p>
+        <h3>Contact for Accessibility Issues</h3>
+        <p>Encountered an accessibility issue? We'd love to help:</p>
+        <ul>
+          <li>Email: <strong>accessibility@omsai.ai</strong></li>
+          <li>Phone: <strong>054-455-5461</strong></li>
+        </ul>
+        <p>We commit to responding to accessibility inquiries within 5 business days.</p>
+        <h3>Statement Date</h3>
+        <p>This accessibility statement was last updated in March 2026.</p>
+        <p class="policy-date">Last updated: March 2026</p>
+      `
+    }
+  }
+};
+
+function openPolicy(type) {
+  const lang = currentLang;
+  const data = policyContent[lang][type];
+  document.getElementById('policyTitle').textContent = data.title;
+  document.getElementById('policyBody').innerHTML = data.body;
+  document.getElementById('policy-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePolicyModal(event) {
+  if (event && event.target !== document.getElementById('policy-modal')) return;
+  document.getElementById('policy-modal').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 // ── WHATSAPP CONTACT ──
