@@ -754,6 +754,35 @@ footer {
   .hero-img-wrap img { max-width: 220px; }
   .about-img img { max-width: 220px; }
 }
+/* ─── COOKIE BANNER ─── */
+#cookie-banner {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9500;
+  background: #0a1e3a; border-top: 1px solid rgba(255,255,255,0.1);
+  padding: 16px 24px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; flex-wrap: wrap;
+  font-size: 13px; color: rgba(255,255,255,0.75);
+  transform: translateY(0); transition: transform 0.35s ease;
+}
+#cookie-banner.hidden { transform: translateY(110%); }
+#cookie-banner p { margin: 0; line-height: 1.5; }
+#cookie-banner a { color: #00BFB3; text-decoration: underline; cursor: pointer; }
+.cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.cookie-btn-accept {
+  background: #00A99D; color: #fff; border: none;
+  padding: 9px 22px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  font-family: 'Rubik', sans-serif; transition: opacity 0.2s;
+}
+.cookie-btn-accept:hover { opacity: 0.85; }
+.cookie-btn-decline {
+  background: transparent; color: rgba(255,255,255,0.45);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 9px 16px; border-radius: 10px;
+  font-size: 13px; cursor: pointer;
+  font-family: 'Rubik', sans-serif; transition: opacity 0.2s;
+}
+.cookie-btn-decline:hover { opacity: 0.7; }
 </style>
 </head>
 <body>
@@ -1222,6 +1251,15 @@ footer {
   </div>
   <p class="footer-copy" data-i18n="footer-copy">© 2026 OMS AI · כל הזכויות שמורות · ישראל</p>
 </footer>
+
+<!-- ══════════════ COOKIE BANNER ══════════════ -->
+<div id="cookie-banner" class="hidden">
+  <p id="cookieBannerText">האתר משתמש בעוגייה טכנית אחת לשמירת העדפת הסכמתך. אין מעקב, אין שיתוף עם צדדים שלישיים. <a onclick="openPolicy('privacy')">מדיניות פרטיות</a></p>
+  <div class="cookie-actions">
+    <button class="cookie-btn-accept" id="cookieBtnAccept" onclick="acceptCookies()">הבנתי, אישור</button>
+    <button class="cookie-btn-decline" id="cookieBtnDecline" onclick="declineCookies()">דחה</button>
+  </div>
+</div>
 
 <!-- ══════════════ POLICY MODALS ══════════════ -->
 <div id="policy-modal" class="svc-modal-overlay" onclick="closePolicyModal(event)">
@@ -1696,7 +1734,36 @@ function setLang(lang) {
     const key = el.getAttribute('data-i18n-placeholder');
     if (T[lang][key] !== undefined) el.placeholder = T[lang][key];
   });
+  updateCookieBannerLang(lang);
 }
+
+// ── COOKIE BANNER ──
+const cookieTexts = {
+  he: { msg: 'האתר משתמש בעוגייה טכנית אחת לשמירת העדפת הסכמתך. אין מעקב, אין שיתוף עם צדדים שלישיים. ', link: 'מדיניות פרטיות', accept: 'הבנתי, אישור', decline: 'דחה' },
+  en: { msg: 'We use one technical cookie to save your consent preference. No tracking, no third-party sharing. ', link: 'Privacy Policy', accept: 'Got it, Accept', decline: 'Decline' }
+};
+function updateCookieBannerLang(lang) {
+  const t = cookieTexts[lang];
+  document.getElementById('cookieBannerText').innerHTML =
+    t.msg + '<a onclick="openPolicy(\'privacy\')">' + t.link + '</a>';
+  document.getElementById('cookieBtnAccept').textContent = t.accept;
+  document.getElementById('cookieBtnDecline').textContent = t.decline;
+}
+function acceptCookies() {
+  localStorage.setItem('cookieConsent', 'accepted');
+  document.getElementById('cookie-banner').classList.add('hidden');
+}
+function declineCookies() {
+  localStorage.setItem('cookieConsent', 'declined');
+  document.getElementById('cookie-banner').classList.add('hidden');
+}
+(function initCookieBanner() {
+  if (!localStorage.getItem('cookieConsent')) {
+    setTimeout(() => {
+      document.getElementById('cookie-banner').classList.remove('hidden');
+    }, 1200);
+  }
+})();
 
 // ── POLICY MODALS ──
 const policyContent = {
@@ -1719,7 +1786,7 @@ const policyContent = {
         <h3>שיתוף מידע עם צדדים שלישיים</h3>
         <p>אנו לא מוכרים, סוחרים, או מעבירים את פרטיך האישיים לצדדים שלישיים כלשהם. המידע נשמר בסודיות מוחלטת.</p>
         <h3>עוגיות (Cookies)</h3>
-        <p>האתר אינו משתמש בעוגיות מעקב או שירותי ניתוח נתונים של צדדים שלישיים.</p>
+        <p>האתר אינו משתמש בעוגיות מעקב או שירותי ניתוח נתונים של צדדים שלישיים. אנו משתמשים בעוגייה טכנית אחת בלבד — לשמירת העדפת הסכמתך להודעת העוגיות. עוגייה זו אינה מכילה מידע אישי ואינה מועברת לאף גורם חיצוני.</p>
         <h3>אבטחת מידע</h3>
         <p>אנו נוקטים באמצעי אבטחה סבירים כדי להגן על המידע המועבר דרך האתר מפני גישה בלתי מורשית.</p>
         <h3>זכויותיך</h3>
@@ -1781,7 +1848,7 @@ const policyContent = {
         <h3>Sharing with Third Parties</h3>
         <p>We do not sell, trade, or transfer your personal information to any third parties. Your information is kept strictly confidential.</p>
         <h3>Cookies</h3>
-        <p>This website does not use tracking cookies or third-party analytics services.</p>
+        <p>This website does not use tracking cookies or third-party analytics services. We use one technical cookie only — to save your cookie consent preference. This cookie contains no personal information and is not shared with any external party.</p>
         <h3>Data Security</h3>
         <p>We take reasonable security measures to protect information transmitted through the website from unauthorized access.</p>
         <h3>Your Rights</h3>
