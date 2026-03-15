@@ -337,11 +337,11 @@ img { display: block; }
 }
 .pillar-icon {
   width: 60px; height: 60px;
-  background: rgba(255,255,255,0.1); border-radius: 16px;
+  background: rgba(0,169,157,0.18); border-radius: 16px;
   display: flex; align-items: center; justify-content: center;
-  color: rgba(255,255,255,0.88);
+  color: #00BFB3;
 }
-.pillar h3 { font-size: 18px; font-weight: 500; }
+.pillar h3 { font-size: 18px; font-weight: 600; color: #00BFB3; }
 .pillar p  { font-size: 14px; color: var(--off); font-weight: 300; line-height: 1.65; }
 
 /* ─── IMPACT CARDS ─── */
@@ -358,7 +358,8 @@ img { display: block; }
   font-size: 36px; font-weight: 700; color: rgba(255,255,255,0.15);
   line-height: 1; flex-shrink: 0; font-variant-numeric: tabular-nums;
 }
-.impact-text h4 { font-size: 17px; font-weight: 500; margin-bottom: 8px; }
+.impact-num { color: rgba(0,169,157,0.35); }
+.impact-text h4 { font-size: 17px; font-weight: 600; margin-bottom: 8px; color: #00BFB3; }
 .impact-text p  { font-size: 14px; color: var(--off); font-weight: 300; line-height: 1.65; }
 
 /* ─── COMPARISON ─── */
@@ -459,11 +460,11 @@ img { display: block; }
 .adv-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.25); }
 .adv-icon {
   width: 52px; height: 52px; border-radius: 14px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(0,169,157,0.18);
   display: flex; align-items: center; justify-content: center;
-  color: rgba(255,255,255,0.88);
+  color: #00BFB3;
 }
-.adv-card h3 { font-size: 17px; font-weight: 500; }
+.adv-card h3 { font-size: 17px; font-weight: 600; color: #00BFB3; }
 .adv-card p  { font-size: 14px; color: var(--off); font-weight: 300; line-height: 1.6; }
 
 /* ─── SERVICES ─── */
@@ -480,11 +481,11 @@ img { display: block; }
 .svc-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.25); cursor: pointer; }
 .svc-icon {
   width: 44px; height: 44px; border-radius: 12px;
-  background: rgba(255,255,255,0.1);
+  background: rgba(0,169,157,0.18);
   display: flex; align-items: center; justify-content: center;
-  color: rgba(255,255,255,0.88);
+  color: #00BFB3;
 }
-.svc-card h3 { font-size: 16px; font-weight: 500; }
+.svc-card h3 { font-size: 16px; font-weight: 600; color: #00BFB3; }
 .svc-card p  { font-size: 13px; color: var(--off); font-weight: 300; line-height: 1.6; }
 
 /* ─── SVC-MORE LINK ─── */
@@ -735,6 +736,7 @@ footer {
     </div>
   </div>
   <ul class="nav-links">
+    <li><a href="#hero" onclick="jumpTo('hero')" data-i18n="nav-home">ראשי</a></li>
     <li><a href="#ainative" onclick="jumpTo('ainative')">AI Native</a></li>
     <li><a href="#compare" onclick="jumpTo('compare')" data-i18n="nav-compare">השוואה</a></li>
     <li><a href="#about" onclick="jumpTo('about')" data-i18n="nav-about">אודות</a></li>
@@ -753,6 +755,7 @@ footer {
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
+  <a href="#hero"     onclick="jumpTo('hero');closeMobile()" data-i18n="nav-home">ראשי</a>
   <a href="#ainative" onclick="jumpTo('ainative');closeMobile()">AI Native</a>
   <a href="#compare"  onclick="jumpTo('compare');closeMobile()" data-i18n="nav-compare">השוואה</a>
   <a href="#about"    onclick="jumpTo('about');closeMobile()" data-i18n="nav-about">אודות</a>
@@ -1201,6 +1204,7 @@ const T = {
   he: {
     'page-title':      'OMS AI - עתיד העסקים מתחיל כאן',
     'nav-sub':         'בניית מוצרים - מערכות, אפליקציות ואתרים באמצעות יכולות הבינה המלאכותית. AI-NATIVE',
+    'nav-home':        'ראשי',
     'nav-compare':     'השוואה',
     'nav-about':       'אודות',
     'nav-services':    'שירותים',
@@ -1398,6 +1402,7 @@ const T = {
   en: {
     'page-title':      'OMS AI - The Future of Business Starts Here',
     'nav-sub':         'Building products - systems, apps and websites using AI capabilities. AI-NATIVE',
+    'nav-home':        'Home',
     'nav-compare':     'Compare',
     'nav-about':       'About',
     'nav-services':    'Services',
