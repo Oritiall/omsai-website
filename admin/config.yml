@@ -1,0 +1,44 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: he
+media_folder: media
+public_folder: /media
+
+collections:
+  - name: content
+    label: תוכן האתר
+    files:
+      - name: main
+        label: ניהול תוכן
+        file: content.json
+        format: json
+        fields:
+          - label: "Hero — כותרת ראשית"
+            name: hero
+            widget: object
+            fields:
+              - { label: "כותרת", name: title, widget: string }
+              - { label: "טקסט תיאור", name: sub, widget: text }
+              - { label: "תמונה ראשית", name: image, widget: image }
+
+          - label: "אודות"
+            name: about
+            widget: object
+            fields:
+              - { label: "טקסט תיאור", name: sub, widget: text }
+              - { label: "תמונה", name: image, widget: image }
+
+          - label: "השוואה — תמונות"
+            name: compare
+            widget: object
+            fields:
+              - { label: "תמונה — שיטה מסורתית", name: traditional_image, widget: image }
+              - { label: "תמונה — צוות AI", name: ai_image, widget: image }
+
+          - label: "צור קשר"
+            name: contact
+            widget: object
+            fields:
+              - { label: "מספר וואטסאפ (עם קוד מדינה, ללא +)", name: whatsapp, widget: string, hint: "לדוגמה: 972544555461" }
