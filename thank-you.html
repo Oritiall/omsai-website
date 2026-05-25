@@ -145,8 +145,8 @@
     <p class="sub">קיבלנו את פרטיך</p>
     <p>נציג מטעם OMS AI יחזור אליך בהקדם בוואטסאפ.<br/>נשמח לענות על כל שאלה ולתאם הדגמה אישית.</p>
     <div class="actions">
-      <a href="/" class="btn-primary">חזרה לדף הבית</a>
-      <a href="/your-meeting" class="btn-secondary">חזרה לדף המוצר</a>
+      <a id="wa-btn" href="#" class="btn-primary" target="_blank" rel="noopener">פתח וואטסאפ</a>
+      <a href="/" class="btn-secondary">חזרה לדף הבית</a>
     </div>
   </div>
 </main>
@@ -155,5 +155,16 @@
   <p>© 2026 OMS AI · כל הזכויות שמורות · ישראל</p>
 </footer>
 
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const waUrl = params.get('wa');
+  const waBtn = document.getElementById('wa-btn');
+  if (waUrl) {
+    waBtn.href = decodeURIComponent(waUrl);
+    setTimeout(() => { waBtn.click(); }, 600);
+  } else {
+    waBtn.style.display = 'none';
+  }
+</script>
 </body>
 </html>

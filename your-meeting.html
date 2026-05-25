@@ -519,8 +519,8 @@
     if (email)   lines.push(`אימייל: ${email}`);
     if (message) lines.push(`הודעה: ${message}`);
     const encoded = encodeURIComponent(lines.join('\n'));
-    window.open(`https://wa.me/972544555461?text=${encoded}`, '_blank');
-    window.location.href = '/thank-you';
+    const waUrl = `https://wa.me/972544555461?text=${encoded}`;
+    window.location.href = `/thank-you?wa=${encodeURIComponent(waUrl)}`;
   }
 
   const hamburger = document.getElementById('hamburger');
