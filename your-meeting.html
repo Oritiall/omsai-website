@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Meeting — ניהול פגישות חכם | OMS AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d1b3e;
+      --surface: #0a1530;
+      --card: #112040;
+      --border: rgba(255,255,255,0.1);
+      --accent: #22c55e;
+      --accent-hover: #16a34a;
+      --blue-light: #1e3a6e;
+      --text: #f8faff;
+      --muted: #b0c4de;
+      --green: #22c55e;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Heebo', sans-serif; background: var(--bg); color: var(--text); direction: rtl; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    .top-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(13,27,62,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 36px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .top-nav-logo { display: flex; align-items: center; gap: 12px; }
+    .top-nav-logo img { height: 44px; }
+    .top-nav-logo span { font-size: 15px; font-weight: 700; color: var(--accent); }
+    .top-nav-back { font-size: 14px; color: var(--muted); transition: color 0.2s; }
+    .top-nav-back:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 100px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse, rgba(34,197,94,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3);
+      color: var(--accent); padding: 6px 18px; border-radius: 100px;
+      font-size: 13px; font-weight: 600; margin-bottom: 28px;
+    }
+    .audience-strip { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 32px; }
+    .audience-tag { background: var(--blue-light); border: 1px solid var(--border); color: var(--text); padding: 7px 18px; border-radius: 100px; font-size: 14px; font-weight: 600; }
+    .simple-tag { display: inline-block; background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); color: var(--accent); padding: 5px 16px; border-radius: 6px; font-size: 13px; font-weight: 700; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(34px, 6vw, 68px); font-weight: 900; line-height: 1.1; margin-bottom: 22px; max-width: 780px; }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero p { font-size: clamp(16px, 2.5vw, 19px); color: var(--muted); max-width: 580px; line-height: 1.75; margin-bottom: 38px; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .btn-primary { background: var(--accent); color: #fff; padding: 14px 34px; border-radius: 10px; font-size: 16px; font-weight: 700; border: none; cursor: pointer; font-family: 'Heebo', sans-serif; transition: all 0.2s; }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .btn-secondary { background: transparent; color: var(--text); padding: 14px 32px; border-radius: 10px; font-size: 16px; font-weight: 600; border: 1px solid var(--border); transition: all 0.2s; display: inline-block; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+    .price-badge { margin-top: 48px; display: inline-flex; align-items: center; gap: 16px; background: var(--card); border: 1px solid rgba(34,197,94,0.3); padding: 16px 32px; border-radius: 14px; }
+    .price-badge .price { font-size: 32px; font-weight: 900; color: var(--green); }
+    .price-badge .desc { font-size: 14px; color: var(--muted); text-align: right; line-height: 1.6; }
+
+    /* SECTIONS */
+    section { padding: 80px 24px; max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; margin-bottom: 14px; }
+    .section-title { font-size: clamp(26px, 4vw, 42px); font-weight: 900; line-height: 1.2; margin-bottom: 14px; }
+    .section-sub { color: var(--muted); font-size: 17px; line-height: 1.75; max-width: 580px; }
+    .divider { width: 52px; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: 20px; }
+
+    /* FEATURES */
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 48px; }
+    .feature-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: border-color 0.2s, transform 0.2s; }
+    .feature-card:hover { border-color: rgba(34,197,94,0.35); transform: translateY(-4px); }
+    .feature-icon { width: 52px; height: 52px; margin-bottom: 18px; }
+    .feature-icon svg { width: 100%; height: 100%; stroke: var(--text); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .feature-card p { color: var(--muted); font-size: 15px; line-height: 1.65; }
+
+    /* HOW IT WORKS */
+    .how-wrap { background: var(--surface); padding: 80px 24px; }
+    .how-inner { max-width: 1100px; margin: 0 auto; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 28px; margin-top: 48px; }
+    .step { text-align: center; padding: 20px; }
+    .step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 900; margin: 0 auto 16px; color: #fff; }
+    .step h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .step p { color: var(--muted); font-size: 14px; line-height: 1.65; }
+
+    /* PRICING */
+    .pricing-card { background: var(--card); border: 1px solid rgba(34,197,94,0.35); border-radius: 24px; padding: 48px; max-width: 560px; margin: 48px auto 0; text-align: center; position: relative; overflow: hidden; }
+    .pricing-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); }
+    .pricing-card .big-price { font-size: 64px; font-weight: 900; color: var(--green); line-height: 1; margin: 16px 0 8px; }
+    .pricing-card .price-note { color: var(--muted); font-size: 15px; margin-bottom: 32px; }
+    .pricing-features { list-style: none; text-align: right; margin-bottom: 32px; }
+    .pricing-features li { padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 15px; color: var(--text); display: flex; align-items: center; gap: 10px; }
+    .pricing-features li::before { content: '✓'; color: var(--green); font-weight: 700; }
+
+    /* FORM */
+    .form-wrap { background: var(--surface); padding: 80px 24px; }
+    .form-inner { max-width: 600px; margin: 0 auto; }
+    .form-card { background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 40px; margin-top: 40px; }
+    .form-row { margin-bottom: 20px; }
+    .form-row label { display: block; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .form-row input, .form-row textarea { width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 12px 16px; border-radius: 10px; font-family: 'Heebo', sans-serif; font-size: 15px; direction: rtl; transition: border-color 0.2s; outline: none; }
+    .form-row input::placeholder, .form-row textarea::placeholder { color: var(--muted); }
+    .form-row input:focus, .form-row textarea:focus { border-color: var(--accent); }
+    .form-row textarea { min-height: 100px; resize: vertical; }
+    .submit-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 16px; border-radius: 10px; font-family: 'Heebo', sans-serif; font-size: 17px; font-weight: 700; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .submit-btn:hover { background: var(--accent-hover); }
+    .form-note { text-align: center; color: var(--muted); font-size: 13px; margin-top: 14px; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero > * { animation: fadeUp 0.55s ease both; }
+    .hero > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero > *:nth-child(2) { animation-delay: 0.15s; }
+    .hero > *:nth-child(3) { animation-delay: 0.22s; }
+    .hero > *:nth-child(4) { animation-delay: 0.30s; }
+    .hero > *:nth-child(5) { animation-delay: 0.38s; }
+    .hero > *:nth-child(6) { animation-delay: 0.45s; }
+    .hero > *:nth-child(7) { animation-delay: 0.52s; }
+
+    @media (max-width: 600px) {
+      .top-nav { padding: 0 16px; }
+      .price-badge { flex-direction: column; gap: 8px; text-align: center; }
+      .pricing-card { padding: 32px 20px; }
+      .form-card { padding: 28px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="top-nav-logo">
+    <img src="logo.png" alt="OMS AI" />
+    <span>Your Meeting</span>
+  </div>
+  <a href="/" class="top-nav-back">← חזרה לאתר הראשי</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✦ ניהול פגישות פשוט ומקצועי</div>
+  <div class="audience-strip">
+    <span class="audience-tag">👩‍💻 קואצ'ים</span>
+    <span class="audience-tag">💼 יועצים</span>
+    <span class="audience-tag">✂️ נותני שירות</span>
+    <span class="audience-tag">🏢 עסקים קטנים ובינוניים</span>
+    <span class="audience-tag">🔧 מנהלים</span>
+  </div>
+  <div class="simple-tag">⚡ הגדרה פשוטה ממש בדקות</div>
+  <h1>ניהול פגישות חכם<br/><em>שעובד בשבילך</em></h1>
+  <p>בלי טרחה ובלי בלבול. מערכת פגישות אוטומטית שקובעת, מזכירה ושומרת פרטים — כדי שתתמקדי בעסק שלך, לא בלוגיסטיקה.</p>
+  <div class="hero-btns">
+    <a href="#form" class="btn-primary">רוצה לשמוע יותר</a>
+    <a href="#features" class="btn-secondary">איך זה עובד?</a>
+  </div>
+  <div class="price-badge">
+    <div class="price">₪695</div>
+    <div class="desc">תשלום חד פעמי בלבד<br/>ללא דמי מנוי · ללא עמלות</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="divider"></div>
+  <div class="section-label">יתרונות המערכת</div>
+  <h2 class="section-title">מה כל עסק מודרני צריך</h2>
+  <p class="section-sub">מערכת מתקדמת, פשוטה לשימוש ואוטומטית שמאפשרת ללקוחות לקבוע פגישות באופן מקצועי, בלחיצת כפתור.</p>
+  <div class="features-grid">
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 48 48">
+          <rect x="6" y="10" width="36" height="32" rx="4"/>
+          <line x1="6" y1="20" x2="42" y2="20"/>
+          <line x1="16" y1="6" x2="16" y2="14"/>
+          <line x1="32" y1="6" x2="32" y2="14"/>
+          <rect x="14" y="26" width="6" height="5" rx="1"/>
+          <rect x="26" y="26" width="6" height="5" rx="1"/>
+        </svg>
+      </div>
+      <h3>תיאום אוטומטי</h3>
+      <p>קבעו פגישות מול לקוחות, אפשרו ניהול יומן ישיר ואוטומטי. אפס מאמץ מצדכם.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 48 48">
+          <rect x="6" y="6" width="16" height="18" rx="3"/>
+          <rect x="26" y="6" width="16" height="10" rx="3"/>
+          <rect x="26" y="20" width="16" height="18" rx="3"/>
+          <rect x="6" y="28" width="16" height="14" rx="3"/>
+        </svg>
+      </div>
+      <h3>לוח שנה מתקדם</h3>
+      <p>צפייה בפגישות, ניהול זמן, עדכון שעות פעילות ומעקב אחר לקוחות. הכל במקום אחד.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 48 48">
+          <circle cx="24" cy="20" r="10"/>
+          <line x1="24" y1="6" x2="24" y2="12"/>
+          <line x1="24" y1="28" x2="24" y2="34"/>
+          <line x1="10" y1="20" x2="16" y2="20"/>
+          <line x1="32" y1="20" x2="38" y2="20"/>
+          <path d="M12 34 C12 28 36 28 36 34 L36 42 L12 42 Z"/>
+        </svg>
+      </div>
+      <h3>עצמאי ובעל עסק</h3>
+      <p>בנינו אותה בשבילך, בצורה שמשקפת את הזהות שלך ואת אופי העסק שלך.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 48 48">
+          <polyline points="6,38 16,26 24,32 34,16 42,22"/>
+          <line x1="6" y1="38" x2="42" y2="38"/>
+          <line x1="6" y1="6" x2="6" y2="38"/>
+          <circle cx="16" cy="26" r="2.5"/>
+          <circle cx="24" cy="32" r="2.5"/>
+          <circle cx="34" cy="16" r="2.5"/>
+        </svg>
+      </div>
+      <h3>מעקב ונתונים</h3>
+      <p>ראה כמה פגישות נקבעו, מה שיעורי ההמרה, ואיפה יש פרצות צמיחה בעסק שלך.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">
+        <svg viewBox="0 0 48 48">
+          <circle cx="18" cy="16" r="8"/>
+          <path d="M4 40 C4 30 32 30 32 40"/>
+          <circle cx="36" cy="18" r="6"/>
+          <path d="M30 40 C30 32 44 32 44 40"/>
+        </svg>
+      </div>
+      <h3>מתאים לכולם</h3>
+      <p>יועצים, קואצ'ים, מספרות, עסקים קטנים ובינוניים. כל מי שרוצה לנהל זמן ולעבוד מסודר.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<div class="how-wrap">
+  <div class="how-inner">
+    <div class="divider"></div>
+    <div class="section-label">איך זה עובד</div>
+    <h2 class="section-title">שלושה צעדים פשוטים</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>השאירו פרטים</h3>
+        <p>מלאו את הטופס, ונציג יצור קשר ויבין את הצרכים שלכם.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>תקבלו הדגמה</h3>
+        <p>נציג יציג לכם את המערכת עם שעות הפעילות שלכם, מותאמת אישית.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>התחילו לקבל פגישות</h3>
+        <p>המערכת עולה לשידור, 24/7, בלי שתצטרכו לעשות דבר נוסף.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section>
+  <div style="text-align:center;">
+    <div class="divider" style="margin:0 auto 16px;"></div>
+    <div class="section-label">מחיר</div>
+    <h2 class="section-title">פשוט. שקוף. חד פעמי.</h2>
+  </div>
+  <div class="pricing-card">
+    <div style="font-size:15px; color:var(--muted);">מחיר לעסק</div>
+    <div class="big-price">₪695</div>
+    <div class="price-note">תשלום חד פעמי · ללא מנוי · ללא הפתעות · ללא עמלות</div>
+    <ul class="pricing-features">
+      <li>תיאום אוטומטי ופשוט ללקוחות</li>
+      <li>עצמאי ובוס של עצמך</li>
+      <li>לוח שנה מלא ומנוהל</li>
+      <li>תמיכה ואימון מהיר</li>
+      <li>ללא עמלות נוספות לצד ג'</li>
+    </ul>
+    <a href="#form" class="btn-primary" style="display:block; text-align:center; padding:16px;">אני רוצה להתחיל</a>
+  </div>
+</section>
+
+<!-- FORM -->
+<div class="form-wrap" id="form">
+  <div class="form-inner">
+    <div class="divider"></div>
+    <div class="section-label">צור קשר</div>
+    <h2 class="section-title">נשמח לשמוע ממך</h2>
+    <p style="color:var(--muted); line-height:1.75;">השאירו פרטים ונחזור אליכם בהקדם, ישירות בוואטסאפ.</p>
+    <div class="form-card">
+      <div class="form-row">
+        <label>שם מלא</label>
+        <input type="text" id="name" placeholder="הכניסו את שמכם" />
+      </div>
+      <div class="form-row">
+        <label>טלפון</label>
+        <input type="tel" id="phone" placeholder="050-0000000" />
+      </div>
+      <div class="form-row">
+        <label>אימייל (אופציונלי)</label>
+        <input type="email" id="email" placeholder="name@example.com" />
+      </div>
+      <div class="form-row">
+        <label>הודעה</label>
+        <textarea id="message" placeholder="ספרו לנו קצת על הצרכים שלכם..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="sendWhatsApp()">
+        <span>שלח בוואטסאפ</span>
+        <span>💬</span>
+      </button>
+      <p class="form-note">לחיצה תפתח את הוואטסאפ עם הפרטים שלך מוכנים לשליחה</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function sendWhatsApp() {
+    const name    = document.getElementById('name').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    if (!name || !phone) { alert('נא למלא שם וטלפון.'); return; }
+    const lines = [
+      `שלום! אני מעוניין/ת בשירות Your Meeting 🗓️`,
+      `שם: ${name}`,
+      `טלפון: ${phone}`,
+    ];
+    if (email)   lines.push(`אימייל: ${email}`);
+    if (message) lines.push(`הודעה: ${message}`);
+    const encoded = encodeURIComponent(lines.join('\n'));
+    window.open(`https://wa.me/972544555461?text=${encoded}`, '_blank');
+  }
+</script>
+
+</body>
+</html>
