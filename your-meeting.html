@@ -512,14 +512,15 @@
     const message = document.getElementById('message').value.trim();
     if (!name || !phone || !email) { alert('נא למלא שם, טלפון ואימייל.'); return; }
     const lines = [
-      `שלום! אני מעוניין/ת בשירות Your Meeting`,
-      `שם: ${name}`,
-      `טלפון: ${phone}`,
+      `שלום! אני מעוניין/ת בשירות Your Meeting 🗓️`,
+      ``,
+      `👤 שם: ${name}`,
+      `📞 טלפון: ${phone}`,
+      `📧 אימייל: ${email}`,
     ];
-    if (email)   lines.push(`אימייל: ${email}`);
-    if (message) lines.push(`הודעה: ${message}`);
-    const encoded = encodeURIComponent(lines.join('\n'));
-    const waUrl = `https://wa.me/972544555461?text=${encoded}`;
+    if (message) lines.push(``, `💬 הודעה: ${message}`);
+    const text = lines.join('\n');
+    const waUrl = `https://wa.me/972544555461?text=${encodeURIComponent(text)}`;
     window.location.href = `/thank-you?wa=${encodeURIComponent(waUrl)}`;
   }
 

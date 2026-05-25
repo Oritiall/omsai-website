@@ -160,8 +160,7 @@
   const waUrl = params.get('wa');
   const waBtn = document.getElementById('wa-btn');
   if (waUrl) {
-    waBtn.href = decodeURIComponent(waUrl);
-    setTimeout(() => { waBtn.click(); }, 600);
+    waBtn.href = waUrl;
   } else {
     waBtn.style.display = 'none';
   }
