@@ -467,7 +467,7 @@
         <input type="tel" id="phone" placeholder="050-0000000" />
       </div>
       <div class="form-row">
-        <label>אימייל (אופציונלי)</label>
+        <label>אימייל</label>
         <input type="email" id="email" placeholder="name@example.com" />
       </div>
       <div class="form-row">
@@ -510,7 +510,7 @@
     const phone   = document.getElementById('phone').value.trim();
     const email   = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
-    if (!name || !phone) { alert('נא למלא שם וטלפון.'); return; }
+    if (!name || !phone || !email) { alert('נא למלא שם, טלפון ואימייל.'); return; }
     const lines = [
       `שלום! אני מעוניין/ת בשירות Your Meeting`,
       `שם: ${name}`,
