@@ -2016,6 +2016,16 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── LOAD EDITABLE CONTENT FROM CMS ──
+fetch('/content.json')
+  .then(r => r.json())
+  .then(data => {
+    if (data.he) Object.assign(T.he, data.he);
+    if (data.en) Object.assign(T.en, data.en);
+    setLang(currentLang);
+  })
+  .catch(() => {});
 </script>
 </body>
 </html>

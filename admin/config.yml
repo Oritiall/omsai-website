@@ -1,0 +1,178 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "."
+public_folder: "."
+locale: "he"
+
+collections:
+  - name: "content"
+    label: "תוכן האתר"
+    files:
+      - name: "main"
+        label: "ניהול תכנים"
+        file: "content.json"
+        fields:
+
+          - label: "עברית"
+            name: "he"
+            widget: "object"
+            fields:
+              - { label: "כותרת משנה - עמוד ראשי", name: "hero-sub", widget: "text" }
+
+              - label: "מה זה AI Native"
+                name: "ainative-section"
+                widget: "object"
+                fields:
+                  - { label: "כותרת", name: "ainative-title", widget: "string" }
+                  - { label: "תת-כותרת", name: "ainative-sub", widget: "text" }
+                  - { label: "עמוד 1 - כותרת", name: "pillar1-h3", widget: "string" }
+                  - { label: "עמוד 1 - תיאור", name: "pillar1-p", widget: "text" }
+                  - { label: "עמוד 2 - כותרת", name: "pillar2-h3", widget: "string" }
+                  - { label: "עמוד 2 - תיאור", name: "pillar2-p", widget: "text" }
+                  - { label: "עמוד 3 - כותרת", name: "pillar3-h3", widget: "string" }
+                  - { label: "עמוד 3 - תיאור", name: "pillar3-p", widget: "text" }
+
+              - label: "השפעה גלובלית"
+                name: "impact-section"
+                widget: "object"
+                fields:
+                  - { label: "כותרת", name: "impact-title", widget: "string" }
+                  - { label: "כרטיס 1 - כותרת", name: "impact1-h4", widget: "string" }
+                  - { label: "כרטיס 1 - תיאור", name: "impact1-p", widget: "text" }
+                  - { label: "כרטיס 2 - כותרת", name: "impact2-h4", widget: "string" }
+                  - { label: "כרטיס 2 - תיאור", name: "impact2-p", widget: "text" }
+                  - { label: "כרטיס 3 - כותרת", name: "impact3-h4", widget: "string" }
+                  - { label: "כרטיס 3 - תיאור", name: "impact3-p", widget: "text" }
+                  - { label: "כרטיס 4 - כותרת", name: "impact4-h4", widget: "string" }
+                  - { label: "כרטיס 4 - תיאור", name: "impact4-p", widget: "text" }
+
+              - label: "מי אנחנו"
+                name: "about-section"
+                widget: "object"
+                fields:
+                  - { label: "תיאור החברה", name: "about-sub", widget: "text" }
+
+              - label: "יתרון תחרותי"
+                name: "movers-section"
+                widget: "object"
+                fields:
+                  - { label: "כותרת", name: "movers-title", widget: "string" }
+                  - { label: "תת-כותרת", name: "movers-sub", widget: "text" }
+
+              - label: "הפתרונות שלנו"
+                name: "services-section"
+                widget: "object"
+                fields:
+                  - { label: "כותרת הסקשן", name: "svc-title", widget: "string" }
+                  - { label: "שירות 1 - כותרת", name: "svc1-h3", widget: "string" }
+                  - { label: "שירות 1 - תיאור קצר", name: "svc1-p", widget: "text" }
+                  - { label: "שירות 2 - כותרת", name: "svc2-h3", widget: "string" }
+                  - { label: "שירות 2 - תיאור קצר", name: "svc2-p", widget: "text" }
+                  - { label: "שירות 3 - כותרת", name: "svc3-h3", widget: "string" }
+                  - { label: "שירות 3 - תיאור קצר", name: "svc3-p", widget: "text" }
+                  - { label: "שירות 4 - כותרת", name: "svc4-h3", widget: "string" }
+                  - { label: "שירות 4 - תיאור קצר", name: "svc4-p", widget: "text" }
+                  - { label: "שירות 5 - כותרת", name: "svc5-h3", widget: "string" }
+                  - { label: "שירות 5 - תיאור קצר", name: "svc5-p", widget: "text" }
+                  - { label: "שירות 6 - כותרת", name: "svc6-h3", widget: "string" }
+                  - { label: "שירות 6 - תיאור קצר", name: "svc6-p", widget: "text" }
+
+              - label: "החזון שלנו"
+                name: "vision-section"
+                widget: "object"
+                fields:
+                  - { label: "כותרת", name: "vision-title", widget: "string" }
+                  - { label: "ציטוט", name: "vision-quote", widget: "text" }
+                  - { label: "משפט CTA", name: "vision-cta", widget: "text" }
+
+              - label: "צור קשר"
+                name: "contact-section"
+                widget: "object"
+                fields:
+                  - { label: "כותרת", name: "contact-title", widget: "string" }
+                  - { label: "תת-כותרת", name: "contact-sub", widget: "text" }
+
+              - { label: "טקסט פוטר", name: "footer-sub", widget: "text" }
+
+          - label: "English"
+            name: "en"
+            widget: "object"
+            fields:
+              - { label: "Hero Subtitle", name: "hero-sub", widget: "text" }
+
+              - label: "AI Native Section"
+                name: "ainative-section"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "ainative-title", widget: "string" }
+                  - { label: "Subtitle", name: "ainative-sub", widget: "text" }
+                  - { label: "Pillar 1 - Title", name: "pillar1-h3", widget: "string" }
+                  - { label: "Pillar 1 - Description", name: "pillar1-p", widget: "text" }
+                  - { label: "Pillar 2 - Title", name: "pillar2-h3", widget: "string" }
+                  - { label: "Pillar 2 - Description", name: "pillar2-p", widget: "text" }
+                  - { label: "Pillar 3 - Title", name: "pillar3-h3", widget: "string" }
+                  - { label: "Pillar 3 - Description", name: "pillar3-p", widget: "text" }
+
+              - label: "Global Impact Section"
+                name: "impact-section"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "impact-title", widget: "string" }
+                  - { label: "Card 1 - Title", name: "impact1-h4", widget: "string" }
+                  - { label: "Card 1 - Description", name: "impact1-p", widget: "text" }
+                  - { label: "Card 2 - Title", name: "impact2-h4", widget: "string" }
+                  - { label: "Card 2 - Description", name: "impact2-p", widget: "text" }
+                  - { label: "Card 3 - Title", name: "impact3-h4", widget: "string" }
+                  - { label: "Card 3 - Description", name: "impact3-p", widget: "text" }
+                  - { label: "Card 4 - Title", name: "impact4-h4", widget: "string" }
+                  - { label: "Card 4 - Description", name: "impact4-p", widget: "text" }
+
+              - label: "About Us"
+                name: "about-section"
+                widget: "object"
+                fields:
+                  - { label: "Company Description", name: "about-sub", widget: "text" }
+
+              - label: "Competitive Advantage"
+                name: "movers-section"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "movers-title", widget: "string" }
+                  - { label: "Subtitle", name: "movers-sub", widget: "text" }
+
+              - label: "Our Solutions"
+                name: "services-section"
+                widget: "object"
+                fields:
+                  - { label: "Section Title", name: "svc-title", widget: "string" }
+                  - { label: "Service 1 - Title", name: "svc1-h3", widget: "string" }
+                  - { label: "Service 1 - Short Description", name: "svc1-p", widget: "text" }
+                  - { label: "Service 2 - Title", name: "svc2-h3", widget: "string" }
+                  - { label: "Service 2 - Short Description", name: "svc2-p", widget: "text" }
+                  - { label: "Service 3 - Title", name: "svc3-h3", widget: "string" }
+                  - { label: "Service 3 - Short Description", name: "svc3-p", widget: "text" }
+                  - { label: "Service 4 - Title", name: "svc4-h3", widget: "string" }
+                  - { label: "Service 4 - Short Description", name: "svc4-p", widget: "text" }
+                  - { label: "Service 5 - Title", name: "svc5-h3", widget: "string" }
+                  - { label: "Service 5 - Short Description", name: "svc5-p", widget: "text" }
+                  - { label: "Service 6 - Title", name: "svc6-h3", widget: "string" }
+                  - { label: "Service 6 - Short Description", name: "svc6-p", widget: "text" }
+
+              - label: "Our Vision"
+                name: "vision-section"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "vision-title", widget: "string" }
+                  - { label: "Quote", name: "vision-quote", widget: "text" }
+                  - { label: "CTA Text", name: "vision-cta", widget: "text" }
+
+              - label: "Contact"
+                name: "contact-section"
+                widget: "object"
+                fields:
+                  - { label: "Title", name: "contact-title", widget: "string" }
+                  - { label: "Subtitle", name: "contact-sub", widget: "text" }
+
+              - { label: "Footer Text", name: "footer-sub", widget: "text" }
