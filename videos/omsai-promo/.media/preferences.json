@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "preferences": {
+    "destination": {
+      "value": "reels",
+      "confirmed_in": [
+        "omsai-promo"
+      ],
+      "updated_at": "2026-07-25T23:43:06.784Z"
+    },
+    "aspect": {
+      "value": "1080x1920",
+      "confirmed_in": [
+        "omsai-promo"
+      ],
+      "updated_at": "2026-07-25T23:43:06.842Z"
+    },
+    "language": {
+      "value": "he",
+      "confirmed_in": [
+        "omsai-promo"
+      ],
+      "updated_at": "2026-07-25T23:43:06.900Z"
+    },
+    "flow": {
+      "value": "automation",
+      "confirmed_in": [
+        "omsai-promo"
+      ],
+      "updated_at": "2026-07-25T23:43:06.957Z"
+    },
+    "storyboard": {
+      "value": "yes",
+      "confirmed_in": [
+        "omsai-promo"
+      ],
+      "updated_at": "2026-07-25T23:43:07.002Z"
+    }
+  },
+  "sightings": {}
+}
