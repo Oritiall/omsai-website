@@ -1,0 +1,266 @@
+<template>
+  <style>
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Hebrew-variable.woff2') format('woff2');
+      unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    }
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Latin-variable.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    .clip {
+      position: absolute;
+      inset: 0;
+    }
+
+    /* full-bleed ground — lives on a .clip layer, never on #root */
+    #f06-bg {
+      background:
+        radial-gradient(circle at 50% 30%, rgba(0, 191, 179, 0.14), transparent 60%),
+        #0b2447;
+    }
+
+    #f06-gauge-pos {
+      position: absolute;
+      top: 33cqh;
+      left: 50%;
+      width: 58cqw;
+      height: 58cqw;
+      transform: translate(-50%, -50%);
+    }
+
+    #f06-group {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-origin: 50% 50%;
+    }
+
+    #f06-gauge-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .f06-arc-static {
+      fill: none;
+      stroke: #00bfb3;
+    }
+    #f06-arc-static-1 {
+      stroke-width: 1.4;
+      opacity: 0.16;
+    }
+    #f06-arc-static-2 {
+      stroke-width: 1.4;
+      opacity: 0.09;
+    }
+
+    #f06-progress-ring {
+      fill: none;
+      stroke: #00bfb3;
+      stroke-width: 15;
+      stroke-linecap: round;
+      transform-origin: 100px 100px;
+      transform: rotate(-90deg);
+    }
+
+    #f06-number-pos {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #f06-counter-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+
+    #f06-counter {
+      font-variant-numeric: tabular-nums;
+      display: inline-block;
+      font-family: 'Rubik', sans-serif;
+      font-weight: 700;
+      font-size: 14.5cqw;
+      line-height: 1;
+      color: #00bfb3;
+      transform-origin: 50% 50%;
+    }
+
+    #f06-plus {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 700;
+      font-size: 14.5cqw;
+      line-height: 1;
+      color: #00bfb3;
+      opacity: 0;
+      margin-inline-start: 0.02em;
+    }
+
+    #f06-caption-wrap {
+      position: absolute;
+      top: 61cqh;
+      left: 50%;
+      width: 74cqw;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    #f06-caption {
+      display: inline-block;
+      font-family: 'Rubik', sans-serif;
+      font-weight: 500;
+      font-size: 4.6cqw;
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.82);
+      opacity: 0;
+    }
+  </style>
+
+  <div
+    id="root"
+    data-composition-id="06-cost-stat"
+    data-width="1080"
+    data-height="1920"
+  >
+    <div
+      class="clip"
+      id="f06-bg-clip"
+      data-start="0"
+      data-duration="4"
+      data-track-index="0"
+    >
+      <div id="f06-bg" style="position: absolute; inset: 0;"></div>
+    </div>
+
+    <div
+      class="clip"
+      id="f06-gauge-clip"
+      data-start="0"
+      data-duration="4"
+      data-track-index="1"
+    >
+      <div id="f06-gauge-pos">
+        <div id="f06-group">
+          <svg id="f06-gauge-svg" viewBox="0 0 200 200">
+            <circle id="f06-arc-static-1" class="f06-arc-static" cx="100" cy="100" r="96" />
+            <circle id="f06-arc-static-2" class="f06-arc-static" cx="100" cy="100" r="90" />
+            <circle id="f06-progress-ring" cx="100" cy="100" r="78" />
+          </svg>
+          <div id="f06-number-pos">
+            <div id="f06-counter-row">
+              <span id="f06-counter">0%</span><span id="f06-plus">+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="clip"
+      id="f06-caption-clip"
+      data-start="2.8"
+      data-duration="1.2"
+      data-track-index="2"
+    >
+      <div id="f06-caption-wrap">
+        <div id="f06-caption" dir="rtl">פחות בעלויות פיתוח ותפעול.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.__timelines = window.__timelines || {};
+    const tl = gsap.timeline({ paused: true });
+
+    // Setup: measure the progress ring's real circumference — never hard-code it.
+    const f06Ring = document.getElementById('f06-progress-ring');
+    const f06RingLen = f06Ring.getTotalLength();
+    f06Ring.style.strokeDasharray = `${f06RingLen}`;
+    f06Ring.style.strokeDashoffset = `${f06RingLen}`;
+
+    const F06_TARGET = 70; // "70%+"
+    const F06_PCT = 0.76; // arc draws a touch past the 70% mark to read as "70%+"
+    const F06_COUNT_START = 1.0;
+    const F06_COUNT_DUR = 1.6; // ends at 2.6s
+    const F06_COUNT_EASE = 'power2.out';
+    const F06_START_SCALE = 0.5; // counter starts at ~50% of its final size
+
+    // Scene 1 (0.0–1.0s): dark-navy field + static concentric arcs are present
+    // from frame start (no motion on the chrome); the thick progress arc
+    // begins its clockwise draw here and continues through Scene 2.
+    tl.to(
+      f06Ring,
+      { strokeDashoffset: f06RingLen * (1 - F06_PCT), duration: 2.6, ease: 'power2.out' },
+      0,
+    );
+
+    // Scene 2 (1.0–2.8s): center number counts up 0 → 70(%) while its
+    // transform-scale grows alongside the value — same start, duration and
+    // ease as the arc's finish so number + ring land together.
+    const f06State = { value: 0 };
+    tl.to(
+      f06State,
+      {
+        value: F06_TARGET,
+        duration: F06_COUNT_DUR,
+        ease: F06_COUNT_EASE,
+        onUpdate: () => {
+          document.getElementById('f06-counter').textContent =
+            Math.round(f06State.value).toLocaleString() + '%';
+        },
+      },
+      F06_COUNT_START,
+    );
+    tl.fromTo(
+      '#f06-counter',
+      { scale: F06_START_SCALE },
+      { scale: 1, duration: F06_COUNT_DUR, ease: F06_COUNT_EASE },
+      F06_COUNT_START,
+    );
+
+    // The "+" locks on right after the count lands.
+    tl.fromTo(
+      '#f06-plus',
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.4, ease: 'back.out(1.6)' },
+      F06_COUNT_START + F06_COUNT_DUR,
+    );
+
+    // Scene 3 (2.8–4.0s): caption fades up beneath the number; the whole
+    // group holds with only a subtle settle-jitter — Frame 7's crossfade is
+    // this frame's exit.
+    tl.fromTo(
+      '#f06-caption',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+      2.8,
+    );
+    tl.to('#f06-group', { scale: 1.015, duration: 0.2, ease: 'power1.inOut' }, 3.4);
+    tl.to('#f06-group', { scale: 1, duration: 0.2, ease: 'power1.inOut' }, 3.6);
+
+    window.__timelines['06-cost-stat'] = tl;
+  </script>
+</template>
