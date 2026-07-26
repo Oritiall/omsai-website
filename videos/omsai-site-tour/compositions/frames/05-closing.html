@@ -1,0 +1,278 @@
+<template>
+<div id="root" data-composition-id="05-closing" data-width="1080" data-height="1920" data-duration="6">
+  <style>
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Hebrew-variable.woff2') format('woff2');
+      unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    }
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Latin-variable.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      direction: rtl;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    /* full-bleed ground — a dedicated clip layer, never painted on #root itself */
+    .f05-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 38%, rgba(0, 191, 179, 0.14), rgba(0, 191, 179, 0) 60%),
+        #0B2447;
+    }
+    .f05-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1.5px, transparent 1.5px);
+      background-size: 54px 54px;
+      opacity: 0.6;
+    }
+
+    /* ---------- Scene 1+2: the vision quote ---------- */
+    .f05-quote-clip {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+    /* static anchor — never GSAP-transformed */
+    .f05-quote-pos {
+      position: absolute;
+      top: 34cqh;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+      padding: 0 8cqw;
+    }
+    /* GSAP-scaled clearing wrapper — carries only transform-origin so the
+       Scene-2 shrink-toward-center tween never fights a static transform */
+    .f05-quote-scale {
+      display: inline-block;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+    .f05-quote {
+      margin: 0;
+      max-width: 88cqw;
+      margin-inline: auto;
+      text-align: center;
+      direction: rtl;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      line-height: 1.34;
+      font-weight: 600;
+      font-size: 6.2cqw;
+    }
+    .f05-word {
+      display: inline-block;
+      opacity: 0;
+      will-change: opacity, filter, transform;
+      margin-inline-end: 0.28em;
+    }
+    .f05-word:last-child {
+      margin-inline-end: 0;
+    }
+
+    /* ---------- Scene 3: logo bloom ---------- */
+    .f05-mark-clip {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+    /* faint concentric closing-rings behind the mark — frame.md's closing atmosphere */
+    .f05-rings {
+      position: absolute;
+      top: 42cqh;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 62cqw;
+      height: 62cqw;
+      pointer-events: none;
+      opacity: 0;
+      will-change: opacity;
+    }
+    .f05-rings::before,
+    .f05-rings::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0, 191, 179, 0.22);
+    }
+    .f05-rings::after {
+      inset: 13%;
+      border-color: rgba(0, 191, 179, 0.32);
+    }
+    /* static anchor — never GSAP-transformed */
+    .f05-mark-anchor {
+      position: absolute;
+      top: 42cqh;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    /* light plate behind the mark — the wordmark is dark navy/black, illegible
+       directly on this dark canvas, so it gets the same light backing the
+       brand uses on its own light nav bar; the mark itself is never recolored */
+    .f05-mark-plate {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 1.9cqh 2.6cqw;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+    .f05-mark-img {
+      display: block;
+      width: 40cqw;
+      height: auto;
+    }
+
+    /* ---------- Scene 4: closing invitation ---------- */
+    .f05-tagline-clip {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+    }
+    /* static anchor, never GSAP-transformed */
+    .f05-tagline-pos {
+      position: absolute;
+      top: 57cqh;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+      padding: 0 6cqw;
+    }
+    .f05-tagline {
+      margin: 0;
+      max-width: 80cqw;
+      margin-inline: auto;
+      text-align: center;
+      direction: rtl;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      font-weight: 600;
+      font-size: 5.4cqw;
+      opacity: 0;
+      will-change: opacity, transform;
+    }
+  </style>
+
+  <!-- full-duration ground -->
+  <div class="clip f05-bg" id="f05-bg" data-start="0" data-duration="6" data-track-index="0"></div>
+
+  <!-- Scene 1 (0.0-2.0s): per-word quote build + hold; Scene 2 (2.0-2.9s): clears to blank -->
+  <div class="clip f05-quote-clip" id="f05-quote-clip" data-start="0" data-duration="2.9" data-track-index="1">
+    <div class="f05-quote-pos">
+      <div class="f05-quote-scale" id="f05-quote-scale">
+        <p class="f05-quote" dir="rtl">
+          <span class="f05-word" id="f05-w1">המהפכה</span>
+          <span class="f05-word" id="f05-w2">כבר</span>
+          <span class="f05-word" id="f05-w3">כאן.</span>
+          <span class="f05-word" id="f05-w4">האם</span>
+          <span class="f05-word" id="f05-w5">העסק</span>
+          <span class="f05-word" id="f05-w6">שלך</span>
+          <span class="f05-word" id="f05-w7">יוביל</span>
+          <span class="f05-word" id="f05-w8">אותה,</span>
+          <span class="f05-word" id="f05-w9">או</span>
+          <span class="f05-word" id="f05-w10">יישאר</span>
+          <span class="f05-word" id="f05-w11">מאחור?</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 3 (2.9-6.0s): on the blank frame the mark spring-blooms from zero and holds -->
+  <div class="clip f05-mark-clip" id="f05-mark-clip" data-start="2.9" data-duration="3.1" data-track-index="2">
+    <div class="f05-rings" id="f05-rings"></div>
+    <div class="f05-mark-anchor">
+      <div class="f05-mark-plate" id="f05-mark">
+        <img class="f05-mark-img" src="assets/logo.png" alt="OMS AI" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4 (4.3-6.0s): the invitation settles below the mark, then the whole
+       composition HOLDS dead static — this is the video's true end, no exit follows -->
+  <div class="clip f05-tagline-clip" id="f05-tagline-clip" data-start="4.3" data-duration="1.7" data-track-index="3">
+    <div class="f05-tagline-pos">
+      <p class="f05-tagline" id="f05-tagline" dir="rtl">נשמח לשמוע ממך</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true });
+
+      // Scene 1 (0.0-2.0s): the vision quote — per-word staggered fade/blur/rise
+      // build, landing well before the 2.0s clear so it gets a real hold.
+      var WORD_DUR = 0.4;
+      var STAGGER = 0.11;
+      tl.fromTo(
+        '.f05-word',
+        { opacity: 0, y: 24, filter: 'blur(9px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: WORD_DUR, stagger: STAGGER, ease: 'power2.out' },
+        0
+      );
+
+      // Scene 2 (2.0-2.9s): the quote CLEARS — shrink-toward-center + fade —
+      // then holds a blank dark beat before the mark appears.
+      tl.to(
+        '#f05-quote-scale',
+        { scale: 0.72, opacity: 0, duration: 0.45, ease: 'power2.in' },
+        2.0
+      );
+
+      // Scene 3 (2.9-6.0s): on the blank frame the mark spring-BLOOMS from zero
+      // at dead center — a smooth long-tail settle, no bounce, no overshoot.
+      tl.fromTo(
+        '#f05-mark',
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.75, ease: 'power3.out' },
+        2.9
+      );
+
+      // The concentric closing-rings fade in softly behind the mark as it settles.
+      tl.fromTo(
+        '#f05-rings',
+        { opacity: 0 },
+        { opacity: 1, duration: 1.1, ease: 'power1.out' },
+        2.95
+      );
+
+      // Scene 4 (4.3-6.0s): the invitation line settles just below the lockup,
+      // then the whole composition HOLDS dead static through the final frame —
+      // this is the video's real ending, no further transition follows.
+      tl.fromTo(
+        '#f05-tagline',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+        4.3
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['05-closing'] = tl;
+    })();
+  </script>
+</div>
+</template>

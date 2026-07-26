@@ -1,0 +1,291 @@
+<template>
+<div id="root" data-composition-id="03-comparison" data-width="1080" data-height="1920" data-duration="7">
+  <style>
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Hebrew-variable.woff2') format('woff2');
+      unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    }
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Latin-variable.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      direction: rtl;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    /* full-bleed ground — a dedicated clip layer, never painted on #root itself */
+    .oc3-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 62% 22% at 50% 22%, rgba(0, 191, 179, 0.14), rgba(0, 191, 179, 0) 72%),
+        radial-gradient(ellipse 62% 22% at 50% 78%, rgba(0, 191, 179, 0.14), rgba(0, 191, 179, 0) 72%),
+        #0B2447;
+      will-change: opacity;
+    }
+    .oc3-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1.5px, transparent 1.5px);
+      background-size: 48px 48px;
+      opacity: 0.5;
+    }
+
+    /* Scene 1 — title, top of frame */
+    .oc3-title-stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      padding-top: 5.5cqh;
+    }
+    .oc3-title {
+      margin: 0;
+      font-size: 7cqw;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      color: #ffffff;
+      text-align: center;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    /* Scene 2/3 — the split-tilt pair + inner-edge badges */
+    .oc3-stage-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 15cqh;
+      perspective: 1400px; /* REQUIRED for rotateX to read as 3D, not flatten */
+    }
+    .oc3-split-stage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 3cqh;
+      transform-style: preserve-3d;
+    }
+    .oc3-card {
+      position: relative;
+      width: 72cqw;
+      height: 27cqh;
+      box-sizing: border-box;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(0, 191, 179, 0.07);
+      border: 1.5px solid rgba(0, 191, 179, 0.30);
+      overflow: hidden;
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+    .oc3-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    /* Shadow falls WITH the facing direction — outward from the split. */
+    .oc3-card-top {
+      transform-origin: 50% 100%; /* hinge at the inner (bottom) edge */
+      box-shadow: 0 -20px 45px rgba(0, 0, 0, 0.35);
+    }
+    .oc3-card-bottom {
+      transform-origin: 50% 0%; /* hinge at the inner (top) edge */
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Badge anchors carry the ONLY static CSS transform (centering) — never GSAP-animated,
+       so they never collide with the pill's own GSAP scale/opacity tween (gsap_css_transform_conflict). */
+    .oc3-badge-anchor {
+      position: absolute;
+      left: 50%;
+      z-index: 5;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .oc3-badge-anchor-top { top: 27cqh; }
+    .oc3-badge-anchor-bottom { top: 30cqh; }
+
+    .oc3-badge {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      padding: 1.5cqh 3.4cqw;
+      border-radius: 100px;
+      background: rgba(11, 36, 71, 0.88);
+      border: 1.5px solid #00BFB3;
+      color: #00BFB3;
+      font-family: 'Rubik', sans-serif;
+      font-size: 3.1cqw;
+      font-weight: 600;
+      opacity: 0;
+      transform-origin: 50% 50%;
+      will-change: transform, opacity;
+    }
+
+    /* Scene 4 — the closing stat line, below both images */
+    .oc3-stat-stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 73.5cqh;
+    }
+    .oc3-stat-hero {
+      margin: 0;
+      font-size: 9cqw;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: #00BFB3;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+    .oc3-stat-sub {
+      margin: 0;
+      margin-top: 0.8cqh;
+      font-size: 4.2cqw;
+      font-weight: 500;
+      line-height: 1.25;
+      color: rgba(255, 255, 255, 0.85);
+      text-align: center;
+      max-width: 80cqw;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+  </style>
+
+  <!-- full-duration ground -->
+  <div class="clip oc3-bg" id="oc3-bg" data-start="0" data-duration="7" data-track-index="0"></div>
+
+  <!-- Scene 1 (0.0-0.8s): title slides down into place, holds -->
+  <div class="clip oc3-title-stage" id="oc3-title-stage" data-start="0" data-duration="7" data-track-index="1">
+    <p class="oc3-title" id="oc3-title">אותה עבודה?</p>
+  </div>
+
+  <!-- Scene 2 (0.4-1.9s signature move) + Scene 3 (1.9-2.6s badges): mirrored split-tilt pair -->
+  <div class="clip oc3-stage-wrap" id="oc3-stage-wrap" data-start="0" data-duration="7" data-track-index="2">
+    <div class="oc3-split-stage" id="oc3-split-stage">
+      <div class="oc3-card oc3-card-top" id="oc3-card-top">
+        <img src="assets/traditional-team.png" alt="" />
+      </div>
+      <div class="oc3-card oc3-card-bottom" id="oc3-card-bottom">
+        <img src="assets/ai-team.png" alt="" />
+      </div>
+      <div class="oc3-badge-anchor oc3-badge-anchor-top">
+        <div class="oc3-badge" id="oc3-badge-top">היום</div>
+      </div>
+      <div class="oc3-badge-anchor oc3-badge-anchor-bottom">
+        <div class="oc3-badge" id="oc3-badge-bottom">עם AI Native</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 4 (2.6-7.0s): closing stat, holds to the end (transition out is the exit) -->
+  <div class="clip oc3-stat-stage" id="oc3-stat-stage" data-start="2.6" data-duration="4.4" data-track-index="3">
+    <p class="oc3-stat-hero" id="oc3-stat-hero" dir="ltr">70%+</p>
+    <p class="oc3-stat-sub" id="oc3-stat-sub">פחות בעלויות פיתוח ותפעול</p>
+  </div>
+
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true });
+
+      // Ambient ground — soft fade-in, atmosphere only (not a content reveal).
+      tl.fromTo('#oc3-bg', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0);
+
+      // Scene 1: title slides down from just above, settles smooth (no overshoot).
+      tl.fromTo(
+        '#oc3-title',
+        { y: -36, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' },
+        0.1
+      );
+
+      // Scene 2 (signature move): opposite-wing mirrored tilt entry.
+      // Top card (traditional-team, "today") arrives from above; bottom card
+      // (ai-team, the focal "answer") arrives from below ~0.2s later — a
+      // book-open rotateX tilt mirrored across the horizontal split axis.
+      var TILT = 12;
+      var TILT_OVERSHOOT = 6;
+
+      tl.fromTo(
+        '#oc3-card-top',
+        { y: -220, rotateX: -(TILT + TILT_OVERSHOOT), scale: 0.85, opacity: 0 },
+        { y: 0, rotateX: -TILT, scale: 1, opacity: 1, duration: 0.9, ease: 'power3.out' },
+        0.4
+      );
+      tl.fromTo(
+        '#oc3-card-bottom',
+        { y: 220, rotateX: TILT + TILT_OVERSHOOT, scale: 0.85, opacity: 0 },
+        { y: 0, rotateX: TILT, scale: 1, opacity: 1, duration: 0.9, ease: 'power3.out' },
+        0.6
+      );
+
+      // Scene 3: inner-edge pill badges — the lone overshoot in the shot.
+      tl.fromTo(
+        '#oc3-badge-top',
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(1.7)' },
+        1.9
+      );
+      tl.fromTo(
+        '#oc3-badge-bottom',
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.35, ease: 'back.out(1.7)' },
+        2.2
+      );
+
+      // Scene 4: closing stat line reveals below both images, holds to the end.
+      tl.fromTo(
+        '#oc3-stat-hero',
+        { y: 24, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.55, ease: 'power3.out' },
+        2.6
+      );
+      tl.fromTo(
+        '#oc3-stat-sub',
+        { y: 24, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' },
+        2.85
+      );
+
+      // Phase-opposed idle float during the hold — subtle, never synchronized
+      // (top and bottom bob in counter-phase so the pair reads alive, not conveyor-belted).
+      tl.to(
+        '#oc3-card-top',
+        { y: -3, duration: 0.75, ease: 'sine.inOut', yoyo: true, repeat: 5 },
+        2.6
+      );
+      tl.to(
+        '#oc3-card-bottom',
+        { y: 3, duration: 0.75, ease: 'sine.inOut', yoyo: true, repeat: 5 },
+        2.6
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['03-comparison'] = tl;
+    })();
+  </script>
+</div>
+</template>
