@@ -1,0 +1,239 @@
+<template>
+<div id="root" data-composition-id="01-hero" data-width="1080" data-height="1920" data-duration="5">
+  <style>
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Hebrew-variable.woff2') format('woff2');
+      unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    }
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Latin-variable.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      direction: rtl;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    /* full-bleed ground — a dedicated clip layer, never painted on #root itself */
+    .oh1-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 44% at 50% 24%, rgba(0, 191, 179, 0.10), rgba(0, 191, 179, 0) 68%),
+        #0B2447;
+    }
+    .oh1-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1.5px, transparent 1.5px);
+      background-size: 48px 48px;
+      opacity: 0.55;
+    }
+
+    /* logo stage — persists the full 5s; anchored upper-middle per the cutout role */
+    .oh1-logo-stage {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 15cqh;
+    }
+
+    .oh1-logo-slot {
+      position: relative;
+    }
+
+    .oh1-glow {
+      position: absolute;
+      inset: -10cqh -14cqw;
+      z-index: 1;
+      border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(0, 191, 179, 0.55), rgba(0, 191, 179, 0) 72%);
+      opacity: 0;
+      transform-origin: 50% 50%;
+      pointer-events: none;
+      will-change: opacity, transform;
+    }
+
+    /* light plate behind the mark — the logo's wordmark is dark navy/black and reads as
+       intended on the site's light nav bar; on this dark canvas it needs the same light
+       backing to stay legible, so the brand mark itself never gets recolored. */
+    .oh1-logo-plate {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2.4cqh 3.6cqw;
+      will-change: transform, opacity;
+    }
+
+    .oh1-logo-img {
+      display: block;
+      width: 48cqw;
+      height: auto;
+    }
+
+    /* tagline stage — hard-cuts in at 1.8s, per-line staggered reveal, holds static */
+    .oh1-tag-stage {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 37cqh;
+    }
+
+    .oh1-accent-line {
+      width: 60px;
+      height: 4px;
+      border-radius: 2px;
+      background: #00BFB3;
+      opacity: 0;
+      margin-bottom: 2.6cqh;
+    }
+
+    .oh1-tag-line {
+      margin: 0;
+      max-width: 92cqw;
+      text-align: center;
+      line-height: 1.18;
+      letter-spacing: -0.01em;
+      color: #ffffff;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .oh1-tag-line + .oh1-tag-line {
+      margin-top: 3.2cqh;
+    }
+
+    .oh1-tag-line-hero {
+      font-size: 9cqw;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #00BFB3;
+    }
+
+    .oh1-tag-line-mid {
+      font-size: 8.4cqw;
+      font-weight: 600;
+    }
+
+    .oh1-tag-line-sub {
+      font-size: 6.6cqw;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.82);
+      max-width: 86cqw;
+    }
+  </style>
+
+  <!-- full-duration ground -->
+  <div class="clip oh1-bg" id="oh1-bg" data-start="0" data-duration="5" data-track-index="0"></div>
+
+  <!-- Scene 1 (0.0-1.8s): dark field, logo spring-pops upper-center with a soft glow bloom, holds -->
+  <div class="clip oh1-logo-stage" id="oh1-logo-stage" data-start="0" data-duration="5" data-track-index="1">
+    <div class="oh1-logo-slot">
+      <div class="oh1-glow" id="oh1-glow" data-layout-allow-overflow></div>
+      <div class="oh1-logo-plate" id="oh1-logo">
+        <img class="oh1-logo-img" src="assets/logo.png" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene 2 (1.8-5.0s): hard cut — tagline enters below the logo, line-by-line stagger, holds -->
+  <div class="clip oh1-tag-stage" id="oh1-tag-stage" data-start="1.8" data-duration="3.2" data-track-index="2">
+    <div class="oh1-accent-line" id="oh1-accent-line"></div>
+    <p class="oh1-tag-line oh1-tag-line-hero" id="oh1-line-1" dir="ltr">AI Native.</p>
+    <p class="oh1-tag-line oh1-tag-line-mid" id="oh1-line-2" dir="rtl">מהיסוד.</p>
+    <p class="oh1-tag-line oh1-tag-line-sub" id="oh1-line-3" dir="rtl">לעסקים קטנים ובינוניים.</p>
+  </div>
+
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true });
+
+      var glow = document.getElementById('oh1-glow');
+
+      // Logo: smooth long-tail spring-pop settle, no bounce — hero fully landed by t=0.42s (<=0.5s floor).
+      tl.fromTo(
+        '#oh1-logo',
+        { scale: 0, opacity: 0, y: 12 },
+        { scale: 1, opacity: 1, y: 0, duration: 0.42, ease: 'power3.out' },
+        0
+      );
+
+      // Ambient glow bloom — lands with the logo's settle as one beat.
+      tl.fromTo(
+        '#oh1-glow',
+        { opacity: 0, scale: 0.85 },
+        { opacity: 0.3, scale: 1, duration: 0.42, ease: 'power2.out' },
+        0
+      );
+
+      // Bounded idle breathe during the Scene-1 hold — finite phase tween, not a yoyo loop.
+      var phase = { p: 0 };
+      tl.to(
+        phase,
+        {
+          p: Math.PI * 2 * 0.4,
+          duration: 1.38,
+          ease: 'none',
+          onUpdate: function () {
+            var s = Math.sin(phase.p);
+            glow.style.opacity = String(0.3 + s * 0.03);
+            glow.style.transform = 'scale(' + (1 + s * 0.02) + ')';
+          },
+        },
+        0.42
+      );
+
+      // Hard cut into Scene 2 at 1.8s — instant, no transition entry (seam is a tl.set, not a tween).
+      tl.set('#oh1-accent-line', { opacity: 1 }, 1.8);
+
+      // Tagline: per-line staggered reveal, spread across the Scene-2 window, then holds static.
+      tl.fromTo(
+        '#oh1-line-1',
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
+        1.9
+      );
+      tl.fromTo(
+        '#oh1-line-2',
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
+        2.7
+      );
+      tl.fromTo(
+        '#oh1-line-3',
+        { opacity: 0, y: 24 },
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' },
+        3.6
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['01-hero'] = tl;
+    })();
+  </script>
+</div>
+</template>
