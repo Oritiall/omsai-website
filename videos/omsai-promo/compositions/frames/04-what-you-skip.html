@@ -1,0 +1,208 @@
+<template>
+<div id="root" data-composition-id="04-what-you-skip">
+  <style>
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Hebrew-variable.woff2') format('woff2');
+      unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    }
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Latin-variable.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      direction: rtl;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    /* full-bleed ground — flat dark field, no atmosphere (content frame, not cover/closing) */
+    .wys-bg {
+      position: absolute;
+      inset: 0;
+      background: #0B2447;
+    }
+
+    .wys-stage {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      padding: 0 8cqw;
+    }
+
+    /* each pain-point beat occupies the same stage cell — clip-gating shows one at a time */
+    .wys-beat {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.4cqh;
+    }
+
+    .wys-words {
+      margin: 0;
+      max-width: 90cqw;
+      display: flex;
+      flex-wrap: wrap;
+      direction: rtl;
+      justify-content: center;
+      align-items: baseline;
+      column-gap: 1.4cqw;
+      row-gap: 0.4cqh;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      line-height: 1.18;
+      text-align: center;
+    }
+
+    .wys-word {
+      display: inline-block;
+    }
+
+    .wys-beat-1 .wys-words,
+    .wys-beat-2 .wys-words {
+      font-size: 8cqw;
+      font-weight: 700;
+    }
+
+    .wys-beat-3 .wys-words {
+      font-size: 9.5cqw;
+      font-weight: 800;
+    }
+
+    .wys-underline {
+      width: 90px;
+      height: 4px;
+      border-radius: 2px;
+      background: #00BFB3;
+    }
+  </style>
+
+  <!-- full-duration ground -->
+  <div class="clip wys-bg" data-start="0" data-duration="5" data-track-index="0"></div>
+
+  <div class="wys-stage">
+    <!-- Scene 1 (0.0–1.5s): "ללמוד כלים חדשים." lands, holds briefly, clears left -->
+    <div class="clip wys-beat wys-beat-1" id="wys-beat1" data-start="0" data-duration="1.5" data-track-index="1">
+      <p class="wys-words" id="wys-words1">
+        <span class="wys-word">ללמוד</span>
+        <span class="wys-word">כלים</span>
+        <span class="wys-word">חדשים.</span>
+      </p>
+      <div class="wys-underline" id="wys-underline1"></div>
+    </div>
+
+    <!-- Scene 2 (1.5–3.0s): hard cut — replaced by "לשכור מומחים יקרים." same treatment -->
+    <div class="clip wys-beat wys-beat-2" id="wys-beat2" data-start="1.5" data-duration="1.5" data-track-index="1">
+      <p class="wys-words" id="wys-words2">
+        <span class="wys-word">לשכור</span>
+        <span class="wys-word">מומחים</span>
+        <span class="wys-word">יקרים.</span>
+      </p>
+      <div class="wys-underline" id="wys-underline2"></div>
+    </div>
+
+    <!-- Scene 3 (3.0–5.0s): hard cut to the climax pain point — holds to the end, settle only -->
+    <div class="clip wys-beat wys-beat-3" id="wys-beat3" data-start="3.0" data-duration="2.0" data-track-index="1">
+      <p class="wys-words" id="wys-words3">
+        <span class="wys-word">לנהל</span>
+        <span class="wys-word">את</span>
+        <span class="wys-word">זה</span>
+        <span class="wys-word">לבד.</span>
+      </p>
+      <div class="wys-underline" id="wys-underline3"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true });
+
+      // Shared beat mechanics: per-word chunk-reveal → teal accent-underline burst (draw-on
+      // overshoot + a quick snap pulse) → either a fast fade+leftward-slide clear (non-final
+      // beats) or a quiet settle that holds to the frame's end (the final beat — Frame 5's
+      // crossfade dissolves it into the brand answer, so no exit is authored here).
+      function buildBeat(idx, t0, wordCount, isFinal) {
+        var wordsSel = '#wys-words' + idx + ' .wys-word';
+        var underlineSel = '#wys-underline' + idx;
+        var beatSel = '#wys-beat' + idx;
+
+        var wordStagger = 0.06;
+        var wordDur = 0.32;
+
+        tl.fromTo(
+          wordsSel,
+          { y: 26, opacity: 0 },
+          { y: 0, opacity: 1, duration: wordDur, ease: 'power2.out', stagger: wordStagger },
+          t0
+        );
+
+        var wordsEnd = t0 + (wordCount - 1) * wordStagger + wordDur;
+        var underlineStart = wordsEnd + 0.04;
+        var drawDur = 0.26;
+
+        tl.fromTo(
+          underlineSel,
+          { scaleX: 0 },
+          { scaleX: 1, duration: drawDur, ease: 'back.out(2.4)' },
+          underlineStart
+        );
+
+        var pulse1Start = underlineStart + drawDur;
+        var pulse1Dur = 0.10;
+        var pulse2Dur = 0.14;
+
+        tl.fromTo(
+          underlineSel,
+          { scaleY: 1 },
+          { scaleY: 2.2, duration: pulse1Dur, ease: 'power1.out' },
+          pulse1Start
+        );
+        tl.to(underlineSel, { scaleY: 1, duration: pulse2Dur, ease: 'power2.out' }, pulse1Start + pulse1Dur);
+
+        var pulse2End = pulse1Start + pulse1Dur + pulse2Dur;
+
+        if (!isFinal) {
+          var exitStart = pulse2End + 0.12;
+          tl.to(
+            [wordsSel, underlineSel],
+            { x: -42, opacity: 0, duration: 0.28, ease: 'power2.in' },
+            exitStart
+          );
+        } else {
+          var settleStart = pulse2End + 0.26;
+          tl.to(
+            beatSel,
+            { scale: 1.015, duration: 0.3, ease: 'sine.inOut', yoyo: true, repeat: 1 },
+            settleStart
+          );
+        }
+      }
+
+      buildBeat(1, 0.0, 3, false);
+      buildBeat(2, 1.5, 3, false);
+      buildBeat(3, 3.0, 4, true);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['04-what-you-skip'] = tl;
+    })();
+  </script>
+</div>
+</template>

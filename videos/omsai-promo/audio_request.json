@@ -1,11 +1,31 @@
 {
-  "provider": "auto",
-  "speed": 1,
-  "lines": [],
+  "lines": [
+    {
+      "id": "02",
+      "sfx": [
+        "soft airy swell (on the accent-line draw)"
+      ]
+    },
+    {
+      "id": "05",
+      "sfx": [
+        "soft chime (on the logo bloom)"
+      ]
+    },
+    {
+      "id": "06",
+      "sfx": [
+        "soft rising tick (synced to the count-up)"
+      ]
+    },
+    {
+      "id": "07",
+      "sfx": [
+        "soft chime (on the logo bloom)"
+      ]
+    }
+  ],
   "bgm": {
-    "mode": "retrieve",
-    "query": "calm confident minimal tech underscore, quiet subtle pulse, no aggressive drops, restrained corporate synth pad",
-    "blob": "אתה לא צריך להבין AI. אתה רק צריך שהוא יעבוד בשבילך.",
-    "arc": "Reframe (myth → relief) → Pain relief → Solution → Proof → CTA (compound custom arc)"
+    "mode": "none"
   }
 }

@@ -1,0 +1,140 @@
+<template>
+<div id="root" data-composition-id="03-work-for-you">
+  <style>
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Hebrew-variable.woff2') format('woff2');
+      unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+    }
+    @font-face {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300 900;
+      font-display: swap;
+      src: url('assets/fonts/Rubik-Latin-variable.woff2') format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      container-type: size;
+      direction: rtl;
+      font-family: 'Rubik', sans-serif;
+    }
+
+    /* full-bleed ground — a dedicated clip layer, never painted on #root itself.
+       Same dark-navy + teal-glow + dot-grid treatment as the preceding frames so the
+       crossfade in from Frame 2 reads as one unbroken field. */
+    .wfy-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(0, 191, 179, 0.12), rgba(0, 191, 179, 0) 62%),
+        #0B2447;
+    }
+    .wfy-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1.5px, transparent 1.5px);
+      background-size: 54px 54px;
+      opacity: 0.6;
+    }
+
+    /* content stage — respects the caption keep-out (bottom ~17%, y >= 1594 on 1920) even
+       though captions are disabled on this frame, for bottom-edge consistency. */
+    .wfy-stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 326px; /* 1920 * 0.17 keep-out */
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 6cqw;
+    }
+
+    .wfy-sentence {
+      margin: 0;
+      max-width: 92cqw;
+      text-align: center;
+      direction: rtl;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      line-height: 1.22;
+      font-weight: 700;
+      font-size: 9.5cqw;
+    }
+
+    .wfy-word {
+      display: inline-block;
+      opacity: 0;
+      will-change: opacity, filter, transform;
+    }
+  </style>
+
+  <!-- full-duration ground -->
+  <div class="clip wfy-bg" data-start="0" data-duration="4" data-track-index="0"></div>
+
+  <div class="wfy-stage">
+    <!-- one continuous sentence, resuming Frame 2's resolved line at the same centered
+         position + type scale. Scene 1 words (0.0-1.4s) build first, Scene 2 words
+         (1.4-2.8s) append to complete the thought, Scene 3 (2.8-4.0s) is a settle-only hold. -->
+    <p class="clip wfy-sentence" id="wfy-sentence" data-start="0" data-duration="4" data-track-index="1">
+      <span class="wfy-word wfy-p1" id="wfy-w1">אתה</span>
+      <span class="wfy-word wfy-p1" id="wfy-w2">רק</span>
+      <span class="wfy-word wfy-p1" id="wfy-w3">צריך</span>
+      <span class="wfy-word wfy-p2" id="wfy-w4">שזה</span>
+      <span class="wfy-word wfy-p2" id="wfy-w5">יעבוד</span>
+      <span class="wfy-word wfy-p2" id="wfy-w6">בשבילך.</span>
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      var tl = gsap.timeline({ paused: true });
+
+      var WORD_DUR = 0.55;
+      var STAGGER = 0.35;
+
+      // Scene 1 (0.0-1.4s): "אתה רק צריך" — per-word staggered fade/blur build,
+      // continuing Frame 2's resolved line at the same centered position/scale.
+      tl.fromTo(
+        '.wfy-p1',
+        { opacity: 0, y: 26, filter: 'blur(10px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: WORD_DUR, stagger: STAGGER, ease: 'power2.out' },
+        0
+      );
+
+      // Scene 2 (1.4-2.8s): "שזה יעבוד בשבילך." appends, completing the sentence —
+      // same per-word mechanic, spread evenly across the window (no VO to time to).
+      tl.fromTo(
+        '.wfy-p2',
+        { opacity: 0, y: 26, filter: 'blur(10px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: WORD_DUR, stagger: STAGGER, ease: 'power2.out' },
+        1.4
+      );
+
+      // Scene 3 (2.8-4.0s): the full sentence holds centered — settle only, subtle
+      // jitter at most. Frame 4's zoom-through transition owns the exit, not this timeline.
+      tl.fromTo(
+        '#wfy-sentence',
+        { scale: 1.015 },
+        { scale: 1, duration: 0.5, ease: 'power2.out' },
+        2.65
+      );
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines['03-work-for-you'] = tl;
+    })();
+  </script>
+</div>
+</template>
