@@ -1,5 +1,5 @@
 <template>
-<div id="root" data-composition-id="03-work-for-you">
+<div id="root" data-composition-id="03-work-for-you" data-width="1080" data-height="1920" data-duration="4.4">
   <style>
     @font-face {
       font-family: 'Rubik';
@@ -82,13 +82,13 @@
   </style>
 
   <!-- full-duration ground -->
-  <div class="clip wfy-bg" data-start="0" data-duration="4" data-track-index="0"></div>
+  <div class="clip wfy-bg" id="wfy-bg" data-start="0" data-duration="4.4" data-track-index="0"></div>
 
   <div class="wfy-stage">
     <!-- one continuous sentence, resuming Frame 2's resolved line at the same centered
          position + type scale. Scene 1 words (0.0-1.4s) build first, Scene 2 words
          (1.4-2.8s) append to complete the thought, Scene 3 (2.8-4.0s) is a settle-only hold. -->
-    <p class="clip wfy-sentence" id="wfy-sentence" data-start="0" data-duration="4" data-track-index="1">
+    <p class="clip wfy-sentence" id="wfy-sentence" data-start="0" data-duration="4.4" data-track-index="1">
       <span class="wfy-word wfy-p1" id="wfy-w1">אתה</span>
       <span class="wfy-word wfy-p1" id="wfy-w2">רק</span>
       <span class="wfy-word wfy-p1" id="wfy-w3">צריך</span>

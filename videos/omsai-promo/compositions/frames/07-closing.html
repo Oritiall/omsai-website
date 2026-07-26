@@ -1,5 +1,5 @@
 <template>
-<div id="root" data-composition-id="07-closing">
+<div id="root" data-composition-id="07-closing" data-width="1080" data-height="1920" data-duration="5">
   <style>
     @font-face {
       font-family: 'Rubik';
@@ -168,10 +168,10 @@
   </style>
 
   <!-- full-duration ground -->
-  <div class="clip f07-bg" data-start="0" data-duration="5" data-track-index="0"></div>
+  <div class="clip f07-bg" id="f07-bg" data-start="0" data-duration="5" data-track-index="0"></div>
 
   <!-- Scene 1 (0.0-1.2s) arrives + holds, Scene 2 (1.2-2.2s) clears to blank -->
-  <div class="clip f07-line-clip" data-start="0" data-duration="2.2" data-track-index="1">
+  <div class="clip f07-line-clip" id="f07-line-clip" data-start="0" data-duration="2.2" data-track-index="1">
     <div class="f07-line-pos">
       <div class="f07-line-scale" id="f07-line-scale">
         <p class="f07-line" dir="rtl">
@@ -186,7 +186,7 @@
   </div>
 
   <!-- Scene 3 (2.2-3.4s): mark blooms from zero, then slides left as "omsai.ai" reveals right -->
-  <div class="clip f07-lockup-clip" data-start="2.2" data-duration="2.8" data-track-index="2">
+  <div class="clip f07-lockup-clip" id="f07-lockup-clip" data-start="2.2" data-duration="2.8" data-track-index="2">
     <div class="f07-lockup">
       <div class="f07-lockup-row">
         <img class="f07-mark" id="f07-mark" src="assets/logo.png" alt="OMS AI" />
@@ -198,7 +198,7 @@
   </div>
 
   <!-- Scene 4 (3.4-5.0s): closing line settles below the lockup, then the frame HOLDS static -->
-  <div class="clip f07-tagline-clip" data-start="3.4" data-duration="1.6" data-track-index="3">
+  <div class="clip f07-tagline-clip" id="f07-tagline-clip" data-start="3.4" data-duration="1.6" data-track-index="3">
     <div class="f07-tagline-pos">
       <p class="f07-tagline" id="f07-tagline" dir="rtl">פשוט תן לו לעבוד בשבילך.</p>
     </div>

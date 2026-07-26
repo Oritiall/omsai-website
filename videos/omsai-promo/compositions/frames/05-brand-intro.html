@@ -1,5 +1,5 @@
 <template>
-<div id="root" data-composition-id="05-brand-intro">
+<div id="root" data-composition-id="05-brand-intro" data-width="1080" data-height="1920" data-duration="5.5">
   <style>
     @font-face {
       font-family: 'Rubik';
@@ -125,18 +125,18 @@
   </style>
 
   <!-- full-duration ground -->
-  <div class="clip bi-bg" data-start="0" data-duration="5" data-track-index="0"></div>
+  <div class="clip bi-bg" id="bi-bg" data-start="0" data-duration="5.5" data-track-index="0"></div>
 
   <!-- Scene 1 (0.0-1.8s): dark field, logo spring-pops center with a soft glow bloom, holds -->
-  <div class="clip bi-logo-stage" id="bi-logo-stage" data-start="0" data-duration="5" data-track-index="1">
+  <div class="clip bi-logo-stage" id="bi-logo-stage" data-start="0" data-duration="5.5" data-track-index="1">
     <div class="bi-logo-slot">
-      <div class="bi-glow" id="bi-glow"></div>
+      <div class="bi-glow" id="bi-glow" data-layout-allow-overflow></div>
       <img class="bi-logo-img" id="bi-logo" src="assets/logo.png" alt="" />
     </div>
   </div>
 
   <!-- Scene 2 (1.8-5.0s): hard cut — tagline card enters below the logo, per-word stagger, holds -->
-  <div class="clip bi-tag-stage" id="bi-tag-stage" data-start="1.8" data-duration="3.2" data-track-index="2">
+  <div class="clip bi-tag-stage" id="bi-tag-stage" data-start="1.8" data-duration="3.7" data-track-index="2">
     <div class="bi-accent-line" id="bi-accent-line"></div>
     <p class="bi-tag-word bi-tag-word-hero" id="bi-word-1" dir="ltr">AI Native.</p>
     <p class="bi-tag-word" id="bi-word-2" dir="rtl">מהיסוד.</p>

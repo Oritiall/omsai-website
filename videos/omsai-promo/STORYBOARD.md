@@ -21,7 +21,7 @@ music: "calm confident minimal tech underscore, quiet subtle pulse, no aggressiv
 - scene: מילים עולות אחת-אחת במרכז המסך על רקע נייבי כהה, בונות מתח בהיפ סביב AI - "ללמוד AI." → "להבין אותו." → "להתמחות בו."
 - duration: 5s
 - transition_in: cut
-- status: outline
+- status: animated
 - src: compositions/frames/01-hype-list.html
 - type: hook
 - persuasion: Negative contrast (מכניסים את ההיפ שהקהל כבר שומע כל יום, כדי לפרק אותו בפריים הבא)
@@ -46,7 +46,7 @@ keyMessage: כולם מדברים על הצורך "להבין" AI.
 - scene: הרשימה מתפוגגת, ובמקומה נכנס משפט אחד גדול בלבן: "אתה לא צריך את זה." קו מבטא טורקיז מתחתיו.
 - duration: 4s
 - transition_in: zoom-through
-- status: outline
+- status: animated
 - src: compositions/frames/02-you-dont-need-it.html
 - type: hook
 - persuasion: Reframe / Risk reversal
@@ -71,7 +71,7 @@ keyMessage: אתה לא צריך להבין AI.
 - scene: אותה שפה חזותית ממשיכה - משפט שני גדול משלים את המחשבה: "אתה רק צריך שזה יעבוד בשבילך."
 - duration: 4s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/03-work-for-you.html
 - type: hook
 - persuasion: Value reframing (נעילת התזה של הסרטון)
@@ -94,7 +94,7 @@ keyMessage: אתה רק צריך שה-AI יעבוד בשבילך.
 - scene: שלוש שורות נכנסות אחת-אחת ואז מתפזרות/נמחקות שמאלה - "ללמוד כלים חדשים." "לשכור מומחים יקרים." "לנהל את זה לבד."
 - duration: 5s
 - transition_in: zoom-through
-- status: outline
+- status: animated
 - src: compositions/frames/04-what-you-skip.html
 - type: pain_point
 - persuasion: Friction reduction
@@ -119,7 +119,7 @@ keyMessage: כל הנטל התפעולי של אימוץ AI - לא עליך.
 - scene: לוגו ה-OMS AI מתאסף במרכז על הרקע הכהה, ומתחתיו נכנס הכיתוב "AI Native. מהיסוד. בשבילך."
 - duration: 5s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/05-brand-intro.html
 - type: product_intro
 - persuasion: Authority by association (נולדו AI Native, לא הוסיפו את זה בדיעבד)
@@ -143,7 +143,7 @@ keyMessage: OMS AI בנתה את עצמה מהיסוד סביב AI, בשביל �
 - scene: המספר "70%+" גדל ונמנה בטורקיז במרכז המסך, ומתחתיו כיתוב "פחות בעלויות פיתוח ותפעול."
 - duration: 4s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/06-cost-stat.html
 - type: benefit_highlight
 - persuasion: Statistical proof
@@ -166,7 +166,7 @@ keyMessage: חיסכון של 70%+ בעלויות פיתוח, תפעול ושי�
 - scene: המסר חוזר בקצרה - "אתה לא צריך להבין AI." ואז "פשוט תן לו לעבוד בשבילך." הלוגו נשאר מוצג עם הכתובת omsai.ai.
 - duration: 5s
 - transition_in: crossfade
-- status: outline
+- status: animated
 - src: compositions/frames/07-closing.html
 - type: cta
 - persuasion: Value stacking / callback לפתיחה
