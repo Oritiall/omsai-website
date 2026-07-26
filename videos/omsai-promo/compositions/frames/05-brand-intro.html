@@ -72,13 +72,25 @@
       will-change: opacity, transform;
     }
 
-    .bi-logo-img {
+    /* light plate behind the mark — the logo's wordmark is dark navy/black and reads as
+       intended on the site's light nav bar; on this dark canvas it needs the same light
+       backing to stay legible, so the brand mark itself never gets recolored. */
+    .bi-logo-plate {
       position: relative;
       z-index: 2;
-      display: block;
-      width: 56cqw;
-      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 2.4cqh 3.6cqw;
       will-change: transform, opacity;
+    }
+
+    .bi-logo-img {
+      display: block;
+      width: 50cqw;
+      height: auto;
     }
 
     /* tagline stage — hard-cuts in at 1.8s, per-word staggered reveal, holds static */
@@ -131,7 +143,9 @@
   <div class="clip bi-logo-stage" id="bi-logo-stage" data-start="0" data-duration="5.5" data-track-index="1">
     <div class="bi-logo-slot">
       <div class="bi-glow" id="bi-glow" data-layout-allow-overflow></div>
-      <img class="bi-logo-img" id="bi-logo" src="assets/logo.png" alt="" />
+      <div class="bi-logo-plate" id="bi-logo">
+        <img class="bi-logo-img" src="assets/logo.png" alt="" />
+      </div>
     </div>
   </div>
 

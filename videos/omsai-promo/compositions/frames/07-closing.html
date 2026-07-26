@@ -113,12 +113,24 @@
       align-items: center;
       gap: 2.4cqw;
     }
-    .f07-mark {
-      display: block;
-      width: 42cqw;
-      height: auto;
+    /* light plate behind the mark — the wordmark is dark navy/black and reads as intended
+       on the site's light nav bar; on this dark canvas it needs the same light backing to
+       stay legible, so the brand mark itself never gets recolored. */
+    .f07-mark-plate {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 1.7cqh 2.3cqw;
       transform-origin: 50% 50%;
       will-change: transform, opacity;
+    }
+
+    .f07-mark-img {
+      display: block;
+      width: 36cqw;
+      height: auto;
     }
     .f07-word-box {
       display: flex;
@@ -194,7 +206,9 @@
   <div class="clip f07-lockup-clip" id="f07-lockup-clip" data-start="2.2" data-duration="2.8" data-track-index="2">
     <div class="f07-lockup">
       <div class="f07-lockup-row">
-        <img class="f07-mark" id="f07-mark" src="assets/logo.png" alt="OMS AI" />
+        <div class="f07-mark-plate" id="f07-mark">
+          <img class="f07-mark-img" src="assets/logo.png" alt="OMS AI" />
+        </div>
         <div class="f07-word-box" id="f07-word-box">
           <span class="f07-domain">omsai.ai</span>
         </div>
