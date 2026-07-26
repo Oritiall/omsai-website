@@ -35,6 +35,13 @@
         "omsai-promo"
       ],
       "updated_at": "2026-07-25T23:43:07.002Z"
+    },
+    "style_preset.product-launch-video": {
+      "value": "blue-professional",
+      "confirmed_in": [
+        "omsai-promo"
+      ],
+      "updated_at": "2026-07-26T00:53:46.310Z"
     }
   },
   "sightings": {}
