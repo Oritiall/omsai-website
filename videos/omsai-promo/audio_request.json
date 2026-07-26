@@ -1,0 +1,11 @@
+{
+  "provider": "auto",
+  "speed": 1,
+  "lines": [],
+  "bgm": {
+    "mode": "retrieve",
+    "query": "calm confident minimal tech underscore, quiet subtle pulse, no aggressive drops, restrained corporate synth pad",
+    "blob": "אתה לא צריך להבין AI. אתה רק צריך שהוא יעבוד בשבילך.",
+    "arc": "Reframe (myth → relief) → Pain relief → Solution → Proof → CTA (compound custom arc)"
+  }
+}
