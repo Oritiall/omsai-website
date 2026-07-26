@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "preferences": {
+    "destination": {
+      "value": "reels",
+      "confirmed_in": [
+        "omsai-site-tour"
+      ],
+      "updated_at": "2026-07-26T10:31:12.553Z"
+    },
+    "aspect": {
+      "value": "1080x1920",
+      "confirmed_in": [
+        "omsai-site-tour"
+      ],
+      "updated_at": "2026-07-26T10:31:12.600Z"
+    },
+    "language": {
+      "value": "he",
+      "confirmed_in": [
+        "omsai-site-tour"
+      ],
+      "updated_at": "2026-07-26T10:31:12.647Z"
+    },
+    "flow": {
+      "value": "automation",
+      "confirmed_in": [
+        "omsai-site-tour"
+      ],
+      "updated_at": "2026-07-26T10:31:12.694Z"
+    },
+    "storyboard": {
+      "value": "yes",
+      "confirmed_in": [
+        "omsai-site-tour"
+      ],
+      "updated_at": "2026-07-26T10:31:12.749Z"
+    },
+    "style_preset.product-launch-video": {
+      "value": "blue-professional",
+      "confirmed_in": [
+        "omsai-site-tour"
+      ],
+      "updated_at": "2026-07-26T10:32:53.370Z"
+    }
+  },
+  "sightings": {}
+}
