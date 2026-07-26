@@ -1,5 +1,5 @@
 <template>
-<div id="root" data-composition-id="03-comparison" data-width="1080" data-height="1920" data-duration="7">
+<div id="root" data-composition-id="03-comparison" data-width="1080" data-height="1920" data-duration="7.5">
   <style>
     @font-face {
       font-family: 'Rubik';
@@ -122,8 +122,8 @@
       transform: translate(-50%, -50%);
       pointer-events: none;
     }
-    .oc3-badge-anchor-top { top: 27cqh; }
-    .oc3-badge-anchor-bottom { top: 30cqh; }
+    .oc3-badge-anchor-top { top: 25cqh; }
+    .oc3-badge-anchor-bottom { top: 32cqh; }
 
     .oc3-badge {
       display: inline-flex;
@@ -176,15 +176,15 @@
   </style>
 
   <!-- full-duration ground -->
-  <div class="clip oc3-bg" id="oc3-bg" data-start="0" data-duration="7" data-track-index="0"></div>
+  <div class="clip oc3-bg" id="oc3-bg" data-start="0" data-duration="7.5" data-track-index="0"></div>
 
   <!-- Scene 1 (0.0-0.8s): title slides down into place, holds -->
-  <div class="clip oc3-title-stage" id="oc3-title-stage" data-start="0" data-duration="7" data-track-index="1">
+  <div class="clip oc3-title-stage" id="oc3-title-stage" data-start="0" data-duration="7.5" data-track-index="1">
     <p class="oc3-title" id="oc3-title">אותה עבודה?</p>
   </div>
 
   <!-- Scene 2 (0.4-1.9s signature move) + Scene 3 (1.9-2.6s badges): mirrored split-tilt pair -->
-  <div class="clip oc3-stage-wrap" id="oc3-stage-wrap" data-start="0" data-duration="7" data-track-index="2">
+  <div class="clip oc3-stage-wrap" id="oc3-stage-wrap" data-start="0" data-duration="7.5" data-track-index="2">
     <div class="oc3-split-stage" id="oc3-split-stage">
       <div class="oc3-card oc3-card-top" id="oc3-card-top">
         <img src="assets/traditional-team.png" alt="" />
@@ -202,7 +202,7 @@
   </div>
 
   <!-- Scene 4 (2.6-7.0s): closing stat, holds to the end (transition out is the exit) -->
-  <div class="clip oc3-stat-stage" id="oc3-stat-stage" data-start="2.6" data-duration="4.4" data-track-index="3">
+  <div class="clip oc3-stat-stage" id="oc3-stat-stage" data-start="2.6" data-duration="4.9" data-track-index="3">
     <p class="oc3-stat-hero" id="oc3-stat-hero" dir="ltr">70%+</p>
     <p class="oc3-stat-sub" id="oc3-stat-sub">פחות בעלויות פיתוח ותפעול</p>
   </div>

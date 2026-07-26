@@ -1,5 +1,5 @@
 <template>
-<div id="root" data-composition-id="02-ai-native" data-width="1080" data-height="1920" data-duration="6">
+<div id="root" data-composition-id="02-ai-native" data-width="1080" data-height="1920" data-duration="6.4">
   <style>
     @font-face {
       font-family: 'Rubik';
@@ -180,10 +180,10 @@
   </style>
 
   <!-- full-duration ground -->
-  <div class="clip oa2-bg" data-start="0" data-duration="6" data-track-index="0"></div>
+  <div class="clip oa2-bg" id="oa2-bg" data-start="0" data-duration="6.4" data-track-index="0"></div>
 
   <!-- Scene 1 (0.0-1.6s): title per-word reveal, then a thin teal accent line; holds for the whole frame -->
-  <div class="clip oa2-title-stage" data-start="0" data-duration="6" data-track-index="1">
+  <div class="clip oa2-title-stage" id="oa2-title-stage" data-start="0" data-duration="6.4" data-track-index="1">
     <p class="oa2-title-line oa2-title-line-1" dir="rtl">
       <span class="oa2-word" id="oa2-w1">מה</span><span class="oa2-word" id="oa2-w2">זה</span>
     </p>
@@ -194,7 +194,7 @@
   </div>
 
   <!-- Scenes 2-4 (1.6-6.0s): three value pillars land one by one and accumulate, never replacing -->
-  <div class="clip oa2-list-stage" data-start="1.6" data-duration="4.4" data-track-index="2">
+  <div class="clip oa2-list-stage" id="oa2-list-stage" data-start="1.6" data-duration="4.8" data-track-index="2">
     <div class="oa2-card" id="oa2-card-1">
       <div class="oa2-marker" id="oa2-marker-1">
         <svg class="oa2-check" viewBox="0 0 24 24"><path id="oa2-check-path-1" d="M5 13l4 4L19 7" /></svg>
