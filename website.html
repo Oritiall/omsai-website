@@ -1265,24 +1265,41 @@ footer {
     <p class="sec-label reveal" data-i18n="contact-label">צור קשר</p>
     <h2 class="sec-title reveal" data-i18n="contact-title">נשמח לשמוע ממך</h2>
     <p class="sec-sub reveal" data-i18n="contact-sub">השאירו פרטים ונחזור אליכם בהקדם - ישירות לוואטסאפ.</p>
+    <p class="sec-sub reveal" style="margin-top:-30px;font-size:14px;" data-i18n-html="contact-bizinfo">📍 הדודאים 5, חדרה &nbsp;·&nbsp; 📞 <a href="tel:+972554606718" style="color:inherit;text-decoration:underline;">055-4606718</a></p>
     <div class="contact-wrap reveal reveal-delay-1">
       <form class="contact-form" onsubmit="sendToWhatsApp(event)">
         <div class="form-group">
-          <label data-i18n="contact-name-label">שם מלא</label>
-          <input type="text" id="cName" placeholder="השם שלך" required data-i18n-placeholder="contact-name-ph">
+          <label data-i18n="contact-fname-label">שם פרטי</label>
+          <input type="text" id="cFirstName" placeholder="השם הפרטי שלך" required data-i18n-placeholder="contact-fname-ph">
+        </div>
+        <div class="form-group">
+          <label data-i18n="contact-lname-label">שם משפחה</label>
+          <input type="text" id="cLastName" placeholder="שם המשפחה שלך" required data-i18n-placeholder="contact-lname-ph">
         </div>
         <div class="form-group">
           <label data-i18n="contact-phone-label">טלפון</label>
           <input type="tel" id="cPhone" placeholder="050-0000000" required data-i18n-placeholder="contact-phone-ph">
         </div>
         <div class="form-group">
-          <label data-i18n="contact-email-label">אימייל (אופציונלי)</label>
-          <input type="email" id="cEmail" placeholder="your@email.com">
+          <label data-i18n="contact-email-label">אימייל</label>
+          <input type="email" id="cEmail" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label data-i18n="contact-country-label">מדינה</label>
+          <select id="cCountry" required>
+            <option value="" disabled selected data-i18n="contact-country-ph">בחר/י מדינה</option>
+            <option value="IL" data-i18n="contact-country-il">ישראל</option>
+            <option value="OTHER" data-i18n="contact-country-other">אחר</option>
+          </select>
         </div>
         <div class="form-group">
           <label data-i18n="contact-msg-label">הודעה</label>
           <textarea id="cMsg" placeholder="ספרי לנו במה תרצי לקבל עזרה..." data-i18n-placeholder="contact-msg-ph"></textarea>
         </div>
+        <label style="display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;">
+          <input type="checkbox" id="cTerms" required style="margin-top:3px;flex-shrink:0;width:16px;height:16px;">
+          <span data-i18n-html="contact-terms-label">קראתי ואני מסכים/ה ל<a href="#" onclick="openPolicy('terms');return false;" style="color:#00BFB3;text-decoration:underline;">תנאי השימוש, מדיניות הביטולים, האספקה והאחריות</a> של OMS AI.</span>
+        </label>
         <button type="submit" class="contact-submit">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0A1628" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           <span data-i18n="contact-btn">שלח בוואטסאפ</span>
@@ -1309,11 +1326,14 @@ footer {
     <a href="#contact" data-i18n="footer-contact">צור קשר</a>
   </div>
   <div class="footer-links" style="margin-bottom:16px;">
+    <a href="#" onclick="openPolicy('terms');return false;" data-i18n="footer-terms">תנאי שימוש ומדיניות ביטולים</a>
+    <span style="color:rgba(255,255,255,0.15)">·</span>
     <a href="#" onclick="openPolicy('privacy');return false;" data-i18n="footer-privacy">מדיניות פרטיות</a>
     <span style="color:rgba(255,255,255,0.15)">·</span>
     <a href="#" onclick="openPolicy('accessibility');return false;" data-i18n="footer-accessibility">הצהרת נגישות</a>
   </div>
   <p class="footer-copy" data-i18n="footer-copy">© 2026 OMS AI · כל הזכויות שמורות · ישראל</p>
+  <p class="footer-copy" style="margin-top:8px;">הדודאים 5, חדרה · <a href="tel:+972554606718" style="color:inherit;">055-4606718</a> · <a href="mailto:info@omsai.ai" style="color:inherit;">info@omsai.ai</a></p>
 </footer>
 
 <!-- ══════════════ COOKIE BANNER ══════════════ -->
@@ -1531,13 +1551,21 @@ const T = {
     'contact-label':      'צור קשר',
     'contact-title':      'נשמח לשמוע ממך',
     'contact-sub':        'השאירו פרטים ונחזור אליכם בהקדם - ישירות לוואטסאפ.',
-    'contact-name-label': 'שם מלא',
-    'contact-name-ph':    'השם שלך',
+    'contact-bizinfo':    '📍 הדודאים 5, חדרה &nbsp;·&nbsp; 📞 <a href="tel:+972554606718" style="color:inherit;text-decoration:underline;">055-4606718</a>',
+    'contact-fname-label':'שם פרטי',
+    'contact-fname-ph':   'השם הפרטי שלך',
+    'contact-lname-label':'שם משפחה',
+    'contact-lname-ph':   'שם המשפחה שלך',
     'contact-phone-label':'טלפון',
     'contact-phone-ph':   '050-0000000',
-    'contact-email-label':'אימייל (אופציונלי)',
+    'contact-email-label':'אימייל',
+    'contact-country-label':'מדינה',
+    'contact-country-ph':  'בחר/י מדינה',
+    'contact-country-il':  'ישראל',
+    'contact-country-other':'אחר',
     'contact-msg-label':  'הודעה',
     'contact-msg-ph':     'ספרי לנו במה תרצי לקבל עזרה...',
+    'contact-terms-label':'קראתי ואני מסכים/ה ל<a href="#" onclick="openPolicy(\'terms\');return false;" style="color:#00BFB3;text-decoration:underline;">תנאי השימוש, מדיניות הביטולים, האספקה והאחריות</a> של OMS AI.',
     'contact-btn':        'שלח בוואטסאפ',
     'contact-note':       'לחיצה תפתח את וואטסאפ עם הפרטים שלך מוכנים לשליחה',
     'footer-sub':      'בניית מוצרים - מערכות, אפליקציות ואתרים באמצעות יכולות הבינה המלאכותית. AI-NATIVE',
@@ -1549,6 +1577,7 @@ const T = {
     'footer-copy':     '© 2026 OMS AI · כל הזכויות שמורות · ישראל',
     'footer-privacy':      'מדיניות פרטיות',
     'footer-accessibility':'הצהרת נגישות',
+    'footer-terms':        'תנאי שימוש ומדיניות ביטולים',
   },
   en: {
     'page-title':      'OMS AI - The Future of Business Starts Here',
@@ -1732,13 +1761,21 @@ const T = {
     'contact-label':      'Contact',
     'contact-title':      "We'd Love to Hear From You",
     'contact-sub':        'Leave your details and we will get back to you - directly on WhatsApp.',
-    'contact-name-label': 'Full Name',
-    'contact-name-ph':    'Your name',
+    'contact-bizinfo':    '📍 5 HaDudaim St, Hadera &nbsp;·&nbsp; 📞 <a href="tel:+972554606718" style="color:inherit;text-decoration:underline;">055-4606718</a>',
+    'contact-fname-label':'First Name',
+    'contact-fname-ph':   'Your first name',
+    'contact-lname-label':'Last Name',
+    'contact-lname-ph':   'Your last name',
     'contact-phone-label':'Phone',
     'contact-phone-ph':   '050-0000000',
-    'contact-email-label':'Email (optional)',
+    'contact-email-label':'Email',
+    'contact-country-label':'Country',
+    'contact-country-ph':  'Select country',
+    'contact-country-il':  'Israel',
+    'contact-country-other':'Other',
     'contact-msg-label':  'Message',
     'contact-msg-ph':     'Tell us how we can help...',
+    'contact-terms-label':'I have read and agree to the <a href="#" onclick="openPolicy(\'terms\');return false;" style="color:#00BFB3;text-decoration:underline;">Terms of Service, Cancellation, Delivery and Warranty Policy</a> of OMS AI.',
     'contact-btn':        'Send via WhatsApp',
     'contact-note':       'Clicking will open WhatsApp with your details ready to send',
     'footer-sub':      'Building products - systems, apps and websites using AI capabilities. AI-NATIVE',
@@ -1750,6 +1787,7 @@ const T = {
     'footer-copy':     '© 2026 OMS AI · All Rights Reserved · Israel',
     'footer-privacy':      'Privacy Policy',
     'footer-accessibility':'Accessibility Statement',
+    'footer-terms':        'Terms of Service & Cancellation Policy',
   }
 };
 
@@ -1832,6 +1870,29 @@ function declineCookies() {
 // ── POLICY MODALS ──
 const policyContent = {
   he: {
+    terms: {
+      title: 'תנאי שימוש, מדיניות ביטולים, אספקה ואחריות',
+      body: `
+        <h3>כללי</h3>
+        <p>אתר OMS AI ("האתר") מופעל על ידי OMS AI ("החברה"). הגלישה באתר, השארת פרטים, הזמנת שירות או ביצוע תשלום מהווים הסכמה לתנאים המפורטים במסמך זה.</p>
+        <p>האתר מציג ומאפשר הזמנה של שירותי פיתוח, הקמת מערכות, אוטומציות, אתרים, אפליקציות ופתרונות מבוססי בינה מלאכותית. ביצוע תשלום, כאשר קיימת אפשרות סליקה מקוונת, מהווה אישור להזמנת השירות בהתאם להצעת המחיר, למסמך האפיון או לפרטי השירות שהוצגו ללקוח לפני ביצוע התשלום.</p>
+        <h3>גיל מינימלי</h3>
+        <p>השימוש באתר, רכישת שירותים והתקשרות עם OMS AI מיועדים לבני 18 ומעלה. מי שטרם מלאו לו 18 שנים רשאי להשתמש באתר או להזמין שירות רק באישור ובהסכמה של הורה או אפוטרופוס חוקי. ביצוע הזמנה או תשלום מהווה הצהרה כי המשתמש רשאי לבצע את ההתקשרות וכי הפרטים שמסר נכונים ומלאים.</p>
+        <h3>מדיניות ביטולים והחזרים</h3>
+        <p>בקשה לביטול עסקה ניתן להגיש בכתב לדוא"ל <strong>info@omsai.ai</strong> בצירוף שם מלא, טלפון, סכום העסקה, תאריך התשלום, פירוט השירות וארבע הספרות האחרונות של כרטיס האשראי (ככל שרלוונטי).</p>
+        <p>ביטול לפני תחילת העבודה ולפני הקצאת משאבים - עשוי לזכות בהחזר מלא או חלקי, בניכוי עמלות סליקה והוצאות טיפול. לאחר תחילת העבודה (אפיון, עיצוב, פיתוח, רכישת שירותים חיצוניים ועוד) - ההחזר, ככל שיאושר, יחושב לפי היקף העבודה וההוצאות שבוצעו בפועל. לא יינתן החזר עבור עבודה, שעות, רישיונות, דומיינים או שירותי צד ג׳ שכבר סופקו.</p>
+        <p>שירותים מותאמים אישית אינם ניתנים לביטול לאחר תחילת ביצועם אלא בהסכמה מפורשת ובכתב של OMS AI. החזר כספי, ככל שיאושר, יבוצע לאותו אמצעי תשלום שבו בוצעה העסקה. בשירותים בתשלום מתמשך (מנוי/תחזוקה) הביטול יחול מהחיוב הבא בלבד. פרטי כרטיס האשראי אינם נשמרים באתר - התשלום מתבצע דרך ספק סליקה חיצוני ומאובטח.</p>
+        <h3>מדיניות אספקה ולוחות זמנים</h3>
+        <p>מועד תחילת העבודה ייקבע לאחר השלמת התשלום, אישור הצעת המחיר וקבלת כל החומרים הדרושים. זמני אספקה משוערים: פרויקט MVP בסיסי - 5 עד 10 ימי עבודה; אתר תדמית בסיסי - 7 עד 14 ימי עבודה; אוטומציה/אינטגרציה בסיסית - 3 עד 10 ימי עבודה; מערכת מורכבת - בהתאם להצעת המחיר. זמני האספקה הם הערכה בלבד ועשויים להשתנות בהתאם למורכבות הפרויקט, זמינות הלקוח ועיכובים שאינם בשליטת OMS AI.</p>
+        <h3>אחריות ותיקון תקלות</h3>
+        <p>ניתנת תקופת אחריות של 30 ימים ממועד מסירת הפרויקט, לתיקון תקלות טכניות הנובעות ישירות מהעבודה שבוצעה. האחריות אינה כוללת שינויים, תוספות או שדרוגים, ואינה חלה על תקלות שנגרמו משימוש לא תקין, שינויים בפלטפורמות חיצוניות או גורמים שאינם בשליטת OMS AI. תמיכה לאחר תקופת האחריות תינתן בהסכם נפרד או בתשלום לפי שעה.</p>
+        <h3>הגבלת אחריות</h3>
+        <p>OMS AI לא תהיה אחראית לנזק עקיף, אובדן הכנסות או רווחים, או כל נזק תוצאתי. האחריות הכוללת של OMS AI לא תעלה על הסכום ששולם בפועל עבור השירות הספציפי שבגינו הוגשה הטענה.</p>
+        <h3>פרטי העסק ויצירת קשר</h3>
+        <p>OMS AI &bull; כתובת: הדודאים 5, חדרה &bull; טלפון: <strong>055-4606718</strong> &bull; דוא"ל: <strong>info@omsai.ai</strong></p>
+        <p class="policy-date">עדכון אחרון: אוגוסט 2026</p>
+      `
+    },
     privacy: {
       title: 'מדיניות פרטיות',
       body: `
@@ -1884,7 +1945,7 @@ const policyContent = {
         <p>נתקלת בבעיית נגישות? נשמח לשמוע ולסייע:</p>
         <ul>
           <li>דוא"ל: <strong>accessibility@omsai.ai</strong></li>
-          <li>טלפון: <strong>054-455-5461</strong></li>
+          <li>טלפון: <strong>055-4606718</strong></li>
         </ul>
         <p>אנו מתחייבים להשיב לפניות נגישות תוך 5 ימי עסקים.</p>
         <h3>תאריך הצהרה</h3>
@@ -1894,6 +1955,29 @@ const policyContent = {
     }
   },
   en: {
+    terms: {
+      title: 'Terms of Service, Cancellation, Delivery and Warranty Policy',
+      body: `
+        <h3>General</h3>
+        <p>The OMS AI website ("the Site") is operated by OMS AI ("the Company"). Browsing the site, submitting your details, ordering a service, or making a payment constitutes agreement to the terms set out in this document.</p>
+        <p>The site presents and enables ordering of development services, system builds, automations, websites, apps and AI-based solutions. Where online payment is available, completing payment constitutes confirmation of the order in accordance with the quote, specification document, or service details presented to the customer prior to payment.</p>
+        <h3>Minimum Age</h3>
+        <p>Use of the site, purchasing services, and engaging with OMS AI are intended for individuals 18 years of age or older. Anyone under 18 may use the site or order a service only with the consent of a parent or legal guardian. Placing an order or making a payment constitutes a declaration that the user is entitled to enter into the engagement and that the details provided are true and complete.</p>
+        <h3>Cancellation & Refund Policy</h3>
+        <p>Cancellation requests must be submitted in writing to <strong>info@omsai.ai</strong>, including full name, phone number, transaction amount, payment date, service details, and the last 4 digits of the credit card (if applicable).</p>
+        <p>Cancellation before work has begun and before resources were allocated may be eligible for a full or partial refund, less clearing fees and handling costs. After work has begun (specification, design, development, purchase of external services, etc.) any approved refund will be calculated based on work already performed and actual expenses incurred. No refund will be given for work, hours, licenses, domains, or third-party services already delivered.</p>
+        <p>Custom-built services cannot be cancelled once work has begun, except by explicit written consent of OMS AI. Any approved refund will be made to the same payment method used for the transaction. For recurring/subscription services, cancellation applies to the next billing cycle only. Credit card details are not stored on the site — payment is processed via a secure external payment provider.</p>
+        <h3>Delivery & Timelines Policy</h3>
+        <p>Work begins after payment is completed, the quote is approved, and all required materials are received. Estimated delivery times: basic MVP project — 5 to 10 business days; basic landing site — 7 to 14 business days; basic automation/integration — 3 to 10 business days; complex systems — as defined in the quote. Delivery times are estimates only and may change based on project complexity, client availability, and delays outside OMS AI's control.</p>
+        <h3>Warranty & Bug Fixes</h3>
+        <p>A 30-day warranty period is provided from project delivery, covering fixes for technical faults directly resulting from work performed by OMS AI. The warranty excludes changes, additions or upgrades, and does not cover faults caused by improper use, changes to external platforms, or factors outside OMS AI's control. Support after the warranty period is provided under a separate agreement or at an hourly rate.</p>
+        <h3>Limitation of Liability</h3>
+        <p>OMS AI shall not be liable for indirect damages, loss of revenue or profits, or any consequential damages. OMS AI's total liability shall not exceed the amount actually paid for the specific service the claim relates to.</p>
+        <h3>Business Details & Contact</h3>
+        <p>OMS AI &bull; Address: 5 HaDudaim St, Hadera, Israel &bull; Phone: <strong>055-4606718</strong> &bull; Email: <strong>info@omsai.ai</strong></p>
+        <p class="policy-date">Last updated: August 2026</p>
+      `
+    },
     privacy: {
       title: 'Privacy Policy',
       body: `
@@ -1946,7 +2030,7 @@ const policyContent = {
         <p>Encountered an accessibility issue? We'd love to help:</p>
         <ul>
           <li>Email: <strong>accessibility@omsai.ai</strong></li>
-          <li>Phone: <strong>054-455-5461</strong></li>
+          <li>Phone: <strong>055-4606718</strong></li>
         </ul>
         <p>We commit to responding to accessibility inquiries within 5 business days.</p>
         <h3>Statement Date</h3>
@@ -1974,17 +2058,20 @@ function closePolicyModal(event) {
 // ── WHATSAPP CONTACT ──
 function sendToWhatsApp(e) {
   e.preventDefault();
-  const name  = document.getElementById('cName').value.trim();
-  const phone = document.getElementById('cPhone').value.trim();
-  const email = document.getElementById('cEmail').value.trim();
-  const msg   = document.getElementById('cMsg').value.trim();
+  const firstName = document.getElementById('cFirstName').value.trim();
+  const lastName  = document.getElementById('cLastName').value.trim();
+  const phone     = document.getElementById('cPhone').value.trim();
+  const email     = document.getElementById('cEmail').value.trim();
+  const country   = document.getElementById('cCountry').value;
+  const msg       = document.getElementById('cMsg').value.trim();
   const lines = [
     'שלום, קיבלתי פנייה דרך האתר:',
-    `*שם:* ${name}`,
+    `*שם:* ${firstName} ${lastName}`,
     `*טלפון:* ${phone}`,
+    `*אימייל:* ${email}`,
+    `*מדינה:* ${country}`,
   ];
-  if (email) lines.push(`*אימייל:* ${email}`);
-  if (msg)   lines.push(`*הודעה:* ${msg}`);
+  if (msg) lines.push(`*הודעה:* ${msg}`);
   const text = encodeURIComponent(lines.join('\n'));
   const waPhone = window._CMS_WHATSAPP || '972554606718';
   window.open(`https://wa.me/${waPhone}?text=${text}`, '_blank');
