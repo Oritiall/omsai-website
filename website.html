@@ -816,6 +816,23 @@ footer {
   .hero-img-wrap img { max-width: 220px; }
   .about-img img { max-width: 220px; }
 }
+/* ─── WHATSAPP FLOATING BUTTON ─── */
+#wa-fab {
+  position: fixed; z-index: 9400;
+  bottom: 24px; left: 24px;
+  width: 58px; height: 58px; border-radius: 50%;
+  background: #25D366; box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+  display: flex; align-items: center; justify-content: center;
+  transition: bottom 0.3s ease, transform 0.2s ease;
+}
+#wa-fab:hover { transform: scale(1.08); }
+#wa-fab svg { width: 30px; height: 30px; }
+#wa-fab.shifted { bottom: 96px; }
+@media (max-width: 600px) {
+  #wa-fab { width: 52px; height: 52px; bottom: 18px; left: 18px; }
+  #wa-fab.shifted { bottom: 150px; }
+}
+
 /* ─── COOKIE BANNER ─── */
 #cookie-banner {
   position: fixed; bottom: 0; left: 0; right: 0; z-index: 9500;
@@ -1336,6 +1353,11 @@ footer {
   <p class="footer-copy" style="margin-top:8px;">הדודאים 5, חדרה · <a href="tel:+972554606718" style="color:inherit;">055-4606718</a> · <a href="mailto:info@omsai.ai" style="color:inherit;">info@omsai.ai</a></p>
 </footer>
 
+<!-- ══════════════ WHATSAPP FLOATING BUTTON ══════════════ -->
+<a id="wa-fab" href="#" target="_blank" rel="noopener" aria-label="WhatsApp" onclick="openWaFab(event)">
+  <svg viewBox="0 0 32 32" fill="#fff"><path d="M16.001 3C9.383 3 4 8.383 4 15.001c0 2.386.626 4.72 1.817 6.767L4 29l7.401-1.79a11.94 11.94 0 0 0 4.6.918h.005c6.617 0 12-5.383 12-12S22.618 3 16.001 3zm0 21.6a9.57 9.57 0 0 1-4.885-1.34l-.35-.207-4.393 1.063 1.174-4.28-.228-.363a9.57 9.57 0 0 1-1.472-5.072c0-5.294 4.308-9.6 9.604-9.6 2.566 0 4.976 1 6.79 2.816a9.53 9.53 0 0 1 2.812 6.79c0 5.294-4.309 9.6-9.605 9.6zm5.264-7.19c-.288-.144-1.706-.842-1.97-.938-.264-.096-.456-.144-.648.144-.192.288-.744.938-.912 1.13-.168.192-.336.216-.624.072-.288-.144-1.215-.448-2.314-1.428-.856-.764-1.434-1.708-1.602-1.996-.168-.288-.018-.444.126-.588.13-.13.288-.336.432-.504.144-.168.192-.288.288-.48.096-.192.048-.36-.024-.504-.072-.144-.648-1.562-.888-2.14-.234-.562-.472-.486-.648-.494-.168-.008-.36-.01-.552-.01-.192 0-.504.072-.768.36-.264.288-1.008.984-1.008 2.4 0 1.416 1.032 2.784 1.176 2.976.144.192 2.03 3.098 4.92 4.344.688.297 1.224.474 1.642.606.69.22 1.318.19 1.814.115.553-.083 1.706-.697 1.946-1.37.24-.673.24-1.25.168-1.37-.072-.12-.264-.192-.552-.336z"/></svg>
+</a>
+
 <!-- ══════════════ COOKIE BANNER ══════════════ -->
 <div id="cookie-banner" class="hidden">
   <p id="cookieBannerText">האתר משתמש בעוגייה טכנית אחת לשמירת העדפת הסכמתך. אין מעקב, אין שיתוף עם צדדים שלישיים. <a onclick="openPolicy('privacy')">מדיניות פרטיות</a></p>
@@ -1837,6 +1859,7 @@ function setLang(lang) {
     if (T[lang][key] !== undefined) el.placeholder = T[lang][key];
   });
   updateCookieBannerLang(lang);
+  updateWaFabHref();
 }
 
 // ── COOKIE BANNER ──
@@ -1854,18 +1877,38 @@ function updateCookieBannerLang(lang) {
 function acceptCookies() {
   localStorage.setItem('cookieConsent', 'accepted');
   document.getElementById('cookie-banner').classList.add('hidden');
+  document.getElementById('wa-fab').classList.remove('shifted');
 }
 function declineCookies() {
   localStorage.setItem('cookieConsent', 'declined');
   document.getElementById('cookie-banner').classList.add('hidden');
+  document.getElementById('wa-fab').classList.remove('shifted');
 }
 (function initCookieBanner() {
   if (!localStorage.getItem('cookieConsent')) {
     setTimeout(() => {
       document.getElementById('cookie-banner').classList.remove('hidden');
+      document.getElementById('wa-fab').classList.add('shifted');
     }, 1200);
   }
 })();
+
+// ── WHATSAPP FLOATING BUTTON ──
+function getWaLink() {
+  const waPhone = window._CMS_WHATSAPP || '972554606718';
+  const greet = currentLang === 'he'
+    ? 'שלום, הגעתי מהאתר ואשמח לקבל פרטים נוספים'
+    : "Hi, I came from the website and I'd like more information";
+  return `https://wa.me/${waPhone}?text=${encodeURIComponent(greet)}`;
+}
+function openWaFab(e) {
+  e.preventDefault();
+  window.open(getWaLink(), '_blank');
+}
+function updateWaFabHref() {
+  const fab = document.getElementById('wa-fab');
+  if (fab) fab.href = getWaLink();
+}
 
 // ── POLICY MODALS ──
 const policyContent = {
@@ -1944,7 +1987,7 @@ const policyContent = {
         <h3>יצירת קשר בנושאי נגישות</h3>
         <p>נתקלת בבעיית נגישות? נשמח לשמוע ולסייע:</p>
         <ul>
-          <li>דוא"ל: <strong>accessibility@omsai.ai</strong></li>
+          <li>דוא"ל: <strong>info@omsai.ai</strong></li>
           <li>טלפון: <strong>055-4606718</strong></li>
         </ul>
         <p>אנו מתחייבים להשיב לפניות נגישות תוך 5 ימי עסקים.</p>
@@ -2029,7 +2072,7 @@ const policyContent = {
         <h3>Contact for Accessibility Issues</h3>
         <p>Encountered an accessibility issue? We'd love to help:</p>
         <ul>
-          <li>Email: <strong>accessibility@omsai.ai</strong></li>
+          <li>Email: <strong>info@omsai.ai</strong></li>
           <li>Phone: <strong>055-4606718</strong></li>
         </ul>
         <p>We commit to responding to accessibility inquiries within 5 business days.</p>
