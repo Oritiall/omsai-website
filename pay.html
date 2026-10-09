@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>תשלום מאובטח | OMS AI</title>
+  <meta name="description" content="תשלום מאובטח עבור שירותי פיתוח, מערכות, אפליקציות ואתרים של OMS AI." />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --nav-h: 96px;
+      --bg: #0d1b3e;
+      --card: #112040;
+      --border: rgba(255,255,255,0.1);
+      --accent: #00BFB3;
+      --accent-hover: #00A99D;
+      --text: #f8faff;
+      --muted: #b0c4de;
+      --error: #ff6b6b;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Rubik', sans-serif; background: var(--bg); color: var(--text); direction: rtl; min-height: 100vh; display: flex; flex-direction: column; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAVBAR */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 36px; direction: ltr;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 18px; }
+    .nav-brand img { height: 84px; object-fit: contain; }
+    .nav-slogan { display: flex; flex-direction: column; gap: 4px; }
+    .nav-slogan-main { font-size: 20px; font-weight: 300; color: #0B2447; letter-spacing: 0.5px; direction: ltr; line-height: 1; }
+    .nav-slogan-main b { font-weight: 700; }
+    .nav-slogan-sub { font-size: 11.5px; color: rgba(0,0,0,0.6); font-weight: 300; direction: ltr; white-space: nowrap; }
+
+    /* MAIN */
+    main {
+      flex: 1; display: flex; justify-content: center;
+      padding: calc(var(--nav-h) + 48px) 16px 72px;
+      position: relative; overflow: hidden;
+    }
+    main::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at 50% 40%, rgba(0,191,179,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .pay-wrap { width: 100%; max-width: 560px; position: relative; }
+    h1 { font-size: clamp(28px, 5vw, 40px); font-weight: 900; text-align: center; margin-bottom: 8px; }
+    .lead { text-align: center; color: var(--muted); font-size: 15px; font-weight: 300; margin-bottom: 32px; }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin-bottom: 20px; }
+    .card h2 { font-size: 17px; font-weight: 600; margin-bottom: 18px; color: #fff; }
+
+    /* ORDER SUMMARY */
+    .summary-row { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-row span:first-child { color: var(--muted); font-weight: 300; }
+    .summary-row span:last-child { font-weight: 500; text-align: left; }
+    .summary-total span:last-child { color: var(--accent); font-size: 20px; font-weight: 700; }
+    .summary-note { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.7; }
+
+    /* FORM */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 13px; color: var(--muted); }
+    input[type=text], input[type=tel], input[type=email], select {
+      width: 100%; padding: 12px 14px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.04);
+      color: var(--text); font-family: 'Rubik', sans-serif; font-size: 15px;
+    }
+    select option { background: var(--card); }
+    input:focus, select:focus { outline: none; border-color: var(--accent); }
+    input[type=tel] { direction: ltr; text-align: right; }
+    .field-error { font-size: 12px; color: var(--error); display: none; }
+    .form-group.invalid input, .form-group.invalid select { border-color: var(--error); }
+    .form-group.invalid .field-error { display: block; }
+
+    .consent { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; margin-top: 20px; }
+    .consent input { margin-top: 4px; flex-shrink: 0; width: 18px; height: 18px; accent-color: var(--accent); }
+    .consent a { color: var(--accent); text-decoration: underline; }
+    .consent.invalid { color: var(--error); }
+
+    .btn-pay {
+      width: 100%; margin-top: 24px; padding: 16px; border: none; border-radius: 12px;
+      background: var(--accent); color: #fff; font-family: 'Rubik', sans-serif;
+      font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .btn-pay:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,191,179,0.25); }
+    .btn-pay svg { width: 18px; height: 18px; fill: #fff; }
+    .secure-note { text-align: center; font-size: 12.5px; color: var(--muted); font-weight: 300; margin-top: 14px; line-height: 1.7; }
+
+    .contact-box { text-align: center; }
+    .contact-box p { color: var(--muted); font-size: 15px; font-weight: 300; line-height: 1.8; margin-bottom: 20px; }
+    .btn-wa { display: inline-block; background: #25D366; color: #fff; padding: 14px 30px; border-radius: 10px; font-weight: 700; font-size: 16px; }
+
+    /* FOOTER (same as homepage) */
+    footer { background: #060E1F; border-top: 1px solid rgba(255,255,255,0.08); padding: 48px 40px; text-align: center; }
+    .footer-header-mirror { display: flex; flex-direction: column; align-items: center; gap: 6px; margin-bottom: 24px; }
+    .footer-slogan-main { font-size: 20px; font-weight: 300; color: rgba(255,255,255,0.85); letter-spacing: 0.5px; direction: ltr; }
+    .footer-slogan-main b { font-weight: 700; color: #fff; }
+    .footer-slogan-sub { font-size: 12px; color: rgba(255,255,255,0.45); font-weight: 300; text-align: center; }
+    .footer-links { display: flex; gap: 28px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); line-height: 1.6; }
+
+    @media (max-width: 600px) {
+      :root { --nav-h: 68px; }
+      #navbar { padding: 0 16px; }
+      .nav-brand img { height: 56px; }
+      .nav-slogan { display: none; }
+      .card { padding: 20px 16px; }
+      .form-grid { grid-template-columns: 1fr; }
+      footer { padding: 36px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-brand">
+    <a href="/"><img src="logo.png" alt="OMS AI" /></a>
+    <div class="nav-slogan">
+      <span class="nav-slogan-main"><b>O</b>ne <b>M</b>an <b>S</b>ystem <b>AI</b></span>
+      <span class="nav-slogan-sub">בניית מוצרים - מערכות, אפליקציות ואתרים באמצעות יכולות הבינה המלאכותית. AI-NATIVE</span>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="pay-wrap">
+    <h1>תשלום מאובטח</h1>
+    <p class="lead">השלמת פרטים ומעבר לתשלום בעמוד מאובטח</p>
+
+    <!-- Order summary -->
+    <div class="card">
+      <h2>פרטי ההזמנה</h2>
+      <div class="summary-row"><span id="sumLabel">שירות / פרויקט</span><span id="sumProject">תשלום עבור שירות / פרויקט</span></div>
+      <div class="summary-row" id="rowStage" style="display:none;"><span id="stageLabel">שלב תשלום</span><span id="sumStage"></span></div>
+      <div class="summary-row summary-total" id="rowAmount" style="display:none;"><span>סכום לתשלום</span><span id="sumAmount"></span></div>
+      <p class="summary-note" id="sumNote" style="margin-top:10px;">הסכום לתשלום נקבע בהתאם להצעת המחיר שקיבלת מ-OMS AI.</p>
+    </div>
+
+    <!-- Checkout form -->
+    <form class="card" id="payForm" novalidate>
+      <h2>פרטי המשלם</h2>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="fFirst">שם פרטי *</label>
+          <input type="text" id="fFirst" autocomplete="given-name" required />
+          <span class="field-error">נא למלא שם פרטי</span>
+        </div>
+        <div class="form-group">
+          <label for="fLast">שם משפחה *</label>
+          <input type="text" id="fLast" autocomplete="family-name" required />
+          <span class="field-error">נא למלא שם משפחה</span>
+        </div>
+        <div class="form-group">
+          <label for="fPhone">טלפון *</label>
+          <input type="tel" id="fPhone" autocomplete="tel-national" placeholder="0501234567" required />
+          <span class="field-error">נא למלא מספר טלפון תקין, ללא קידומת מדינה</span>
+        </div>
+        <div class="form-group">
+          <label for="fCountry">מדינה *</label>
+          <select id="fCountry" required>
+            <option value="" disabled selected>בחר/י מדינה</option>
+            <option value="IL">ישראל</option>
+            <option value="OTHER">אחר</option>
+          </select>
+          <span class="field-error">נא לבחור מדינה</span>
+        </div>
+        <div class="form-group full" id="otherCountryGroup" style="display:none;">
+          <label for="fCountryOther">שם המדינה *</label>
+          <input type="text" id="fCountryOther" autocomplete="country-name" />
+          <span class="field-error">נא לכתוב את שם המדינה</span>
+        </div>
+        <div class="form-group full">
+          <label for="fEmail">אימייל *</label>
+          <input type="email" id="fEmail" autocomplete="email" placeholder="your@email.com" required />
+          <span class="field-error">נא למלא כתובת אימייל תקינה</span>
+        </div>
+      </div>
+
+      <label class="consent" id="consentLabel">
+        <input type="checkbox" id="fTerms" required />
+        <span>קראתי ואני מסכים/ה ל<a href="/#terms" target="_blank" rel="noopener">תנאי השימוש, מדיניות הביטולים, האספקה והאחריות</a> ול<a href="/#privacy" target="_blank" rel="noopener">מדיניות הפרטיות</a> של OMS AI.</span>
+      </label>
+
+      <button type="submit" class="btn-pay">
+        <svg viewBox="0 0 24 24"><path d="M12 1a5 5 0 0 0-5 5v4H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm-3 9V6a3 3 0 1 1 6 0v4H9z"/></svg>
+        מעבר לתשלום מאובטח
+      </button>
+      <p class="secure-note">התשלום מתבצע בעמוד מאובטח של חברת הסליקה Grow.<br/>פרטי כרטיס האשראי אינם נשמרים באתר OMS AI.</p>
+    </form>
+
+    <!-- Shown instead of the form when there is no payment link -->
+    <div class="card contact-box" id="noLinkBox" style="display:none;">
+      <h2>לקבלת קישור לתשלום</h2>
+      <p>התשלום מתבצע באמצעות קישור אישי שנשלח אליך לאחר אישור הצעת המחיר.<br/>לא קיבלת קישור? צרו איתנו קשר ונשלח אותו בהקדם.</p>
+      <a class="btn-wa" href="https://wa.me/972554606718?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A7%D7%99%D7%A9%D7%95%D7%A8%20%D7%9C%D7%AA%D7%A9%D7%9C%D7%95%D7%9D" target="_blank" rel="noopener">שליחת הודעה ב-WhatsApp</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-header-mirror">
+    <span class="footer-slogan-main"><b>O</b>ne <b>M</b>an <b>S</b>ystem <b>AI</b></span>
+    <span class="footer-slogan-sub">בניית מוצרים - מערכות, אפליקציות ואתרים באמצעות יכולות הבינה המלאכותית. AI-NATIVE</span>
+  </div>
+  <div class="footer-links" style="margin-bottom:16px;">
+    <a href="/#terms">תנאי שימוש ומדיניות ביטולים</a>
+    <span style="color:rgba(255,255,255,0.15)">·</span>
+    <a href="/#privacy">מדיניות פרטיות</a>
+    <span style="color:rgba(255,255,255,0.15)">·</span>
+    <a href="/#accessibility">הצהרת נגישות</a>
+  </div>
+  <p class="footer-copy">© 2026 OMS AI · כל הזכויות שמורות · ישראל</p>
+  <p class="footer-copy" style="margin-top:8px;">הדודאים 5, חדרה · <a href="tel:+972554606718" style="color:inherit;">055-4606718</a> · <a href="mailto:info@omsai.ai" style="color:inherit;">info@omsai.ai</a></p>
+</footer>
+
+<!-- Facebook Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '816292384580051');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=816292384580051&ev=PageView&noscript=1"/></noscript>
+
+<script>
+  // Fixed-price products. Each Grow link must be a closed-amount link for exactly this amount.
+  const PRODUCTS = {
+    'seder-yom': {
+      name:   'סדר יום - אפליקציה לתכנון משימות ופגישות',
+      stage:  'גישה מלאה לשנה הראשונה',
+      amount: '67',
+      link:   'https://pay.grow.link/MTAzOTI5~d6f59abfff80bff3221d1254f1c61ed8-NDEwNjA4Mg',
+      page:   '/seder-yom',
+    },
+  };
+  const DEFAULT_PRODUCT = 'seder-yom';   // shown when /pay is opened with no parameters
+
+  // Personal links (built with pay-link.html) carry: p=project, s=stage, a=amount, g=Grow link
+  // Product links carry: product=<key>
+  const params  = new URLSearchParams(location.search);
+  const growArg = params.get('g');
+  const product = growArg ? null : PRODUCTS[params.get('product') || DEFAULT_PRODUCT];
+
+  const project = product ? product.name   : params.get('p');
+  const stage   = product ? product.stage  : params.get('s');
+  const amount  = product ? product.amount : params.get('a');
+
+  // Only ever redirect to Grow's payment domain
+  const isGrowLink = u => /^https:\/\/pay\.grow\.link\/[\w~\-]+$/.test(u || '');
+  const growLink = isGrowLink(product ? product.link : growArg) ? (product ? product.link : growArg) : '';
+
+  if (product) {
+    document.getElementById('sumLabel').textContent = 'מוצר';
+    document.getElementById('stageLabel').textContent = 'כולל';
+    document.getElementById('sumProject').innerHTML = '';
+    const a = document.createElement('a');
+    a.href = product.page; a.textContent = product.name;
+    a.style.cssText = 'color:var(--accent);text-decoration:underline;';
+    document.getElementById('sumProject').appendChild(a);
+  }
+  if (project && !product) document.getElementById('sumProject').textContent = project;
+  if (stage) {
+    document.getElementById('sumStage').textContent = stage;
+    document.getElementById('rowStage').style.display = '';
+  }
+  if (amount && !isNaN(Number(amount))) {
+    document.getElementById('sumAmount').textContent = '₪' + Number(amount).toLocaleString('he-IL');
+    document.getElementById('rowAmount').style.display = '';
+    document.getElementById('sumNote').style.display = 'none';
+  }
+  if (!growLink && !product) {
+    document.getElementById('payForm').style.display = 'none';
+    document.getElementById('noLinkBox').style.display = '';
+  }
+
+  const checks = {
+    fFirst:   v => v.trim().length > 1,
+    fLast:    v => v.trim().length > 1,
+    fPhone:   v => /^0?\d{8,11}$/.test(v.replace(/[\s\-]/g, '')),
+    fCountry: v => v !== '',
+    fEmail:   v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()),
+    fCountryOther: v => document.getElementById('fCountry').value !== 'OTHER' || v.trim().length > 1,
+  };
+
+  // "Other" country opens a free-text field
+  document.getElementById('fCountry').addEventListener('change', function () {
+    const other = this.value === 'OTHER';
+    document.getElementById('otherCountryGroup').style.display = other ? '' : 'none';
+    if (other) document.getElementById('fCountryOther').focus();
+  });
+
+  document.getElementById('payForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    let ok = true;
+    for (const id in checks) {
+      const el = document.getElementById(id);
+      const valid = checks[id](el.value);
+      el.closest('.form-group').classList.toggle('invalid', !valid);
+      if (!valid) ok = false;
+    }
+    const terms = document.getElementById('fTerms').checked;
+    document.getElementById('consentLabel').classList.toggle('invalid', !terms);
+    if (!terms) ok = false;
+    if (!ok) return;
+
+    if (!growLink) { alert('התשלום עבור מוצר זה יהיה זמין בקרוב.'); return; }
+    fbq('track', 'InitiateCheckout');
+    location.href = growLink;
+  });
+</script>
+</body>
+</html>

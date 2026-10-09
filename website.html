@@ -884,6 +884,7 @@ footer {
     <li><a href="#vision" onclick="jumpTo('vision')" data-i18n="nav-vision">חזון</a></li>
     <li><a href="#jobot" onclick="jumpTo('jobot')">Jobot</a></li>
     <li><a href="/your-meeting">Your Meeting</a></li>
+    <li><a href="/seder-yom" data-i18n="nav-sederyom">סדר יום</a></li>
     <li><a href="#contact" onclick="jumpTo('contact')" class="nav-cta" data-i18n="nav-contact">צור קשר</a></li>
   </ul>
   <div class="nav-controls">
@@ -904,6 +905,7 @@ footer {
   <a href="#vision"   onclick="jumpTo('vision');closeMobile()" data-i18n="nav-vision">חזון</a>
   <a href="#jobot"    onclick="jumpTo('jobot');closeMobile()">Jobot</a>
   <a href="/your-meeting">Your Meeting</a>
+  <a href="/seder-yom" data-i18n="nav-sederyom">סדר יום</a>
   <a href="#contact" onclick="jumpTo('contact');closeMobile()" data-i18n="nav-contact">צור קשר</a>
 </div>
 
@@ -1343,6 +1345,8 @@ footer {
     <a href="#contact" data-i18n="footer-contact">צור קשר</a>
   </div>
   <div class="footer-links" style="margin-bottom:16px;">
+    <a href="/pay" data-i18n="footer-pay">תשלום מאובטח</a>
+    <span style="color:rgba(255,255,255,0.15)">·</span>
     <a href="#" onclick="openPolicy('terms');return false;" data-i18n="footer-terms">תנאי שימוש ומדיניות ביטולים</a>
     <span style="color:rgba(255,255,255,0.15)">·</span>
     <a href="#" onclick="openPolicy('privacy');return false;" data-i18n="footer-privacy">מדיניות פרטיות</a>
@@ -1600,6 +1604,8 @@ const T = {
     'footer-privacy':      'מדיניות פרטיות',
     'footer-accessibility':'הצהרת נגישות',
     'footer-terms':        'תנאי שימוש ומדיניות ביטולים',
+    'footer-pay':          'תשלום מאובטח',
+    'nav-sederyom':        'סדר יום',
   },
   en: {
     'page-title':      'OMS AI - The Future of Business Starts Here',
@@ -1810,6 +1816,8 @@ const T = {
     'footer-privacy':      'Privacy Policy',
     'footer-accessibility':'Accessibility Statement',
     'footer-terms':        'Terms of Service & Cancellation Policy',
+    'footer-pay':          'Secure Payment',
+    'nav-sederyom':        'Seder Yom',
   }
 };
 
@@ -1927,13 +1935,17 @@ const policyContent = {
         <p>שירותים מותאמים אישית אינם ניתנים לביטול לאחר תחילת ביצועם אלא בהסכמה מפורשת ובכתב של OMS AI. החזר כספי, ככל שיאושר, יבוצע לאותו אמצעי תשלום שבו בוצעה העסקה. בשירותים בתשלום מתמשך (מנוי/תחזוקה) הביטול יחול מהחיוב הבא בלבד. פרטי כרטיס האשראי אינם נשמרים באתר - התשלום מתבצע דרך ספק סליקה חיצוני ומאובטח.</p>
         <h3>מדיניות אספקה ולוחות זמנים</h3>
         <p>מועד תחילת העבודה ייקבע לאחר השלמת התשלום, אישור הצעת המחיר וקבלת כל החומרים הדרושים. זמני אספקה משוערים: פרויקט MVP בסיסי - 5 עד 10 ימי עבודה; אתר תדמית בסיסי - 7 עד 14 ימי עבודה; אוטומציה/אינטגרציה בסיסית - 3 עד 10 ימי עבודה; מערכת מורכבת - בהתאם להצעת המחיר. זמני האספקה הם הערכה בלבד ועשויים להשתנות בהתאם למורכבות הפרויקט, זמינות הלקוח ועיכובים שאינם בשליטת OMS AI.</p>
+        <h3>מוצרים דיגיטליים - אפליקציית "סדר יום"</h3>
+        <p><strong>מה נרכש:</strong> גישה מלאה לאפליקציה לתכנון משימות ופגישות למשך 12 חודשים ממועד ההפעלה, בתשלום חד-פעמי של 67 ₪ (כולל מע"מ ככל שחל). התשלום אינו מתחדש אוטומטית; לקראת תום התקופה תישלח הצעה לחידוש, ללא התחייבות.</p>
+        <p><strong>אספקה:</strong> קישור לאפליקציה ופרטי התחברות יישלחו לכתובת הדוא"ל שנמסרה בעת הרכישה, תוך 24 שעות ממועד התשלום. אם לא התקבלו - יש לפנות ל-info@omsai.ai או לטלפון 055-4606718.</p>
+        <p><strong>ביטול:</strong> ניתן לבטל את הרכישה בתוך 14 ימים ממועד העסקה, בהודעה בכתב ל-info@omsai.ai. הביטול יבוצע בהתאם לחוק הגנת הצרכן, התשמ"א-1981, וההחזר יינתן לאותו אמצעי תשלום בניכוי דמי ביטול בשיעור של 5% ממחיר העסקה או 100 ₪, לפי הנמוך מביניהם.</p>
         <h3>אחריות ותיקון תקלות</h3>
         <p>ניתנת תקופת אחריות של 30 ימים ממועד מסירת הפרויקט, לתיקון תקלות טכניות הנובעות ישירות מהעבודה שבוצעה. האחריות אינה כוללת שינויים, תוספות או שדרוגים, ואינה חלה על תקלות שנגרמו משימוש לא תקין, שינויים בפלטפורמות חיצוניות או גורמים שאינם בשליטת OMS AI. תמיכה לאחר תקופת האחריות תינתן בהסכם נפרד או בתשלום לפי שעה.</p>
         <h3>הגבלת אחריות</h3>
         <p>OMS AI לא תהיה אחראית לנזק עקיף, אובדן הכנסות או רווחים, או כל נזק תוצאתי. האחריות הכוללת של OMS AI לא תעלה על הסכום ששולם בפועל עבור השירות הספציפי שבגינו הוגשה הטענה.</p>
         <h3>פרטי העסק ויצירת קשר</h3>
         <p>OMS AI &bull; כתובת: הדודאים 5, חדרה &bull; טלפון: <strong>055-4606718</strong> &bull; דוא"ל: <strong>info@omsai.ai</strong></p>
-        <p class="policy-date">עדכון אחרון: אוגוסט 2026</p>
+        <p class="policy-date">עדכון אחרון: אוקטובר 2026</p>
       `
     },
     privacy: {
@@ -2012,13 +2024,17 @@ const policyContent = {
         <p>Custom-built services cannot be cancelled once work has begun, except by explicit written consent of OMS AI. Any approved refund will be made to the same payment method used for the transaction. For recurring/subscription services, cancellation applies to the next billing cycle only. Credit card details are not stored on the site — payment is processed via a secure external payment provider.</p>
         <h3>Delivery & Timelines Policy</h3>
         <p>Work begins after payment is completed, the quote is approved, and all required materials are received. Estimated delivery times: basic MVP project — 5 to 10 business days; basic landing site — 7 to 14 business days; basic automation/integration — 3 to 10 business days; complex systems — as defined in the quote. Delivery times are estimates only and may change based on project complexity, client availability, and delays outside OMS AI's control.</p>
+        <h3>Digital Products - "Seder Yom" App</h3>
+        <p><strong>What you buy:</strong> full access to the task and meeting planning app for 12 months from activation, for a one-time payment of ₪67 (including VAT where applicable). The payment does not renew automatically; an optional renewal offer will be sent before the period ends.</p>
+        <p><strong>Delivery:</strong> a link to the app and login details are sent to the email address provided at purchase within 24 hours of payment. If not received, contact info@omsai.ai or 055-4606718.</p>
+        <p><strong>Cancellation:</strong> the purchase may be cancelled within 14 days of the transaction by written notice to info@omsai.ai, in accordance with the Israeli Consumer Protection Law, 1981. Refunds are made to the original payment method, less a cancellation fee of 5% of the price or ₪100, whichever is lower.</p>
         <h3>Warranty & Bug Fixes</h3>
         <p>A 30-day warranty period is provided from project delivery, covering fixes for technical faults directly resulting from work performed by OMS AI. The warranty excludes changes, additions or upgrades, and does not cover faults caused by improper use, changes to external platforms, or factors outside OMS AI's control. Support after the warranty period is provided under a separate agreement or at an hourly rate.</p>
         <h3>Limitation of Liability</h3>
         <p>OMS AI shall not be liable for indirect damages, loss of revenue or profits, or any consequential damages. OMS AI's total liability shall not exceed the amount actually paid for the specific service the claim relates to.</p>
         <h3>Business Details & Contact</h3>
         <p>OMS AI &bull; Address: 5 HaDudaim St, Hadera, Israel &bull; Phone: <strong>055-4606718</strong> &bull; Email: <strong>info@omsai.ai</strong></p>
-        <p class="policy-date">Last updated: August 2026</p>
+        <p class="policy-date">Last updated: October 2026</p>
       `
     },
     privacy: {

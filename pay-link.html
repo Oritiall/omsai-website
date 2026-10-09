@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>יצירת קישור תשלום | OMS AI</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --bg: #0d1b3e; --card: #112040; --border: rgba(255,255,255,0.1); --accent: #00BFB3; --text: #f8faff; --muted: #b0c4de; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Rubik', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 40px 16px; }
+    .wrap { max-width: 560px; margin: 0 auto; }
+    h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; }
+    .lead { color: var(--muted); font-size: 14px; font-weight: 300; line-height: 1.7; margin-bottom: 28px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    label { font-size: 13px; color: var(--muted); }
+    .hint { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 300; }
+    input, select { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.04); color: var(--text); font-family: 'Rubik', sans-serif; font-size: 15px; }
+    select option { background: var(--card); }
+    input:focus, select:focus { outline: none; border-color: var(--accent); }
+    #fGrow, #result { direction: ltr; text-align: left; }
+    .btn { border: none; border-radius: 10px; padding: 13px 22px; font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; color: #fff; background: var(--accent); }
+    .btn.wa { background: #25D366; }
+    .btn.ghost { background: transparent; border: 1px solid rgba(255,255,255,0.2); }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .error { color: #ff6b6b; font-size: 13px; margin-top: 8px; display: none; }
+    #resultCard { display: none; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>יצירת קישור תשלום ללקוח</h1>
+  <p class="lead">1. צרי ב-Grow לינק עם <b>סכום סגור</b> ללקוח ולשלב הזה.<br/>2. מלאי כאן את הפרטים והדביקי את הלינק מ-Grow.<br/>3. שלחי ללקוח את הקישור שנוצר.</p>
+
+  <div class="card">
+    <div class="form-group">
+      <label for="fProject">שם הפרויקט / השירות</label>
+      <input type="text" id="fProject" placeholder="לדוגמה: אתר תדמית לחברת X" />
+    </div>
+    <div class="form-group">
+      <label for="fStage">שלב התשלום</label>
+      <select id="fStage">
+        <option value="מקדמה">מקדמה</option>
+        <option value="אבן דרך">אבן דרך</option>
+        <option value="תשלום סופי">תשלום סופי</option>
+        <option value="תשלום מלא">תשלום מלא</option>
+        <option value="">ללא</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="fAmount">סכום (₪)</label>
+      <input type="number" id="fAmount" min="1" step="1" placeholder="3000" />
+      <span class="hint">חייב להיות זהה לסכום שהגדרת בלינק ב-Grow</span>
+    </div>
+    <div class="form-group">
+      <label for="fGrow">הלינק מ-Grow</label>
+      <input type="url" id="fGrow" placeholder="https://pay.grow.link/..." />
+    </div>
+    <button class="btn" id="btnMake">יצירת קישור</button>
+    <p class="error" id="err"></p>
+  </div>
+
+  <div class="card" id="resultCard">
+    <label for="result">הקישור ללקוח:</label>
+    <input type="text" id="result" readonly style="margin-top:6px;" />
+    <div class="actions">
+      <button class="btn" id="btnCopy">העתקה</button>
+      <button class="btn wa" id="btnWa">שליחה ב-WhatsApp</button>
+      <button class="btn ghost" id="btnOpen">תצוגה מקדימה</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const $ = id => document.getElementById(id);
+  const isGrowLink = u => /^https:\/\/pay\.grow\.link\/[\w~\-]+$/.test(u);
+
+  $('btnMake').addEventListener('click', () => {
+    const project = $('fProject').value.trim();
+    const stage   = $('fStage').value;
+    const amount  = $('fAmount').value.trim();
+    const grow    = $('fGrow').value.trim();
+    let error = '';
+    if (!project) error = 'נא למלא שם פרויקט';
+    else if (!(Number(amount) > 0)) error = 'נא למלא סכום';
+    else if (!isGrowLink(grow)) error = 'הלינק מ-Grow צריך להתחיל ב-https://pay.grow.link/';
+    $('err').textContent = error;
+    $('err').style.display = error ? 'block' : 'none';
+    if (error) return;
+
+    const q = new URLSearchParams({ p: project });
+    if (stage) q.set('s', stage);
+    q.set('a', amount);
+    q.set('g', grow);
+    $('result').value = 'https://omsai.ai/pay?' + q.toString();
+    $('resultCard').style.display = 'block';
+  });
+
+  $('btnCopy').addEventListener('click', () => {
+    navigator.clipboard.writeText($('result').value).then(() => {
+      $('btnCopy').textContent = 'הועתק ✓';
+      setTimeout(() => $('btnCopy').textContent = 'העתקה', 1500);
+    });
+  });
+  $('btnWa').addEventListener('click', () => {
+    const msg = 'שלום, זהו הקישור לתשלום עבור ' + $('fProject').value.trim() + ':\n' + $('result').value;
+    window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
+  });
+  // Relative link so the preview also works before the page is live
+  $('btnOpen').addEventListener('click', () => window.open('pay.html?' + $('result').value.split('?')[1], '_blank'));
+</script>
+</body>
+</html>
