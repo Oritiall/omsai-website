@@ -757,6 +757,14 @@ footer {
 .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
 
 /* ─── RESPONSIVE ─── */
+/* Keep the full menu on one line: drop the slogan, then switch to the hamburger */
+@media (max-width: 1600px) { .nav-slogan { display: none; } }
+@media (max-width: 1150px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-contact-fixed { display: inline-block; }
+}
+
 @media (max-width: 900px) {
   :root { --nav-h: 68px; }
   .section { padding: calc(var(--nav-h) + 40px) 20px 60px; }

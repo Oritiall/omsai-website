@@ -89,8 +89,13 @@
     #sh-policy .sh-body li { margin-bottom: 6px; }
     #sh-policy .sh-body .policy-date { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 28px; }
 
-    @media (max-width: 1280px) { #sh-nav .sh-slogan { display: none; } }
-    @media (max-width: 1000px) {
+    @media (max-width: 1600px) { #sh-nav .sh-slogan { display: none; } }
+    @media (max-width: 1150px) {
+      #sh-nav ul { display: none; }
+      #sh-nav .sh-mobile-cta { display: inline-block; }
+      #sh-burger { display: flex; }
+    }
+    @media (max-width: 900px) {
       :root { --nav-h: 76px; }
       #sh-nav { padding: 0 14px; }
       #sh-nav .sh-brand img { height: 64px; }
