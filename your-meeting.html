@@ -244,40 +244,6 @@
 <body>
 
 <!-- NAVBAR -->
-<nav id="navbar">
-  <div class="nav-brand">
-    <a href="/"><img src="logo.png" alt="OMS AI" /></a>
-    <div class="nav-slogan">
-      <span class="nav-slogan-main"><b>O</b>ne <b>M</b>an <b>S</b>ystem <b>AI</b></span>
-      <span class="nav-slogan-sub">בניית מוצרים - מערכות, אפליקציות ואתרים באמצעות יכולות הבינה המלאכותית. AI-NATIVE</span>
-    </div>
-  </div>
-  <ul class="nav-links">
-    <li><a href="/">ראשי</a></li>
-    <li><a href="/#about">אודות</a></li>
-    <li><a href="/#services">שירותים</a></li>
-    <li><a href="/#vision">חזון</a></li>
-    <li><a href="/#jobot">Jobot</a></li>
-    <li><a href="/your-meeting" class="nav-active">Your Meeting</a></li>
-    <li><a href="/#contact" class="nav-cta">צור קשר</a></li>
-  </ul>
-  <div class="nav-controls">
-    <button class="hamburger" id="hamburger" aria-label="תפריט">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<div class="mobile-menu" id="mobile-menu">
-  <a href="/">ראשי</a>
-  <a href="/#about">אודות</a>
-  <a href="/#services">שירותים</a>
-  <a href="/#vision">חזון</a>
-  <a href="/#jobot">Jobot</a>
-  <a href="/your-meeting">Your Meeting</a>
-  <a href="/#contact">צור קשר</a>
-</div>
-
 <!-- HERO -->
 <div class="hero">
   <div class="audience-strip">
@@ -484,25 +450,8 @@
 </div>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-header-mirror">
-    <span class="footer-slogan-main"><b>O</b>ne <b>M</b>an <b>S</b>ystem <b>AI</b></span>
-    <span class="footer-slogan-sub">בניית מוצרים - מערכות, אפליקציות ואתרים באמצעות יכולות הבינה המלאכותית. AI-NATIVE</span>
-  </div>
-  <div class="footer-links">
-    <a href="/">ראשי</a>
-    <a href="/#about">אודות</a>
-    <a href="/#services">שירותים</a>
-    <a href="/#vision">חזון</a>
-    <a href="/#jobot">Jobot</a>
-    <a href="/your-meeting">Your Meeting</a>
-    <a href="/#contact">צור קשר</a>
-  </div>
-  <div class="footer-links" style="margin-bottom:16px;">
-    <a href="/privacy">מדיניות פרטיות</a>
-  </div>
-  <p class="footer-copy">© 2026 OMS AI · כל הזכויות שמורות · ישראל</p>
-</footer>
+<script src="policies.js"></script>
+<script src="site.js"></script>
 
 <script>
   function sendWhatsApp() {
@@ -523,23 +472,6 @@
     const waUrl = `https://wa.me/972554606718?text=${encodeURIComponent(text)}`;
     window.location.href = `/thank-you?wa=${encodeURIComponent(waUrl)}`;
   }
-
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    });
-  });
-
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
-  });
 </script>
 
 </body>
