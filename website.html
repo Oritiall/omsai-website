@@ -2097,6 +2097,11 @@ function closePolicyModal(event) {
   document.getElementById('policy-modal').classList.remove('open');
   document.body.style.overflow = '';
 }
+// Open a policy straight from a link such as omsai.ai/#terms (used by other pages)
+(function () {
+  const type = location.hash.slice(1);
+  if (['terms', 'privacy', 'accessibility'].includes(type)) openPolicy(type);
+})();
 
 // ── WHATSAPP CONTACT ──
 function sendToWhatsApp(e) {
