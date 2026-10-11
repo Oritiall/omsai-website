@@ -9,7 +9,7 @@
     ['/#about', 'אודות'],
     ['/#services', 'שירותים'],
     ['/#vision', 'חזון'],
-    ['/#jobot', 'Jobot'],
+    ['/jobot', 'Jobot'],
     ['/your-meeting', 'Your Meeting'],
     ['/seder-yom', 'סדר יום'],
   ];

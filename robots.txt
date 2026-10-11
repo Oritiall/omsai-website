@@ -1,0 +1,9 @@
+# All search engines and AI assistants are welcome to read the site.
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /pay-link
+Disallow: /payment-success
+Disallow: /thank-you
+
+Sitemap: https://omsai.ai/sitemap.xml

@@ -1,0 +1,18 @@
+# OMS AI
+
+> OMS AI (One Man System AI) is an Israeli company that builds AI-native products: systems, apps and websites for small and medium businesses, built with artificial intelligence. Address: 5 HaDudaim St, Hadera, Israel. Phone: +972-55-460-6718. Email: info@omsai.ai. The site is in Hebrew with an English version.
+
+OMS AI develops custom software for businesses (MVPs, websites, automations and integrations, complex systems) and also publishes its own apps, listed below.
+
+## Products
+
+- [Jobot](https://omsai.ai/jobot): A free AI job-search bot. It scans job listings in real time, analyses the user's CV, finds matching jobs and writes a personalised cover letter with AI. It does not submit applications on the user's behalf. Free during wartime, no credit card needed. App: https://jobot.app (Hebrew and English).
+- [Your Meeting](https://omsai.ai/your-meeting): A meeting-scheduling system for coaches, consultants, service providers and small businesses. Clients pick a free slot and leave their details, and the meeting goes into the calendar automatically. One-time payment of ₪695 including full setup; no monthly subscription.
+- [Seder Yom (סדר יום)](https://omsai.ai/seder-yom): A task and meeting planner for individuals and freelancers. Monthly calendar, timed and recurring tasks, search, export to Google Calendar and Apple Calendar (ICS), installable on the phone home screen, available in Hebrew, English, French and Spanish. ₪67 for the first year, one-time payment that does not auto-renew; access details are emailed within 24 hours.
+
+## Company
+
+- [Homepage](https://omsai.ai/): About OMS AI, the AI-native approach, services, vision and contact.
+- [Secure payment](https://omsai.ai/pay): Checkout for products and for custom-development projects (payments are processed by Grow).
+- [Terms of service and cancellation policy](https://omsai.ai/terms)
+- [Privacy policy](https://omsai.ai/privacy)
