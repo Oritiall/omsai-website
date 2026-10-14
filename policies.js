@@ -17,7 +17,7 @@ const policyContent = {
         <h3>מדיניות אספקה ולוחות זמנים</h3>
         <p>מועד תחילת העבודה ייקבע לאחר השלמת התשלום, אישור הצעת המחיר וקבלת כל החומרים הדרושים. זמני אספקה משוערים: פרויקט MVP בסיסי - 5 עד 10 ימי עבודה; אתר תדמית בסיסי - 7 עד 14 ימי עבודה; אוטומציה/אינטגרציה בסיסית - 3 עד 10 ימי עבודה; מערכת מורכבת - בהתאם להצעת המחיר. זמני האספקה הם הערכה בלבד ועשויים להשתנות בהתאם למורכבות הפרויקט, זמינות הלקוח ועיכובים שאינם בשליטת OMS AI.</p>
         <h3>מוצרים דיגיטליים - אפליקציית "סדר יום"</h3>
-        <p><strong>מה נרכש:</strong> גישה מלאה לאפליקציה לתכנון משימות ופגישות למשך 12 חודשים ממועד ההפעלה, בתשלום חד-פעמי של 67 ₪ (כולל מע"מ ככל שחל). התשלום אינו מתחדש אוטומטית; לקראת תום התקופה תישלח הצעה לחידוש, ללא התחייבות.</p>
+        <p><strong>מה נרכש:</strong> גישה מלאה לאפליקציה לתכנון משימות ופגישות למשך 12 חודשים ממועד ההפעלה, בתשלום חד-פעמי של 67 ₪ (כולל מע"מ ככל שחל). התשלום אינו מתחדש אוטומטית. בתום התקופה תוצג באפליקציה הודעת חידוש; החידוש מתבצע באותו אופן, דרך עמוד המוצר באתר, וללא התחייבות.</p>
         <p><strong>אספקה:</strong> קישור לאפליקציה ופרטי התחברות יישלחו לכתובת הדוא"ל שנמסרה בעת הרכישה, תוך 24 שעות ממועד התשלום. אם לא התקבלו - יש לפנות ל-info@omsai.ai או לטלפון 055-4606718.</p>
         <p><strong>ביטול:</strong> ניתן לבטל את הרכישה בתוך 14 ימים ממועד העסקה, בהודעה בכתב ל-info@omsai.ai. הביטול יבוצע בהתאם לחוק הגנת הצרכן, התשמ"א-1981, וההחזר יינתן לאותו אמצעי תשלום בניכוי דמי ביטול בשיעור של 5% ממחיר העסקה או 100 ₪, לפי הנמוך מביניהם.</p>
         <h3>אחריות ותיקון תקלות</h3>
@@ -106,7 +106,7 @@ const policyContent = {
         <h3>Delivery & Timelines Policy</h3>
         <p>Work begins after payment is completed, the quote is approved, and all required materials are received. Estimated delivery times: basic MVP project — 5 to 10 business days; basic landing site — 7 to 14 business days; basic automation/integration — 3 to 10 business days; complex systems — as defined in the quote. Delivery times are estimates only and may change based on project complexity, client availability, and delays outside OMS AI's control.</p>
         <h3>Digital Products - "Seder Yom" App</h3>
-        <p><strong>What you buy:</strong> full access to the task and meeting planning app for 12 months from activation, for a one-time payment of ₪67 (including VAT where applicable). The payment does not renew automatically; an optional renewal offer will be sent before the period ends.</p>
+        <p><strong>What you buy:</strong> full access to the task and meeting planning app for 12 months from activation, for a one-time payment of ₪67 (including VAT where applicable). The payment does not renew automatically. When the period ends, a renewal notice is shown in the app; renewal is optional and is done the same way, through the product page on the site.</p>
         <p><strong>Delivery:</strong> a link to the app and login details are sent to the email address provided at purchase within 24 hours of payment. If not received, contact info@omsai.ai or 055-4606718.</p>
         <p><strong>Cancellation:</strong> the purchase may be cancelled within 14 days of the transaction by written notice to info@omsai.ai, in accordance with the Israeli Consumer Protection Law, 1981. Refunds are made to the original payment method, less a cancellation fee of 5% of the price or ₪100, whichever is lower.</p>
         <h3>Warranty & Bug Fixes</h3>

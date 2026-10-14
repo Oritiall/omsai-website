@@ -140,12 +140,21 @@
     </div>
     <h1>תודה על התשלום!</h1>
     <p class="sub">התשלום התקבל בהצלחה</p>
-    <p>קבלה תישלח לכתובת המייל שהזנת.<br/>נציג OMS AI ייצור איתך קשר בהקדם להמשך הפרויקט.<br/>לשאלות: <a href="tel:+972554606718" style="color:var(--accent);">055-4606718</a> · <a href="mailto:info@omsai.ai" style="color:var(--accent);">info@omsai.ai</a></p>
+    <p><span id="nextStep">קבלה תישלח לכתובת המייל שהזנת.<br/>נציג OMS AI ייצור איתך קשר בהקדם להמשך הפרויקט.</span><br/>לשאלות: <a href="tel:+972554606718" style="color:var(--accent);">055-4606718</a> · <a href="mailto:info@omsai.ai" style="color:var(--accent);">info@omsai.ai</a></p>
     <div class="actions">
       <a href="/" class="btn-primary">חזרה לדף הבית</a>
     </div>
   </div>
 </main>
+
+<script>
+  // Product purchases come back with ?product=<key> (set per Grow link) and get their own next step
+  const NEXT_STEP = {
+    'seder-yom': 'תודה על רכישת סדר יום! 🎉<br/>פרטי הגישה לאפליקציה יישלחו לכתובת המייל שהזנת תוך 24 שעות.<br/>קבלה תישלח בנפרד למייל.',
+  };
+  const step = NEXT_STEP[new URLSearchParams(location.search).get('product')];
+  if (step) document.getElementById('nextStep').innerHTML = step;
+</script>
 
 <!-- Facebook Pixel -->
 <script src="policies.js"></script>
