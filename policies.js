@@ -33,22 +33,21 @@ const policyContent = {
       title: 'מדיניות פרטיות',
       body: `
         <h3>כללי</h3>
-        <p>OMS AI ("החברה", "אנחנו") מחויבת להגנה על פרטיות המשתמשים באתר omsai.ai ("האתר") ובאפליקציית "סדר יום" ("האפליקציה"). מדיניות זו מסבירה אילו פרטים נאספים, למה הם משמשים, למי הם מועברים ומה זכויותיך, בהתאם לחוק הגנת הפרטיות, התשמ"א-1981. המדיניות מנוסחת בלשון זכר מטעמי נוחות בלבד, והיא מיועדת לכל המגדרים.</p>
+        <p>OMS AI ("החברה", "אנחנו") מחויבת להגנה על פרטיות המשתמשים באתר omsai.ai ("האתר") . מדיניות זו מסבירה אילו פרטים נאספים, למה הם משמשים, למי הם מועברים ומה זכויותיך, בהתאם לחוק הגנת הפרטיות, התשמ"א-1981. המדיניות מנוסחת בלשון זכר מטעמי נוחות בלבד, והיא מיועדת לכל המגדרים.</p>
         <p>האחראית על המידע: OMS AI, הדודאים 5, חדרה · טלפון 055-4606718 · דוא"ל <strong>info@omsai.ai</strong>.</p>
 
         <h3>איזה מידע נאסף</h3>
         <p><strong>פניות באתר.</strong> בטופס יצירת הקשר ובטופסי הפנייה בעמודי המוצרים נאספים הפרטים שתמסור: שם, טלפון, כתובת דוא"ל, מדינה ותוכן ההודעה. בלחיצה על "שליחה" הפרטים מוכנים כהודעת WhatsApp, ונשלחים אלינו רק כשאתה שולח את ההודעה בעצמך. הם אינם נשמרים בשרתי האתר.</p>
         <p><strong>עמוד התשלום באתר.</strong> הפרטים שתמלא בעמוד התשלום (שם, טלפון, מדינה ודוא"ל) נבדקים בדפדפן שלך לפני המעבר לתשלום, ואינם נשמרים באתר או נשלחים ממנו.</p>
-        <p><strong>רכישה ותשלום.</strong> התשלום מתבצע בדף מאובטח של חברת הסליקה Grow. בדף זה אתה מזין את פרטיך ואת פרטי אמצעי התשלום, ו-Grow מעבירה אלינו את פרטי הרוכש והעסקה (שם, טלפון, דוא"ל, מדינה, סכום ומועד) לצורך אספקת השירות. <strong>פרטי כרטיס האשראי אינם מגיעים אלינו ואינם נשמרים באתר.</strong> החשבונית או הקבלה מופקת באמצעות מערכת Morning (חשבונית ירוקה) ונשלחת לדוא"ל שמסרת.</p>
-        <p><strong>אפליקציית "סדר יום".</strong> לצורך התחברות נאספת כתובת הדוא"ל שלך, ואליה נשלח קוד כניסה חד-פעמי. באפליקציה נשמרים התוכן שאתה מזין (משימות, פגישות, תאריכים, שעות והערות) ונתוני המנוי (מועד ההפעלה ותקופת הגישה), כדי שיהיו זמינים לך מכל מכשיר.</p>
+        <p><strong>רכישה ותשלום.</strong> התשלום מתבצע בדף מאובטח של חברת הסליקה Grow. בדף זה אתה מזין את פרטיך ואת פרטי אמצעי התשלום, ו-Grow מעבירה אלינו את פרטי הרוכש והעסקה (שם, טלפון, דוא"ל, מדינה, סכום ומועד) לצורך אספקת המוצר או השירות שרכשת. <strong>פרטי כרטיס האשראי אינם מגיעים אלינו ואינם נשמרים באתר.</strong> החשבונית או הקבלה מופקת באמצעות מערכת Morning (חשבונית ירוקה) ונשלחת לדוא"ל שמסרת.</p>
         <p><strong>מידע טכני.</strong> בעת הגלישה נאסף באופן אוטומטי מידע טכני, כגון כתובת IP, סוג הדפדפן והמכשיר, העמודים שנצפו ומועד הביקור. המידע נאסף על ידי ספקי האחסון של האתר ועל ידי כלי המדידה המפורטים בסעיף "עוגיות וכלי מדידה".</p>
 
         <h3>למה אנו משתמשים במידע</h3>
         <ul>
           <li>מענה לפניות ויצירת קשר חוזר.</li>
-          <li>ביצוע הרכישה, מתן גישה לאפליקציה, ניהול המנוי והודעות חידוש.</li>
+          <li>ביצוע הרכישה ואספקת המוצר או השירות שרכשת.</li>
           <li>הפקת חשבוניות וקבלות ועמידה בחובות לפי דין, לרבות דיני מס.</li>
-          <li>תפעול האתר והאפליקציה, אבטחתם ושיפורם.</li>
+          <li>תפעול האתר, אבטחתו ושיפורו.</li>
           <li>מדידת ביצועי האתר והפרסום שלנו ברשתות החברתיות.</li>
         </ul>
 
@@ -62,31 +61,31 @@ const policyContent = {
           <li><strong>Grow</strong>: סליקת התשלומים.</li>
           <li><strong>Morning (חשבונית ירוקה)</strong>: הפקת חשבוניות וקבלות.</li>
           <li><strong>Meta</strong>: Meta Pixel, ו-WhatsApp להעברת פניות שאתה שולח.</li>
-          <li><strong>Google</strong>: חיבור ליומן גוגל, רק אם בחרת בו (ראה בהמשך), וטעינת גופנים באתר.</li>
-          <li><strong>ספקי אחסון ותשתית ענן</strong>: אחסון האתר, האפליקציה והנתונים שנשמרים בה.</li>
+          <li><strong>Google</strong>: טעינת גופנים באתר.</li>
+          <li><strong>ספקי אחסון ותשתית ענן</strong>: אחסון האתר.</li>
         </ul>
         <p>מידע עשוי להימסר גם אם הדבר נדרש לפי דין, צו שיפוטי או דרישה של רשות מוסמכת.</p>
 
         <h3>העברת מידע אל מחוץ לישראל</h3>
         <p>חלק מנותני השירותים שלנו (כגון Meta, Google וספקי האחסון) מאחסנים ומעבדים מידע בשרתים מחוץ לישראל. העברת המידע נעשית בהתאם להוראות הדין.</p>
 
-        <h3>חיבור ליומן גוגל</h3>
-        <p>אפליקציית "סדר יום" מאפשרת, באישור מפורש בלבד, חיבור ליומן גוגל האישי שלך לצורך הוספת המשימות והפגישות שתכננת. הגישה מוגבלת למטרה זו: לא נעשה בה שימוש לפרסום, למכירת מידע או לשיתוף עם צדדים שלישיים. מפתח הגישה נשמר מוצפן, נמחק בעת ניתוק החיבור, וניתן לבטלו בכל עת - מתוך האפליקציה, או דרך הגדרות החשבון שלך בגוגל.</p>
+        <h3>האפליקציות שלנו</h3>
+        <p>לכל אחת מהאפליקציות של OMS AI (כגון Jobot, Your Meeting וסדר יום) מדיניות פרטיות נפרדת, המוצגת בתוך האפליקציה. המדיניות שבעמוד זה חלה על האתר omsai.ai ועל רכישות המתבצעות דרכו.</p>
 
         <h3>שמירת המידע</h3>
-        <p>אנו שומרים מידע אישי כל עוד הוא נדרש למטרות שלשמן נאסף: פניות - לזמן הדרוש לטיפול בהן; נתוני האפליקציה - כל עוד החשבון קיים או עד שתבקש למחוק אותם; רשומות עסקאות, חשבוניות וקבלות - לתקופה הנדרשת לפי דין, לרבות דיני מס.</p>
+        <p>אנו שומרים מידע אישי כל עוד הוא נדרש למטרות שלשמן נאסף: פניות - לזמן הדרוש לטיפול בהן; רשומות עסקאות, חשבוניות וקבלות - לתקופה הנדרשת לפי דין, לרבות דיני מס.</p>
 
         <h3>אבטחת מידע</h3>
         <p>אנו נוקטים באמצעי אבטחה סבירים כדי להגן על המידע מפני גישה, שימוש או חשיפה בלתי מורשים, לרבות תקשורת מוצפנת (HTTPS) והגבלת הגישה לנתונים. עם זאת, אין שיטת העברה או אחסון שמבטיחה הגנה מוחלטת.</p>
 
         <h3>קטינים</h3>
-        <p>האתר, הרכישה והאפליקציה מיועדים לבני 18 ומעלה. מי שטרם מלאו לו 18 רשאי למסור פרטים רק באישור הורה או אפוטרופוס.</p>
+        <p>האתר והרכישה בו מיועדים לבני 18 ומעלה. מי שטרם מלאו לו 18 רשאי למסור פרטים רק באישור הורה או אפוטרופוס.</p>
 
         <h3>מסירת מידע</h3>
         <p>אינך חייב על פי חוק למסור את המידע המבוקש, ומסירתו נעשית מרצונך ובהסכמתך. עם זאת, בלי פרטים מסוימים לא נוכל לחזור אליך, לבצע את הרכישה או לספק את השירות.</p>
 
         <h3>זכויותיך</h3>
-        <p>הנך רשאי בכל עת לפנות אלינו בבקשה לעיין, לתקן או למחוק מידע אישי שמסרת לנו, לרבות נתוני החשבון והמשימות באפליקציה, באמצעות פנייה לדוא"ל: <strong>info@omsai.ai</strong></p>
+        <p>הנך רשאי בכל עת לפנות אלינו בבקשה לעיין, לתקן או למחוק מידע אישי שמסרת לנו באמצעות פנייה לדוא"ל: <strong>info@omsai.ai</strong></p>
 
         <h3>שינויים במדיניות</h3>
         <p>החברה שומרת לעצמה את הזכות לעדכן מדיניות זו מעת לעת. שינויים מהותיים יפורסמו באתר.</p>
@@ -158,22 +157,21 @@ const policyContent = {
       title: 'Privacy Policy',
       body: `
         <h3>General</h3>
-        <p>OMS AI ("the Company", "we") is committed to protecting the privacy of users of the omsai.ai website ("the Site") and the "Seder Yom" app ("the App"). This policy explains what information is collected, what it is used for, who receives it and what your rights are, in accordance with the Israeli Privacy Protection Law, 1981.</p>
+        <p>OMS AI ("the Company", "we") is committed to protecting the privacy of users of the omsai.ai website ("the Site"). This policy explains what information is collected, what it is used for, who receives it and what your rights are, in accordance with the Israeli Privacy Protection Law, 1981.</p>
         <p>Data controller: OMS AI, 5 HaDudaim St, Hadera, Israel · Phone +972-55-460-6718 · Email <strong>info@omsai.ai</strong>.</p>
 
         <h3>Information We Collect</h3>
         <p><strong>Enquiries on the Site.</strong> The contact form and the enquiry forms on product pages collect the details you provide: name, phone, email address, country and message. When you click "Send", the details are prepared as a WhatsApp message and reach us only when you send that message yourself. They are not stored on the Site's servers.</p>
         <p><strong>The payment page on the Site.</strong> The details you fill in on the payment page (name, phone, country and email) are checked in your browser before you continue to payment, and are not stored on or sent from the Site.</p>
-        <p><strong>Purchase and payment.</strong> Payment takes place on a secure page of the payment processor Grow. On that page you enter your details and payment method, and Grow passes the buyer and transaction details to us (name, phone, email, country, amount and date) so that we can provide the service. <strong>Credit card details never reach us and are not stored on the Site.</strong> The invoice or receipt is issued through Morning (Green Invoice) and sent to the email address you provided.</p>
-        <p><strong>The "Seder Yom" app.</strong> To sign in, we collect your email address, to which a one-time login code is sent. The App stores the content you enter (tasks, meetings, dates, times and notes) and your subscription details (activation date and access period), so that they are available to you on any device.</p>
+        <p><strong>Purchase and payment.</strong> Payment takes place on a secure page of the payment processor Grow. On that page you enter your details and payment method, and Grow passes the buyer and transaction details to us (name, phone, email, country, amount and date) so that we can provide the product or service you purchased. <strong>Credit card details never reach us and are not stored on the Site.</strong> The invoice or receipt is issued through Morning (Green Invoice) and sent to the email address you provided.</p>
         <p><strong>Technical information.</strong> When you browse, technical information is collected automatically, such as IP address, browser and device type, pages viewed and time of visit. It is collected by the Site's hosting providers and by the measurement tools described under "Cookies and Measurement Tools".</p>
 
         <h3>How We Use Information</h3>
         <ul>
           <li>Responding to enquiries and getting back to you.</li>
-          <li>Completing purchases, giving access to the App, managing subscriptions and renewal notices.</li>
+          <li>Completing purchases and providing the product or service you purchased.</li>
           <li>Issuing invoices and receipts and meeting legal obligations, including tax law.</li>
-          <li>Operating, securing and improving the Site and the App.</li>
+          <li>Operating, securing and improving the Site.</li>
           <li>Measuring the performance of the Site and of our advertising on social networks.</li>
         </ul>
 
@@ -187,31 +185,31 @@ const policyContent = {
           <li><strong>Grow</strong>: payment processing.</li>
           <li><strong>Morning (Green Invoice)</strong>: issuing invoices and receipts.</li>
           <li><strong>Meta</strong>: Meta Pixel, and WhatsApp for enquiries you send.</li>
-          <li><strong>Google</strong>: Google Calendar connection, only if you choose it (see below), and loading fonts on the Site.</li>
-          <li><strong>Hosting and cloud infrastructure providers</strong>: hosting the Site, the App and the data stored in it.</li>
+          <li><strong>Google</strong>: loading fonts on the Site.</li>
+          <li><strong>Hosting and cloud infrastructure providers</strong>: hosting the Site.</li>
         </ul>
         <p>Information may also be disclosed where required by law, court order or a competent authority.</p>
 
         <h3>Transfers Outside Israel</h3>
         <p>Some of our service providers (such as Meta, Google and hosting providers) store and process information on servers outside Israel. Such transfers are made in accordance with the law.</p>
 
-        <h3>Google Calendar Connection</h3>
-        <p>The "Seder Yom" app lets you connect your personal Google Calendar, with your explicit permission only, in order to add the tasks and meetings you have planned. Access is limited to this purpose: it is not used for advertising, for selling information or for sharing with third parties. The access token is stored encrypted, is deleted when you disconnect, and can be revoked at any time - from within the app or through your Google account settings.</p>
+        <h3>Our Apps</h3>
+        <p>Each OMS AI app (such as Jobot, Your Meeting and Seder Yom) has its own privacy policy, shown within the app. The policy on this page applies to the omsai.ai website and to purchases made through it.</p>
 
         <h3>Data Retention</h3>
-        <p>We keep personal information for as long as it is needed for the purposes for which it was collected: enquiries - for as long as needed to handle them; App data - for as long as the account exists or until you ask us to delete it; transaction records, invoices and receipts - for the period required by law, including tax law.</p>
+        <p>We keep personal information for as long as it is needed for the purposes for which it was collected: enquiries - for as long as needed to handle them; transaction records, invoices and receipts - for the period required by law, including tax law.</p>
 
         <h3>Data Security</h3>
         <p>We take reasonable security measures to protect information from unauthorised access, use or disclosure, including encrypted communication (HTTPS) and restricted access to data. However, no method of transmission or storage is completely secure.</p>
 
         <h3>Minors</h3>
-        <p>The Site, purchases and the App are intended for people aged 18 and over. Anyone under 18 may provide details only with the consent of a parent or guardian.</p>
+        <p>The Site and purchases made through it are intended for people aged 18 and over. Anyone under 18 may provide details only with the consent of a parent or guardian.</p>
 
         <h3>Providing Information</h3>
         <p>You are not legally required to provide the information requested; you provide it of your own free will and with your consent. However, without certain details we cannot get back to you, complete a purchase or provide the service.</p>
 
         <h3>Your Rights</h3>
-        <p>You may at any time contact us to review, correct, or delete personal information you have provided, including your account and task data in the app, by emailing: <strong>info@omsai.ai</strong></p>
+        <p>You may at any time contact us to review, correct, or delete personal information you have provided by emailing: <strong>info@omsai.ai</strong></p>
 
         <h3>Policy Changes</h3>
         <p>The Company reserves the right to update this policy from time to time. Material changes will be published on the website.</p>
