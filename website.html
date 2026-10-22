@@ -895,14 +895,6 @@ footer {
   font-family: 'Rubik', sans-serif; transition: opacity 0.2s;
 }
 .cookie-btn-accept:hover { opacity: 0.85; }
-.cookie-btn-decline {
-  background: transparent; color: rgba(255,255,255,0.45);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 9px 16px; border-radius: 10px;
-  font-size: 13px; cursor: pointer;
-  font-family: 'Rubik', sans-serif; transition: opacity 0.2s;
-}
-.cookie-btn-decline:hover { opacity: 0.7; }
 </style>
 </head>
 <body>
@@ -1405,10 +1397,9 @@ footer {
 
 <!-- ══════════════ COOKIE BANNER ══════════════ -->
 <div id="cookie-banner" class="hidden">
-  <p id="cookieBannerText">האתר משתמש בעוגיות, לרבות Meta Pixel למדידה ולפרסום. פרטים נוספים ב<a onclick="openPolicy('privacy')">מדיניות פרטיות</a></p>
+  <p id="cookieBannerText">האתר משתמש בעוגיות, לרבות Meta Pixel למדידה ולפרסום. המשך הגלישה מהווה הסכמה לכך. פרטים נוספים ב<a onclick="openPolicy('privacy')">מדיניות הפרטיות</a>.</p>
   <div class="cookie-actions">
-    <button class="cookie-btn-accept" id="cookieBtnAccept" onclick="acceptCookies()">הבנתי, אישור</button>
-    <button class="cookie-btn-decline" id="cookieBtnDecline" onclick="declineCookies()">דחה</button>
+    <button class="cookie-btn-accept" id="cookieBtnAccept" onclick="acceptCookies()">הבנתי</button>
   </div>
 </div>
 
@@ -1914,23 +1905,17 @@ function setLang(lang) {
 
 // ── COOKIE BANNER ──
 const cookieTexts = {
-  he: { msg: 'האתר משתמש בעוגיות, לרבות Meta Pixel למדידה ולפרסום. פרטים נוספים ב', link: 'מדיניות פרטיות', accept: 'הבנתי, אישור', decline: 'דחה' },
-  en: { msg: 'This site uses cookies, including Meta Pixel for measurement and advertising. Learn more in our ', link: 'Privacy Policy', accept: 'Got it, Accept', decline: 'Decline' }
+  he: { msg: 'האתר משתמש בעוגיות, לרבות Meta Pixel למדידה ולפרסום. המשך הגלישה מהווה הסכמה לכך. פרטים נוספים ב', link: 'מדיניות הפרטיות', accept: 'הבנתי' },
+  en: { msg: 'This site uses cookies, including Meta Pixel for measurement and advertising. By continuing to browse, you agree to this. Learn more in our ', link: 'Privacy Policy', accept: 'Got it' }
 };
 function updateCookieBannerLang(lang) {
   const t = cookieTexts[lang];
   document.getElementById('cookieBannerText').innerHTML =
-    t.msg + '<a onclick="openPolicy(\'privacy\')">' + t.link + '</a>';
+    t.msg + '<a onclick="openPolicy(\'privacy\')">' + t.link + '</a>.';
   document.getElementById('cookieBtnAccept').textContent = t.accept;
-  document.getElementById('cookieBtnDecline').textContent = t.decline;
 }
 function acceptCookies() {
   localStorage.setItem('cookieConsent', 'accepted');
-  document.getElementById('cookie-banner').classList.add('hidden');
-  document.getElementById('wa-fab').classList.remove('shifted');
-}
-function declineCookies() {
-  localStorage.setItem('cookieConsent', 'declined');
   document.getElementById('cookie-banner').classList.add('hidden');
   document.getElementById('wa-fab').classList.remove('shifted');
 }
