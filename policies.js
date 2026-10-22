@@ -48,13 +48,15 @@ const policyContent = {
         <p>אנו לא מוכרים, סוחרים, או מעבירים את פרטיך האישיים לצדדים שלישיים כלשהם. המידע נשמר בסודיות מוחלטת.</p>
         <h3>עוגיות (Cookies)</h3>
         <p>האתר אינו משתמש בעוגיות מעקב או שירותי ניתוח נתונים של צדדים שלישיים. אנו משתמשים בעוגייה טכנית אחת בלבד — לשמירת העדפת הסכמתך להודעת העוגיות. עוגייה זו אינה מכילה מידע אישי ואינה מועברת לאף גורם חיצוני.</p>
+        <h3>חיבור ליומן גוגל</h3>
+        <p>אפליקציית "סדר יום" מאפשרת, באישור מפורש בלבד, חיבור ליומן גוגל האישי שלך לצורך הוספת המשימות והפגישות שתכננת. הגישה מוגבלת למטרה זו: לא נעשה בה שימוש לפרסום, למכירת מידע או לשיתוף עם צדדים שלישיים. מפתח הגישה נשמר מוצפן, נמחק בעת ניתוק החיבור, וניתן לבטלו בכל עת - מתוך האפליקציה, או דרך הגדרות החשבון שלך בגוגל.</p>
         <h3>אבטחת מידע</h3>
         <p>אנו נוקטים באמצעי אבטחה סבירים כדי להגן על המידע המועבר דרך האתר מפני גישה בלתי מורשית.</p>
         <h3>זכויותיך</h3>
-        <p>הנך רשאי בכל עת לפנות אלינו בבקשה לעיין, לתקן או למחוק מידע אישי שמסרת לנו, באמצעות פנייה לדוא"ל: <strong>info@omsai.ai</strong></p>
+        <p>הנך רשאי בכל עת לפנות אלינו בבקשה לעיין, לתקן או למחוק מידע אישי שמסרת לנו, לרבות נתוני החשבון והמשימות באפליקציה, באמצעות פנייה לדוא"ל: <strong>info@omsai.ai</strong></p>
         <h3>שינויים במדיניות</h3>
         <p>החברה שומרת לעצמה את הזכות לעדכן מדיניות זו מעת לעת. שינויים מהותיים יפורסמו באתר.</p>
-        <p class="policy-date">עדכון אחרון: מרץ 2026</p>
+        <p class="policy-date">עדכון אחרון: אוקטובר 2026</p>
       `
     },
     accessibility: {
@@ -137,13 +139,15 @@ const policyContent = {
         <p>We do not sell, trade, or transfer your personal information to any third parties. Your information is kept strictly confidential.</p>
         <h3>Cookies</h3>
         <p>This website does not use tracking cookies or third-party analytics services. We use one technical cookie only — to save your cookie consent preference. This cookie contains no personal information and is not shared with any external party.</p>
+        <h3>Google Calendar Connection</h3>
+        <p>The "Seder Yom" app lets you connect your personal Google Calendar, with your explicit permission only, in order to add the tasks and meetings you have planned. Access is limited to this purpose: it is not used for advertising, for selling information or for sharing with third parties. The access token is stored encrypted, is deleted when you disconnect, and can be revoked at any time - from within the app or through your Google account settings.</p>
         <h3>Data Security</h3>
         <p>We take reasonable security measures to protect information transmitted through the website from unauthorized access.</p>
         <h3>Your Rights</h3>
-        <p>You may at any time contact us to review, correct, or delete personal information you have provided, by emailing: <strong>info@omsai.ai</strong></p>
+        <p>You may at any time contact us to review, correct, or delete personal information you have provided, including your account and task data in the app, by emailing: <strong>info@omsai.ai</strong></p>
         <h3>Policy Changes</h3>
         <p>The Company reserves the right to update this policy from time to time. Material changes will be published on the website.</p>
-        <p class="policy-date">Last updated: March 2026</p>
+        <p class="policy-date">Last updated: October 2026</p>
       `
     },
     accessibility: {
