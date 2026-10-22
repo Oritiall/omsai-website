@@ -1405,7 +1405,7 @@ footer {
 
 <!-- ══════════════ COOKIE BANNER ══════════════ -->
 <div id="cookie-banner" class="hidden">
-  <p id="cookieBannerText">האתר משתמש בעוגייה טכנית אחת לשמירת העדפת הסכמתך. אין מעקב, אין שיתוף עם צדדים שלישיים. <a onclick="openPolicy('privacy')">מדיניות פרטיות</a></p>
+  <p id="cookieBannerText">האתר משתמש בעוגיות, לרבות Meta Pixel למדידה ולפרסום. פרטים נוספים ב<a onclick="openPolicy('privacy')">מדיניות פרטיות</a></p>
   <div class="cookie-actions">
     <button class="cookie-btn-accept" id="cookieBtnAccept" onclick="acceptCookies()">הבנתי, אישור</button>
     <button class="cookie-btn-decline" id="cookieBtnDecline" onclick="declineCookies()">דחה</button>
@@ -1914,8 +1914,8 @@ function setLang(lang) {
 
 // ── COOKIE BANNER ──
 const cookieTexts = {
-  he: { msg: 'האתר משתמש בעוגייה טכנית אחת לשמירת העדפת הסכמתך. אין מעקב, אין שיתוף עם צדדים שלישיים. ', link: 'מדיניות פרטיות', accept: 'הבנתי, אישור', decline: 'דחה' },
-  en: { msg: 'We use one technical cookie to save your consent preference. No tracking, no third-party sharing. ', link: 'Privacy Policy', accept: 'Got it, Accept', decline: 'Decline' }
+  he: { msg: 'האתר משתמש בעוגיות, לרבות Meta Pixel למדידה ולפרסום. פרטים נוספים ב', link: 'מדיניות פרטיות', accept: 'הבנתי, אישור', decline: 'דחה' },
+  en: { msg: 'This site uses cookies, including Meta Pixel for measurement and advertising. Learn more in our ', link: 'Privacy Policy', accept: 'Got it, Accept', decline: 'Decline' }
 };
 function updateCookieBannerLang(lang) {
   const t = cookieTexts[lang];
