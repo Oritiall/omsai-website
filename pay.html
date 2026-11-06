@@ -299,7 +299,9 @@ src="https://www.facebook.com/tr?id=816292384580051&ev=PageView&noscript=1"/></n
     if (!ok) return;
 
     if (!growLink) { alert('התשלום עבור מוצר זה יהיה זמין בקרוב.'); return; }
-    fbq('track', 'InitiateCheckout');
+    fbq('track', 'InitiateCheckout', product
+      ? { value: Number(product.amount), currency: 'ILS', content_name: product.name }
+      : (amount && !isNaN(Number(amount)) ? { value: Number(amount), currency: 'ILS' } : {}));
     location.href = growLink;
   });
 </script>

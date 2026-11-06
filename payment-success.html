@@ -168,6 +168,18 @@ t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '816292384580051');
 fbq('track', 'PageView');
+
+// Purchase event for fixed-price products (Grow success URL carries ?product=<key>).
+// Sent once per browser session so a refresh does not count as a second sale.
+(function () {
+  var PURCHASE = { 'seder-yom': { value: 67, name: 'סדר יום' } };
+  var key = new URLSearchParams(location.search).get('product');
+  var p = PURCHASE[key];
+  if (!p) return;
+  try { if (sessionStorage.getItem('purchase_' + key)) return; } catch (e) {}
+  fbq('track', 'Purchase', { value: p.value, currency: 'ILS', content_name: p.name, content_ids: [key], content_type: 'product' });
+  try { sessionStorage.setItem('purchase_' + key, '1'); } catch (e) {}
+})();
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=816292384580051&ev=PageView&noscript=1"/></noscript>
