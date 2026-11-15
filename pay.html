@@ -302,7 +302,11 @@ src="https://www.facebook.com/tr?id=816292384580051&ev=PageView&noscript=1"/></n
     fbq('track', 'InitiateCheckout', product
       ? { value: Number(product.amount), currency: 'ILS', content_name: product.name }
       : (amount && !isNaN(Number(amount)) ? { value: Number(amount), currency: 'ILS' } : {}));
-    location.href = growLink;
+    // Give the pixel a moment to send the event before leaving the page,
+    // otherwise the immediate navigation can cancel the request.
+    const btn = this.querySelector('[type="submit"]');
+    if (btn) btn.disabled = true;
+    setTimeout(function () { location.href = growLink; }, 600);
   });
 </script>
 </body>
