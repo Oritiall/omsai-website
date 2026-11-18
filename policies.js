@@ -52,7 +52,7 @@ const policyContent = {
         </ul>
 
         <h3>עוגיות וכלי מדידה</h3>
-        <p>האתר משתמש ב-<strong>Meta Pixel (Facebook Pixel)</strong> של חברת Meta, המציב עוגיות בדפדפן ומעביר ל-Meta מידע על השימוש באתר: צפייה בעמודים, צפייה במוצר, תחילת תהליך תשלום ושליחת פנייה. המידע משמש למדידת הפרסום שלנו ולהצגת מודעות רלוונטיות בפייסבוק ובאינסטגרם. Meta עשויה לשייך את המידע לחשבון שלך אצלה, בהתאם למדיניות הפרטיות שלה. בנוסף, האתר שומר בדפדפן שלך את העדפת ההסכמה להודעת העוגיות.</p>
+        <p>האתר משתמש ב-<strong>Meta Pixel (Facebook Pixel)</strong> של חברת Meta, המציב עוגיות בדפדפן ומעביר ל-Meta מידע על השימוש באתר: צפייה בעמודים, צפייה במוצר, תחילת תהליך תשלום, התחלת תקופת ניסיון ושליחת פנייה. המידע משמש למדידת הפרסום שלנו ולהצגת מודעות רלוונטיות בפייסבוק ובאינסטגרם. Meta עשויה לשייך את המידע לחשבון שלך אצלה, בהתאם למדיניות הפרטיות שלה. בנוסף, האתר שומר בדפדפן שלך את העדפת ההסכמה להודעת העוגיות.</p>
         <p>ניתן לחסום או למחוק עוגיות בהגדרות הדפדפן, ולנהל את העדפות הפרסום שלך בהגדרות החשבון ב-Facebook. חסימת עוגיות לא תפגע ביכולת לגלוש באתר.</p>
 
         <h3>העברת מידע לצדדים שלישיים</h3>
@@ -176,7 +176,7 @@ const policyContent = {
         </ul>
 
         <h3>Cookies and Measurement Tools</h3>
-        <p>The Site uses <strong>Meta Pixel (Facebook Pixel)</strong> by Meta, which places cookies in your browser and sends Meta information about your use of the Site: page views, product views, starting checkout and sending an enquiry. This information is used to measure our advertising and to show relevant ads on Facebook and Instagram. Meta may associate it with your Meta account, under Meta's own privacy policy. The Site also stores your cookie-notice consent preference in your browser.</p>
+        <p>The Site uses <strong>Meta Pixel (Facebook Pixel)</strong> by Meta, which places cookies in your browser and sends Meta information about your use of the Site: page views, product views, starting checkout, starting a free trial and sending an enquiry. This information is used to measure our advertising and to show relevant ads on Facebook and Instagram. Meta may associate it with your Meta account, under Meta's own privacy policy. The Site also stores your cookie-notice consent preference in your browser.</p>
         <p>You can block or delete cookies in your browser settings and manage your ad preferences in your Facebook account settings. Blocking cookies does not prevent you from browsing the Site.</p>
 
         <h3>Sharing Information with Third Parties</h3>
